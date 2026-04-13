@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EstateBite - Real Estate & Dining</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER & NAVIGATION -->
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <i class="fas fa-home"></i> EstateBite
+    </div>
+    <nav class="nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#properties" class="nav-link">Properties</a>
+      <a href="#restaurants" class="nav-link">Restaurants</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#blogs" class="nav-link">Blogs</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO SECTION WITH CAROUSEL -->
+<section id="home" class="hero">
+  <div class="hero-carousel">
+    <div class="carousel-slide active">
+      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=600&fit=crop" alt="Luxury Property">
+      <div class="hero-content">
+        <h1>Premium Real Estate & Dining</h1>
+        <p>Discover Your Dream Home & Best Restaurants</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('#properties')">View Properties</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('#restaurants')">Explore Restaurants</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop" alt="Fine Dining">
+      <div class="hero-content">
+        <h1>Exquisite Dining Experience</h1>
+        <p>Taste Excellence at Our Partner Restaurants</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="openRestaurantBooking(1)">Book Now</button>
+          <button class="btn btn-secondary" onclick="callNow('restaurant')">Call Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=600&fit=crop" alt="Beach Property">
+      <div class="hero-content">
+        <h1>Beachfront Properties</h1>
+        <p>Live the Coastal Dream</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="openPropertyDetails(1)">View Details</button>
+          <button class="btn btn-secondary" onclick="callNow('property')">Call Now</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control prev" onclick="prevSlide()">❮</button>
+    <button class="carousel-control next" onclick="nextSlide()">❯</button>
+    <div class="carousel-indicators">
+      <span class="indicator active" onclick="currentSlide(1)"></span>
+      <span class="indicator" onclick="currentSlide(2)"></span>
+      <span class="indicator" onclick="currentSlide(3)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT COMPANY -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-content">
+      <h2>About EstateBite</h2>
+      <p>EstateBite is a premier platform combining premium real estate listings with curated dining experiences. We believe in creating communities where people find their perfect home and enjoy exceptional culinary adventures. Since 2020, we've connected thousands of clients with their dream properties and favorite restaurants.</p>
+      
+      <div class="about-features">
+        <div class="feature">
+          <i class="fas fa-home"></i>
+          <h3>5000+ Properties</h3>
+          <p>Handpicked premium properties across the country</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-utensils"></i>
+          <h3>500+ Restaurants</h3>
+          <p>Finest dining establishments at your fingertips</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-users"></i>
+          <h3>50,000+ Customers</h3>
+          <p>Trusted by clients nationwide</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-award"></i>
+          <h3>Award Winning</h3>
+          <p>Recognized for excellence in service</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section id="properties" class="properties">
+  <div class="container">
+    <h2>Featured Properties</h2>
+    <div class="property-grid">
+      <div class="property-card" onclick="openPropertyModal(1)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Luxury Villa">
+          <span class="property-badge">Premium</span>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Villa</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="price">₹1.2 Cr</p>
+          <p class="description">4 BHK, 3000 sq ft, Private garden</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(1)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(2)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=400&h=300&fit=crop" alt="Modern Flat">
+          <span class="property-badge">Modern</span>
+        </div>
+        <div class="property-info">
+          <h3>Modern Flat</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
+          <p class="price">₹75 Lakh</p>
+          <p class="description">2 BHK, 1200 sq ft, City view</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(2)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(3)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Beach House">
+          <span class="property-badge">Luxury</span>
+        </div>
+        <div class="property-info">
+          <h3>Beach House</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
+          <p class="price">₹2 Cr</p>
+          <p class="description">5 BHK, 5000 sq ft, Beachfront</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(3)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(4)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=400&h=300&fit=crop" alt="Penthouse">
+          <span class="property-badge">New</span>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Penthouse</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+          <p class="price">₹3.5 Cr</p>
+          <p class="description">3 BHK, 2500 sq ft, Sky lounge</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(4)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(5)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=400&h=300&fit=crop" alt="Villa Complex">
+          <span class="property-badge">Popular</span>
+        </div>
+        <div class="property-info">
+          <h3>Villa Complex</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
+          <p class="price">₹95 Lakh</p>
+          <p class="description">3 BHK, 1800 sq ft, Gated community</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(5)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(6)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=400&h=300&fit=crop" alt="Eco House">
+          <span class="property-badge">Green</span>
+        </div>
+        <div class="property-info">
+          <h3>Eco-Friendly Home</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
+          <p class="price">₹1.5 Cr</p>
+          <p class="description">4 BHK, 2200 sq ft, Solar powered</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(6)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED RESTAURANTS -->
+<section id="restaurants" class="restaurants">
+  <div class="container">
+    <h2>Featured Restaurants</h2>
+    <div class="restaurant-grid">
+      <div class="restaurant-card" onclick="openRestaurantModal(1)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=300&fit=crop" alt="Fine Dining Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.8
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(1)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Elegance Fine Dining</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> French, Continental</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="description">Award-winning fine dining with 5-star service</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(1)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(1)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(2)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1567655366169-8269849e9a12?w=400&h=300&fit=crop" alt="Italian Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.6
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(2)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>La Bella Italia</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Italian, Pasta</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+          <p class="description">Authentic Italian cuisine with homemade pasta</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(2)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(2)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(3)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Asian Fusion">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.7
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(3)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Orient Express</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Asian Fusion, Japanese</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
+          <p class="description">Asian fusion with premium sushi and sashimi</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(3)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(3)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(4)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1504674900961-9f5815edf4a7?w=400&h=300&fit=crop" alt="Rooftop Bar">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.5
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(4)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Skyline Lounge</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Cocktails, Casual</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="description">Rooftop bar with panoramic city views</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(4)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(4)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(5)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1585518419759-1b4fad5aaf4f?w=400&h=300&fit=crop" alt="Indian Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.9
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(5)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Maharaja Palace</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Indian, Mughlai</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
+          <p class="description">Authentic Indian cuisine with royal flavors</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(5)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(5)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(6)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1537457519924-2d3726e93e26?w=400&h=300&fit=crop" alt="Cafe">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.4
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(6)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>The Corner Cafe</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Cafe, Casual</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
+          <p class="description">Cozy cafe with artisan coffee and pastries</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(6)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(6)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS & TESTIMONIALS -->
+<section id="reviews" class="reviews">
+  <div class="container">
+    <h2>Customer Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">RK</div>
+          <div class="review-meta">
+            <h4>Rahul Kumar</h4>
+            <p class="review-type">Property Purchase</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"EstateBite helped me find my dream home in Bangalore. Their team was professional and transparent throughout the process. Highly recommended!"</p>
+        <p class="review-date">2 weeks ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">PS</div>
+          <div class="review-meta">
+            <h4>Priya Singh</h4>
+            <p class="review-type">Restaurant Booking</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"The restaurant booking experience was seamless. Had a wonderful dinner at Elegance Fine Dining. Will use EstateBite again!"</p>
+        <p class="review-date">1 week ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">AJ</div>
+          <div class="review-meta">
+            <h4>Arjun Joshi</h4>
+            <p class="review-type">Property Viewing</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Great platform with excellent property listings. The virtual tour feature was very helpful. Loved the dining integration feature!"</p>
+        <p class="review-date">3 weeks ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">NP</div>
+          <div class="review-meta">
+            <h4>Neha Patel</h4>
+            <p class="review-type">Property + Dining</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Fantastic experience with both property search and restaurant bookings. The all-in-one platform is a game changer!"</p>
+        <p class="review-date">5 days ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">MK</div>
+          <div class="review-meta">
+            <h4>Manoj Kumar</h4>
+            <p class="review-type">Investor</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"As an investor, I found EstateBite's platform very reliable. Great market insights and responsive customer support."</p>
+        <p class="review-date">1 day ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">SK</div>
+          <div class="review-meta">
+            <h4>Sneha Kapoor</h4>
+            <p class="review-type">Restaurant Enthusiast</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Love the restaurant collection on EstateBite. Perfect for finding new places to dine. Great booking process too!"</p>
+        <p class="review-date">4 days ago</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS SECTION -->
+<section id="blogs" class="blogs">
+  <div class="container">
+    <h2>Latest Blog Posts</h2>
+    <div class="blogs-grid">
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1554224311-beee415c15e7?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 15, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Top 5 Luxury Properties in Bangalore</h3>
+          <p>Discover the most prestigious and luxurious properties in Bangalore's prime locations...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1495564151525-2a7f81d2ccff?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 12, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Fine Dining Guide: 2024 Edition</h3>
+          <p>Complete guide to the best fine dining restaurants offering exceptional culinary experiences...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1560491676-04071c5f467b?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 10, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Investment Guide: Real Estate Trends</h3>
+          <p>Market analysis and investment strategies for real estate in emerging Indian markets...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 8, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Coastal Living: Benefits & Lifestyle</h3>
+          <p>Explore the advantages of beachfront living and how it transforms your lifestyle...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 5, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Culinary Trends: What's Hot in 2024</h3>
+          <p>Discover the latest food trends and dining concepts revolutionizing the restaurant industry...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1493536671697-6d302319b41e?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 1, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Home Automation: Smart Living Solutions</h3>
+          <p>Get insights into smart home technologies that enhance comfort and security...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h4>Phone</h4>
+            <p>+91 9876543210</p>
+            <p>+91 9867543210</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h4>Email</h4>
+            <p>info@estatebite.com</p>
+            <p>support@estatebite.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Address</h4>
+            <p>123 Business Street</p>
+            <p>Bangalore, India 560001</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Working Hours</h4>
+            <p>Mon - Fri: 09:00 AM - 06:00 PM</p>
+            <p>Sat - Sun: 10:00 AM - 04:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="tel" placeholder="Your Phone" required>
+        <select required>
+          <option value="">Select Subject</option>
+          <option value="property">Property Inquiry</option>
+          <option value="restaurant">Restaurant Booking</option>
+          <option value="general">General Inquiry</option>
+        </select>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+
+    <!-- EMBEDDED MAPS -->
+    <h3 style="margin-top: 50px;">Our Locations</h3>
+    <div class="maps-container">
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6180722395535!2d77.6298!3d12.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1729f1e4c9e1%3A0xb3f6c5e4d9e1a2e3!2sBangalore!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Bangalore Office</h4>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5!2d72.8479!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x9b9b9b9b9b9b!2sMumbai!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Mumbai Office</h4>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.1!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15bd9d9d9d9d%3A0x9b9b9b9b9b9b!2sChenai!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Chennai Office</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS -->
+
+<!-- PROPERTY DETAILS MODAL -->
+<div id="propertyModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closePropertyModal()">&times;</span>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img id="modalPropertyImage" src="" alt="Property">
+        <div class="gallery-controls">
+          <button onclick="prevPropertyImage()">❮</button>
+          <button onclick="nextPropertyImage()">❯</button>
+        </div>
+      </div>
+
+      <div class="modal-details">
+        <h2 id="modalPropertyTitle"></h2>
+        <div class="property-specs">
+          <div class="spec">
+            <i class="fas fa-door-open"></i>
+            <span id="modalBedrooms"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-bath"></i>
+            <span id="modalBathrooms"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-ruler-combined"></i>
+            <span id="modalArea"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-calendar"></i>
+            <span id="modalYear"></span>
+          </div>
+        </div>
+
+        <p class="price-modal" id="modalPropertyPrice"></p>
+        <p id="modalPropertyDescription"></p>
+
+        <div class="property-amenities">
+          <h3>Amenities</h3>
+          <ul id="amenitiesList"></ul>
+        </div>
+
+        <div class="map-container">
+          <h3>Location Map</h3>
+          <iframe id="propertyMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary large" onclick="openPropertyForm()">Register Interest</button>
+          <button class="btn btn-secondary large" onclick="callNow('property')">Call Now</button>
+          <button class="btn btn-outline large" onclick="shareProperty()">Share Property</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY REGISTRATION FORM MODAL -->
+<div id="registrationModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeRegistrationModal()">&times;</span>
+    <h2>Register Your Interest</h2>
+    <form onsubmit="submitPropertyForm(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="text" placeholder="Current Address" required>
+      <select required>
+        <option value="">Select Purpose</option>
+        <option value="buy">Buy</option>
+        <option value="rent">Rent</option>
+        <option value="invest">Invest</option>
+      </select>
+      <select required>
+        <option value="">Budget Range</option>
+        <option value="0-50">₹0 - ₹50 Lakh</option>
+        <option value="50-100">₹50 Lakh - ₹1 Cr</option>
+        <option value="100-200">₹1 Cr - ₹2 Cr</option>
+        <option value="200+">₹2 Cr+</option>
+      </select>
+      <textarea placeholder="Additional Comments" rows="4"></textarea>
+      <button type="submit" class="btn btn-primary">Submit Registration</button>
+    </form>
+  </div>
+</div>
+
+<!-- RESTAURANT DETAILS MODAL -->
+<div id="restaurantModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closeRestaurantModal()">&times;</span>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img id="modalRestaurantImage" src="" alt="Restaurant">
+        <div class="gallery-controls">
+          <button onclick="prevRestaurantImage()">❮</button>
+          <button onclick="nextRestaurantImage()">❯</button>
+        </div>
+      </div>
+
+      <div class="modal-details">
+        <h2 id="modalRestaurantName"></h2>
+        <div class="restaurant-meta">
+          <span class="rating" id="modalRating"><i class="fas fa-star"></i></span>
+          <span class="cuisine" id="modalCuisine"></span>
+          <span class="location" id="modalLocation"><i class="fas fa-map-marker-alt"></i></span>
+        </div>
+
+        <p id="modalRestaurantDescription"></p>
+
+        <div class="restaurant-amenities">
+          <h3>Facilities</h3>
+          <ul id="facilitiesList"></ul>
+        </div>
+
+        <div class="restaurant-reviews">
+          <h3>Guest Reviews</h3>
+          <div id="restaurantReviews"></div>
+        </div>
+
+        <div class="map-container">
+          <h3>Location Map</h3>
+          <iframe id="restaurantMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary large" onclick="openRestaurantBooking(currentRestaurant)">Book Now</button>
+          <button class="btn btn-secondary large" onclick="callNow('restaurant')">Call Now</button>
+          <button class="btn btn-outline large" onclick="openGallery(currentRestaurant)">View Gallery</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESTAURANT BOOKING MODAL -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeBookingModal()">&times;</span>
+    <h2>Book Your Table</h2>
+    <form onsubmit="submitRestaurantBooking(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="date" required>
+      <input type="time" required>
+      <select required>
+        <option value="">Number of Guests</option>
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+        <option value="5">5 Guests</option>
+        <option value="6">6+ Guests</option>
+      </select>
+      <textarea placeholder="Special Requests" rows="3"></textarea>
+      <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" class="modal">
+  <div class="modal-content gallery-modal">
+    <span class="close-btn" onclick="closeGalleryModal()">&times;</span>
+    <div class="gallery-container">
+      <img id="galleryImage" src="" alt="Gallery">
+      <div class="gallery-nav">
+        <button onclick="prevGalleryImage()">❮ Previous</button>
+        <span id="galleryCounter">1 / 6</span>
+        <button onclick="nextGalleryImage()">Next ❯</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>EstateBite is your one-stop platform for luxury real estate and premium dining experiences.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#restaurants">Restaurants</a></li>
+          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <form>
+          <input type="email" placeholder="Your email">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 EstateBite. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
