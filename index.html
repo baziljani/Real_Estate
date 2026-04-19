@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EstateBite - Real Estate & Dining</title>
+  <title>TS Real Estates - Premium Real Estate</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="favicon/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,12 +18,13 @@
 <header class="header">
   <div class="container">
     <div class="logo">
-      <i class="fas fa-home"></i> EstateBite
+      <img src="assets/logo.png" alt="TS Real Estates Logo" class="logo-img">
+      TS Real Estates
     </div>
     <nav class="nav">
       <a href="#home" class="nav-link">Home</a>
       <a href="#properties" class="nav-link">Properties</a>
-      <a href="#restaurants" class="nav-link">Restaurants</a>
+      <a href="#documents" class="nav-link">Documents</a>
       <a href="#reviews" class="nav-link">Reviews</a>
       <a href="#blogs" class="nav-link">Blogs</a>
       <a href="#about" class="nav-link">About</a>
@@ -33,17 +38,70 @@
   </div>
 </header>
 
+<!-- FLOATING WHATSAPP BUTTON -->
+<div class="whatsapp-float" onclick="openWhatsApp()">
+  <i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- ENQUIRY POPUP MODAL -->
+<div id="enquiryModal" class="enquiry-modal">
+  <div class="enquiry-content">
+    <div class="enquiry-header">
+      <h3><i class="fas fa-envelope"></i> Get Instant Property Updates</h3>
+      <span class="close-enquiry" onclick="closeEnquiryModal()">&times;</span>
+    </div>
+    <div class="enquiry-body">
+      <p>Leave your details and get instant updates on premium properties!</p>
+      <form class="enquiry-form" onsubmit="submitEnquiry(event)">
+        <div class="form-group">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-phone"></i>
+          <input type="tel" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email Address" value="info@tsrealestates.com" required>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-home"></i>
+          <select required>
+            <option value="">Select Property Type</option>
+            <option value="apartment">Apartment</option>
+            <option value="villa">Villa</option>
+            <option value="plot">Plot</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="Preferred Location" required>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-comment"></i>
+          <textarea placeholder="Any specific requirements?" rows="3"></textarea>
+        </div>
+        <button type="submit" class="enquiry-submit">
+          <i class="fas fa-paper-plane"></i> Get Property Updates
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- HERO SECTION WITH CAROUSEL -->
 <section id="home" class="hero">
   <div class="hero-carousel">
     <div class="carousel-slide active">
       <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=600&fit=crop" alt="Luxury Property">
       <div class="hero-content">
-        <h1>Premium Real Estate & Dining</h1>
-        <p>Discover Your Dream Home & Best Restaurants</p>
+        <h1>Premium Real Estate</h1>
+        <p>Discover Your Dream Home</p>
         <div class="hero-buttons">
           <button class="btn btn-primary" onclick="scrollToSection('#properties')">View Properties</button>
-          <button class="btn btn-secondary" onclick="scrollToSection('#restaurants')">Explore Restaurants</button>
+          <!-- <button class="btn btn-secondary" onclick="scrollToSection('#restaurants')">Explore Restaurants</button> -->
         </div>
       </div>
     </div>
@@ -51,11 +109,11 @@
     <div class="carousel-slide">
       <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop" alt="Fine Dining">
       <div class="hero-content">
-        <h1>Exquisite Dining Experience</h1>
-        <p>Taste Excellence at Our Partner Restaurants</p>
+        <h1>Exquisite Properties</h1>
+        <p>Find Your Perfect Home Today</p>
         <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="openRestaurantBooking(1)">Book Now</button>
-          <button class="btn btn-secondary" onclick="callNow('restaurant')">Call Now</button>
+          <button class="btn btn-primary" onclick="openPropertyDetails(1)">View Details</button>
+          <button class="btn btn-secondary" onclick="callNow('property')">Call Now</button>
         </div>
       </div>
     </div>
@@ -86,8 +144,8 @@
 <section id="about" class="about">
   <div class="container">
     <div class="about-content">
-      <h2>About EstateBite</h2>
-      <p>EstateBite is a premier platform combining premium real estate listings with curated dining experiences. We believe in creating communities where people find their perfect home and enjoy exceptional culinary adventures. Since 2020, we've connected thousands of clients with their dream properties and favorite restaurants.</p>
+      <h2>About TS Real Estates</h2>
+      <p>TS Real Estates is a premier platform for premium real estate listings. We believe in creating communities where people find their perfect home. Since 2020, we've connected thousands of clients with their dream properties.</p>
       
       <div class="about-features">
         <div class="feature">
@@ -95,11 +153,11 @@
           <h3>5000+ Properties</h3>
           <p>Handpicked premium properties across the country</p>
         </div>
-        <div class="feature">
+        <!-- <div class="feature">
           <i class="fas fa-utensils"></i>
           <h3>500+ Restaurants</h3>
           <p>Finest dining establishments at your fingertips</p>
-        </div>
+        </div> -->
         <div class="feature">
           <i class="fas fa-users"></i>
           <h3>50,000+ Customers</h3>
@@ -225,8 +283,192 @@
   </div>
 </section>
 
+<!-- DOCUMENTS SECTION -->
+<section id="documents" class="documents">
+  <div class="container">
+    <h2>Property Documents</h2>
+    <p class="section-description">Access all necessary property documents and legal paperwork for your real estate transactions</p>
+
+    <div class="documents-grid">
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="document-info">
+          <h3>Property Brochure</h3>
+          <p>General property information and company overview with all essential details.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-file-alt"></i>
+              <span>Company Overview</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Updated 2024</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-eye"></i> Essential information</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <div class="document-info">
+          <h3>Amrit Kalash Apartment</h3>
+          <p>Detailed brochure for Amrit Kalash Apartment project by Maansarovar developers.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Prime Location</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Premium Project</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-star"></i> Featured property</span>
+            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="document-info">
+          <h3>Property Features</h3>
+          <p>Complete guide to property features including modern amenities and facilities.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-cog"></i>
+              <span>Amenities Guide</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Latest Features</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-check-circle"></i> Comprehensive guide</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="document-info">
+          <h3>Developer Information</h3>
+          <p>Detailed information about Maansarovar developers and their track record.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-building"></i>
+              <span>Developer Profile</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Established Builder</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-award"></i> Trusted developer</span>
+            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-map"></i>
+        </div>
+        <div class="document-info">
+          <h3>Location Guide</h3>
+          <p>Complete location guide with connectivity, nearby amenities, and landmarks.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-route"></i>
+              <span>Connectivity Info</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Area Guide</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-location-arrow"></i> Prime location</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <div class="document-info">
+          <h3>Contact & Support</h3>
+          <p>Get in touch with our team for personalized property consultation and guidance.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-phone"></i>
+              <span>Direct Contact</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>24/7 Support</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-info-circle"></i>
+              <span>Contact Details</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-headset"></i> Expert assistance</span>
+            <button class="btn btn-small" onclick="callNow('documents')">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="documents-contact">
+      <h3>Need Help with Documents?</h3>
+      <p>Our legal experts are here to assist you with all property documentation needs. Contact us for personalized guidance.</p>
+      <button class="btn btn-primary" onclick="callNow('documents')">Call Legal Team</button>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURED RESTAURANTS -->
-<section id="restaurants" class="restaurants">
+<!-- <section id="restaurants" class="restaurants">
   <div class="container">
     <h2>Featured Restaurants</h2>
     <div class="restaurant-grid">
@@ -381,7 +623,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- REVIEWS & TESTIMONIALS -->
 <section id="reviews" class="reviews">
@@ -594,24 +836,26 @@
           <i class="fas fa-phone"></i>
           <div>
             <h4>Phone</h4>
-            <p>+91 9876543210</p>
-            <p>+91 9867543210</p>
+            <p>Dubai: +971 50 356 7945</p>
+            <p>Bengaluru: +91 9791789497</p>
+            <p>Chennai: +91 xxxxxxxxxx</p>
           </div>
         </div>
         <div class="contact-item">
           <i class="fas fa-envelope"></i>
           <div>
             <h4>Email</h4>
-            <p>info@estatebite.com</p>
-            <p>support@estatebite.com</p>
+            <p>info@tsrealestates.com</p>
+            <p>support@tsrealestates.com</p>
           </div>
         </div>
         <div class="contact-item">
           <i class="fas fa-map-marker-alt"></i>
           <div>
             <h4>Address</h4>
-            <p>123 Business Street</p>
-            <p>Bangalore, India 560001</p>
+            <p>Eta Start House Building, Office No 723, </p>
+              <p>Near by Salah al din metro Station</p>
+            <p>Dubai, UAE 29328</p>
           </div>
         </div>
         <div class="contact-item">
@@ -643,16 +887,8 @@
     <h3 style="margin-top: 50px;">Our Locations</h3>
     <div class="maps-container">
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6180722395535!2d77.6298!3d12.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1729f1e4c9e1%3A0xb3f6c5e4d9e1a2e3!2sBangalore!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <h4>Bangalore Office</h4>
-      </div>
-      <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5!2d72.8479!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x9b9b9b9b9b9b!2sMumbai!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <h4>Mumbai Office</h4>
-      </div>
-      <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.1!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15bd9d9d9d9d%3A0x9b9b9b9b9b9b!2sChenai!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <h4>Chennai Office</h4>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.995559130635!2d55.322021074444166!3d25.27073482871994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5cc812c56ded%3A0x1833b4e9e0095885!2sEta%20Star%20Holding!5e0!3m2!1sen!2sus!4v1776358221763!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Dubai Office</h4>
       </div>
     </div>
   </div>
@@ -841,7 +1077,7 @@
     <div class="footer-content">
       <div class="footer-section">
         <h4>About Us</h4>
-        <p>EstateBite is your one-stop platform for luxury real estate and premium dining experiences.</p>
+        <p>TS Real Estates is your one-stop platform for luxury real estate and premium property experiences.</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
@@ -859,6 +1095,7 @@
           <a href="#"><i class="fab fa-twitter"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#" onclick="openWhatsApp()" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
       <div class="footer-section">
@@ -870,7 +1107,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 EstateBite. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+      <p>&copy; 2026 TS Real Estates. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
     </div>
   </div>
 </footer>

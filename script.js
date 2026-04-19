@@ -54,7 +54,7 @@ const nav = document.querySelector('.nav');
 
 if (hamburger) {
   hamburger.addEventListener('click', () => {
-    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    nav.classList.toggle('show');
   });
 }
 
@@ -485,16 +485,22 @@ function nextGalleryImage() {
 // ============ CONTACT & CALL FUNCTIONS ============
 function callNow(type) {
   if (type === 'property') {
-    window.location.href = "tel:+919876543210";
-    alert("Opening phone app to call: +91-9876543210");
+    window.location.href = "tel:+971503567945";
+    alert("Opening phone app to call: +971-50-356-7945");
   } else if (type === 'restaurant') {
-    const phone = restaurants[currentRestaurant]?.phone || "+91-9867543210";
+    const phone = restaurants[currentRestaurant]?.phone || "+971-503567945";
     window.location.href = `tel:${phone}`;
     alert(`Opening phone app to call: ${phone}`);
   } else {
-    alert("Calling EstateBite: +91-9876543210");
-    window.location.href = "tel:+919876543210";
+    alert("Calling EstateBite: +971-50-356-7945");
+    window.location.href = "tel:+971503567945";
   }
+}
+
+function openWhatsApp() {
+  const phoneNumber = "919715207988"; // +91 97152 07988 without + and spaces
+  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+  window.open(whatsappUrl, '_blank');
 }
 
 function submitContactForm(event) {
@@ -503,10 +509,44 @@ function submitContactForm(event) {
   event.target.reset();
 }
 
+// ============ ENQUIRY MODAL FUNCTIONS ============
+function showEnquiryModal() {
+  const modal = document.getElementById('enquiryModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeEnquiryModal() {
+  const modal = document.getElementById('enquiryModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+function submitEnquiry(event) {
+  event.preventDefault();
+  alert("Thank you for your enquiry! Our property experts will contact you within 24 hours with the best property options.");
+  closeEnquiryModal();
+  event.target.reset();
+}
+
+// Show enquiry modal on page load (after 3 seconds)
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    // Check if user hasn't seen the modal in this session
+    if (!sessionStorage.getItem('enquiryShown')) {
+      showEnquiryModal();
+      sessionStorage.setItem('enquiryShown', 'true');
+    }
+  }, 3000); // 3 seconds delay
+});
+
 // ============ CLOSE MODALS ON OUTSIDE CLICK ============
 window.onclick = function(event) {
   if (event.target.classList.contains('modal')) {
     event.target.style.display = "none";
+  }
+  if (event.target.classList.contains('enquiry-modal')) {
+    closeEnquiryModal();
   }
 }
 
