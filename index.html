@@ -3,1116 +3,1170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TS Real Estates - Premium Real Estate</title>
+  <title>TS Consultancy - Premium Properties, Resorts & Land Sales</title>
+  <meta name="description" content="TS Consultancy offers premium real estate properties, luxury resorts, and land sales across Dubai and India. Find your dream home today.">
+  <meta name="keywords" content="real estate, properties, resorts, land sales, Dubai, apartments, villas">
+  
   <link rel="icon" type="image/x-icon" href="assets/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="icon" type="favicon/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HEADER & NAVIGATION -->
+<!-- ==================== HEADER & NAVIGATION ==================== -->
 <header class="header">
   <div class="container">
-    <div class="logo">
-      <img src="assets/logo.png" alt="TS Real Estates Logo" class="logo-img">
-      TS Real Estates
+    <div class="logo-section">
+      <img src="assets/logo2.png" alt="TS Consultancy Logo" class="logo-img">
+      <span class="brand-name">TS Consultancy</span>
     </div>
+    
     <nav class="nav">
-      <a href="#home" class="nav-link">Home</a>
-      <a href="#properties" class="nav-link">Properties</a>
-      <a href="#documents" class="nav-link">Documents</a>
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About Us</a>
+      
+      <!-- SERVICES DROPDOWN -->
+      <div class="nav-dropdown">
+        <a href="#services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="#properties" class="dropdown-item"><i class="fas fa-building"></i> Properties</a>
+          <a href="#resorts" class="dropdown-item"><i class="fas fa-hotel"></i> Resorts</a>
+          <a href="#lands" class="dropdown-item"><i class="fas fa-map"></i> Land Sales</a>
+        </div>
+      </div>
+      
       <a href="#reviews" class="nav-link">Reviews</a>
-      <a href="#blogs" class="nav-link">Blogs</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#blogs" class="nav-link">Blog</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <button class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+
+    <div class="nav-actions">
+      <button class="btn btn-call-enquiry" onclick="openEnquiryModal()"><i class="fas fa-phone"></i> Call Enquiry</button>
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 </header>
 
-<!-- FLOATING WHATSAPP BUTTON -->
+<!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
 <div class="whatsapp-float" onclick="openWhatsApp()">
   <i class="fab fa-whatsapp"></i>
 </div>
 
-<!-- ENQUIRY POPUP MODAL -->
-<div id="enquiryModal" class="enquiry-modal">
-  <div class="enquiry-content">
-    <div class="enquiry-header">
-      <h3><i class="fas fa-envelope"></i> Get Instant Property Updates</h3>
-      <span class="close-enquiry" onclick="closeEnquiryModal()">&times;</span>
+<!-- ==================== ENQUIRY REGISTRATION MODAL ==================== -->
+<div id="enquiryModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeEnquiryModal()">&times;</span>
+    <div class="modal-header">
+      <h2><i class="fas fa-edit"></i> Register Your Enquiry</h2>
+      <p>Get exclusive updates on premium properties and offers</p>
     </div>
-    <div class="enquiry-body">
-      <p>Leave your details and get instant updates on premium properties!</p>
-      <form class="enquiry-form" onsubmit="submitEnquiry(event)">
+    <form class="modal-form" onsubmit="submitEnquiry(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-row">
         <div class="form-group">
-          <i class="fas fa-user"></i>
-          <input type="text" placeholder="Your Name" required>
+          <label>Email *</label>
+          <input type="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
-          <i class="fas fa-phone"></i>
-          <input type="tel" placeholder="Phone Number" required>
+          <label>Phone *</label>
+          <input type="tel" placeholder="+971 XXX XXXX" required>
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email Address" value="info@tsrealestates.com" required>
-        </div>
-        <div class="form-group">
-          <i class="fas fa-home"></i>
+          <label>Service Interested *</label>
           <select required>
-            <option value="">Select Property Type</option>
-            <option value="apartment">Apartment</option>
-            <option value="villa">Villa</option>
-            <option value="plot">Plot</option>
-            <option value="commercial">Commercial</option>
+            <option value="">Select Service</option>
+            <option value="properties">Properties</option>
+            <option value="resorts">Resorts</option>
+            <option value="lands">Land Sales</option>
           </select>
         </div>
         <div class="form-group">
-          <i class="fas fa-map-marker-alt"></i>
-          <input type="text" placeholder="Preferred Location" required>
-        </div>
-        <div class="form-group">
-          <i class="fas fa-comment"></i>
-          <textarea placeholder="Any specific requirements?" rows="3"></textarea>
-        </div>
-        <button type="submit" class="enquiry-submit">
-          <i class="fas fa-paper-plane"></i> Get Property Updates
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- HERO SECTION WITH CAROUSEL -->
-<section id="home" class="hero">
-  <div class="hero-carousel">
-    <div class="carousel-slide active">
-      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=600&fit=crop" alt="Luxury Property">
-      <div class="hero-content">
-        <h1>Premium Real Estate</h1>
-        <p>Discover Your Dream Home</p>
-        <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="scrollToSection('#properties')">View Properties</button>
-          <!-- <button class="btn btn-secondary" onclick="scrollToSection('#restaurants')">Explore Restaurants</button> -->
+          <label>Budget Range *</label>
+          <select required>
+            <option value="">Select Range</option>
+            <option value="0-500k">Below 500K</option>
+            <option value="500k-1m">500K - 1M</option>
+            <option value="1m-2m">1M - 2M</option>
+            <option value="2m+">2M+</option>
+          </select>
         </div>
       </div>
-    </div>
-
-    <div class="carousel-slide">
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop" alt="Fine Dining">
-      <div class="hero-content">
-        <h1>Exquisite Properties</h1>
-        <p>Find Your Perfect Home Today</p>
-        <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="openPropertyDetails(1)">View Details</button>
-          <button class="btn btn-secondary" onclick="callNow('property')">Call Now</button>
-        </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your requirements..." rows="4"></textarea>
       </div>
-    </div>
-
-    <div class="carousel-slide">
-      <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=600&fit=crop" alt="Beach Property">
-      <div class="hero-content">
-        <h1>Beachfront Properties</h1>
-        <p>Live the Coastal Dream</p>
-        <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="openPropertyDetails(1)">View Details</button>
-          <button class="btn btn-secondary" onclick="callNow('property')">Call Now</button>
-        </div>
-      </div>
-    </div>
-
-    <button class="carousel-control prev" onclick="prevSlide()">❮</button>
-    <button class="carousel-control next" onclick="nextSlide()">❯</button>
-    <div class="carousel-indicators">
-      <span class="indicator active" onclick="currentSlide(1)"></span>
-      <span class="indicator" onclick="currentSlide(2)"></span>
-      <span class="indicator" onclick="currentSlide(3)"></span>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT COMPANY -->
-<section id="about" class="about">
-  <div class="container">
-    <div class="about-content">
-      <h2>About TS Real Estates</h2>
-      <p>TS Real Estates is a premier platform for premium real estate listings. We believe in creating communities where people find their perfect home. Since 2020, we've connected thousands of clients with their dream properties.</p>
-      
-      <div class="about-features">
-        <div class="feature">
-          <i class="fas fa-home"></i>
-          <h3>5000+ Properties</h3>
-          <p>Handpicked premium properties across the country</p>
-        </div>
-        <!-- <div class="feature">
-          <i class="fas fa-utensils"></i>
-          <h3>500+ Restaurants</h3>
-          <p>Finest dining establishments at your fingertips</p>
-        </div> -->
-        <div class="feature">
-          <i class="fas fa-users"></i>
-          <h3>50,000+ Customers</h3>
-          <p>Trusted by clients nationwide</p>
-        </div>
-        <div class="feature">
-          <i class="fas fa-award"></i>
-          <h3>Award Winning</h3>
-          <p>Recognized for excellence in service</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURED PROPERTIES -->
-<section id="properties" class="properties">
-  <div class="container">
-    <h2>Featured Properties</h2>
-    <div class="property-grid">
-      <div class="property-card" onclick="openPropertyModal(1)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Luxury Villa">
-          <span class="property-badge">Premium</span>
-        </div>
-        <div class="property-info">
-          <h3>Luxury Villa</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
-          <p class="price">₹1.2 Cr</p>
-          <p class="description">4 BHK, 3000 sq ft, Private garden</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(1)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card" onclick="openPropertyModal(2)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=400&h=300&fit=crop" alt="Modern Flat">
-          <span class="property-badge">Modern</span>
-        </div>
-        <div class="property-info">
-          <h3>Modern Flat</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
-          <p class="price">₹75 Lakh</p>
-          <p class="description">2 BHK, 1200 sq ft, City view</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(2)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card" onclick="openPropertyModal(3)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Beach House">
-          <span class="property-badge">Luxury</span>
-        </div>
-        <div class="property-info">
-          <h3>Beach House</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
-          <p class="price">₹2 Cr</p>
-          <p class="description">5 BHK, 5000 sq ft, Beachfront</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(3)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card" onclick="openPropertyModal(4)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=400&h=300&fit=crop" alt="Penthouse">
-          <span class="property-badge">New</span>
-        </div>
-        <div class="property-info">
-          <h3>Luxury Penthouse</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
-          <p class="price">₹3.5 Cr</p>
-          <p class="description">3 BHK, 2500 sq ft, Sky lounge</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(4)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card" onclick="openPropertyModal(5)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=400&h=300&fit=crop" alt="Villa Complex">
-          <span class="property-badge">Popular</span>
-        </div>
-        <div class="property-info">
-          <h3>Villa Complex</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
-          <p class="price">₹95 Lakh</p>
-          <p class="description">3 BHK, 1800 sq ft, Gated community</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(5)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card" onclick="openPropertyModal(6)">
-        <div class="property-image">
-          <img src="https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=400&h=300&fit=crop" alt="Eco House">
-          <span class="property-badge">Green</span>
-        </div>
-        <div class="property-info">
-          <h3>Eco-Friendly Home</h3>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
-          <p class="price">₹1.5 Cr</p>
-          <p class="description">4 BHK, 2200 sq ft, Solar powered</p>
-          <div class="property-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(6)">View Details</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DOCUMENTS SECTION -->
-<section id="documents" class="documents">
-  <div class="container">
-    <h2>Property Documents</h2>
-    <p class="section-description">Access all necessary property documents and legal paperwork for your real estate transactions</p>
-
-    <div class="documents-grid">
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-file-pdf"></i>
-        </div>
-        <div class="document-info">
-          <h3>Property Brochure</h3>
-          <p>General property information and company overview with all essential details.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-file-alt"></i>
-              <span>Company Overview</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>Updated 2024</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-download"></i>
-              <span>PDF Format</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-eye"></i> Essential information</span>
-            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-building"></i>
-        </div>
-        <div class="document-info">
-          <h3>Amrit Kalash Apartment</h3>
-          <p>Detailed brochure for Amrit Kalash Apartment project by Maansarovar developers.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Prime Location</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>Premium Project</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-download"></i>
-              <span>PDF Format</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-star"></i> Featured property</span>
-            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-home"></i>
-        </div>
-        <div class="document-info">
-          <h3>Property Features</h3>
-          <p>Complete guide to property features including modern amenities and facilities.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-cog"></i>
-              <span>Amenities Guide</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>Latest Features</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-download"></i>
-              <span>PDF Format</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-check-circle"></i> Comprehensive guide</span>
-            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <div class="document-info">
-          <h3>Developer Information</h3>
-          <p>Detailed information about Maansarovar developers and their track record.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-building"></i>
-              <span>Developer Profile</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>Established Builder</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-download"></i>
-              <span>PDF Format</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-award"></i> Trusted developer</span>
-            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-map"></i>
-        </div>
-        <div class="document-info">
-          <h3>Location Guide</h3>
-          <p>Complete location guide with connectivity, nearby amenities, and landmarks.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-route"></i>
-              <span>Connectivity Info</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>Area Guide</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-download"></i>
-              <span>PDF Format</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-location-arrow"></i> Prime location</span>
-            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="document-card">
-        <div class="document-icon">
-          <i class="fas fa-handshake"></i>
-        </div>
-        <div class="document-info">
-          <h3>Contact & Support</h3>
-          <p>Get in touch with our team for personalized property consultation and guidance.</p>
-          <div class="document-details">
-            <div class="detail-item">
-              <i class="fas fa-phone"></i>
-              <span>Direct Contact</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-calendar"></i>
-              <span>24/7 Support</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-info-circle"></i>
-              <span>Contact Details</span>
-            </div>
-          </div>
-          <div class="document-meta">
-            <span><i class="fas fa-headset"></i> Expert assistance</span>
-            <button class="btn btn-small" onclick="callNow('documents')">Call Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="documents-contact">
-      <h3>Need Help with Documents?</h3>
-      <p>Our legal experts are here to assist you with all property documentation needs. Contact us for personalized guidance.</p>
-      <button class="btn btn-primary" onclick="callNow('documents')">Call Legal Team</button>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURED RESTAURANTS -->
-<!-- <section id="restaurants" class="restaurants">
-  <div class="container">
-    <h2>Featured Restaurants</h2>
-    <div class="restaurant-grid">
-      <div class="restaurant-card" onclick="openRestaurantModal(1)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=300&fit=crop" alt="Fine Dining Restaurant">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.8
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(1)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>Elegance Fine Dining</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> French, Continental</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
-          <p class="description">Award-winning fine dining with 5-star service</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(1)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(1)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="restaurant-card" onclick="openRestaurantModal(2)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1567655366169-8269849e9a12?w=400&h=300&fit=crop" alt="Italian Restaurant">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.6
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(2)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>La Bella Italia</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> Italian, Pasta</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
-          <p class="description">Authentic Italian cuisine with homemade pasta</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(2)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(2)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="restaurant-card" onclick="openRestaurantModal(3)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Asian Fusion">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.7
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(3)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>Orient Express</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> Asian Fusion, Japanese</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
-          <p class="description">Asian fusion with premium sushi and sashimi</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(3)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(3)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="restaurant-card" onclick="openRestaurantModal(4)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1504674900961-9f5815edf4a7?w=400&h=300&fit=crop" alt="Rooftop Bar">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.5
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(4)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>Skyline Lounge</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> Cocktails, Casual</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
-          <p class="description">Rooftop bar with panoramic city views</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(4)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(4)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="restaurant-card" onclick="openRestaurantModal(5)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1585518419759-1b4fad5aaf4f?w=400&h=300&fit=crop" alt="Indian Restaurant">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.9
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(5)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>Maharaja Palace</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> Indian, Mughlai</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
-          <p class="description">Authentic Indian cuisine with royal flavors</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(5)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(5)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="restaurant-card" onclick="openRestaurantModal(6)">
-        <div class="restaurant-image">
-          <img src="https://images.unsplash.com/photo-1537457519924-2d3726e93e26?w=400&h=300&fit=crop" alt="Cafe">
-          <span class="restaurant-rating">
-            <i class="fas fa-star"></i> 4.4
-          </span>
-          <div class="gallery-preview">
-            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(6)">
-              <i class="fas fa-images"></i> Gallery
-            </button>
-          </div>
-        </div>
-        <div class="restaurant-info">
-          <h3>The Corner Cafe</h3>
-          <p class="cuisine"><i class="fas fa-utensils"></i> Cafe, Casual</p>
-          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
-          <p class="description">Cozy cafe with artisan coffee and pastries</p>
-          <div class="restaurant-actions">
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(6)">View Details</button>
-            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(6)">Book Now</button>
-            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- REVIEWS & TESTIMONIALS -->
-<section id="reviews" class="reviews">
-  <div class="container">
-    <h2>Customer Reviews</h2>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">RK</div>
-          <div class="review-meta">
-            <h4>Rahul Kumar</h4>
-            <p class="review-type">Property Purchase</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"EstateBite helped me find my dream home in Bangalore. Their team was professional and transparent throughout the process. Highly recommended!"</p>
-        <p class="review-date">2 weeks ago</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">PS</div>
-          <div class="review-meta">
-            <h4>Priya Singh</h4>
-            <p class="review-type">Restaurant Booking</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"The restaurant booking experience was seamless. Had a wonderful dinner at Elegance Fine Dining. Will use EstateBite again!"</p>
-        <p class="review-date">1 week ago</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">AJ</div>
-          <div class="review-meta">
-            <h4>Arjun Joshi</h4>
-            <p class="review-type">Property Viewing</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"Great platform with excellent property listings. The virtual tour feature was very helpful. Loved the dining integration feature!"</p>
-        <p class="review-date">3 weeks ago</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">NP</div>
-          <div class="review-meta">
-            <h4>Neha Patel</h4>
-            <p class="review-type">Property + Dining</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"Fantastic experience with both property search and restaurant bookings. The all-in-one platform is a game changer!"</p>
-        <p class="review-date">5 days ago</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">MK</div>
-          <div class="review-meta">
-            <h4>Manoj Kumar</h4>
-            <p class="review-type">Investor</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"As an investor, I found EstateBite's platform very reliable. Great market insights and responsive customer support."</p>
-        <p class="review-date">1 day ago</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="reviewer-avatar">SK</div>
-          <div class="review-meta">
-            <h4>Sneha Kapoor</h4>
-            <p class="review-type">Restaurant Enthusiast</p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p class="review-text">"Love the restaurant collection on EstateBite. Perfect for finding new places to dine. Great booking process too!"</p>
-        <p class="review-date">4 days ago</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOGS SECTION -->
-<section id="blogs" class="blogs">
-  <div class="container">
-    <h2>Latest Blog Posts</h2>
-    <div class="blogs-grid">
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1554224311-beee415c15e7?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 15, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Top 5 Luxury Properties in Bangalore</h3>
-          <p>Discover the most prestigious and luxurious properties in Bangalore's prime locations...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1495564151525-2a7f81d2ccff?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 12, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Fine Dining Guide: 2024 Edition</h3>
-          <p>Complete guide to the best fine dining restaurants offering exceptional culinary experiences...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1560491676-04071c5f467b?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 10, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Investment Guide: Real Estate Trends</h3>
-          <p>Market analysis and investment strategies for real estate in emerging Indian markets...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 8, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Coastal Living: Benefits & Lifestyle</h3>
-          <p>Explore the advantages of beachfront living and how it transforms your lifestyle...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 5, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Culinary Trends: What's Hot in 2024</h3>
-          <p>Discover the latest food trends and dining concepts revolutionizing the restaurant industry...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-image">
-          <img src="https://images.unsplash.com/photo-1493536671697-6d302319b41e?w=400&h=250&fit=crop" alt="Blog">
-          <span class="blog-date">Mar 1, 2024</span>
-        </div>
-        <div class="blog-content">
-          <h3>Home Automation: Smart Living Solutions</h3>
-          <p>Get insights into smart home technologies that enhance comfort and security...</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section id="contact" class="contact">
-  <div class="container">
-    <h2>Get In Touch</h2>
-    <div class="contact-content">
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <div>
-            <h4>Phone</h4>
-            <p>Dubai: +971 50 356 7945</p>
-            <p>Bengaluru: +91 9791789497</p>
-            <p>Chennai: +91 xxxxxxxxxx</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <div>
-            <h4>Email</h4>
-            <p>info@tsrealestates.com</p>
-            <p>support@tsrealestates.com</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div>
-            <h4>Address</h4>
-            <p>Eta Start House Building, Office No 723, </p>
-              <p>Near by Salah al din metro Station</p>
-            <p>Dubai, UAE 29328</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <div>
-            <h4>Working Hours</h4>
-            <p>Mon - Fri: 09:00 AM - 06:00 PM</p>
-            <p>Sat - Sun: 10:00 AM - 04:00 PM</p>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form" onsubmit="submitContactForm(event)">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <input type="tel" placeholder="Your Phone" required>
-        <select required>
-          <option value="">Select Subject</option>
-          <option value="property">Property Inquiry</option>
-          <option value="restaurant">Restaurant Booking</option>
-          <option value="general">General Inquiry</option>
-        </select>
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
-    </div>
-
-    <!-- EMBEDDED MAPS -->
-    <h3 style="margin-top: 50px;">Our Locations</h3>
-    <div class="maps-container">
-      <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.995559130635!2d55.322021074444166!3d25.27073482871994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5cc812c56ded%3A0x1833b4e9e0095885!2sEta%20Star%20Holding!5e0!3m2!1sen!2sus!4v1776358221763!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <h4>Dubai Office</h4>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MODALS -->
-
-<!-- PROPERTY DETAILS MODAL -->
-<div id="propertyModal" class="modal">
-  <div class="modal-content large-modal">
-    <span class="close-btn" onclick="closePropertyModal()">&times;</span>
-    <div class="modal-body">
-      <div class="modal-gallery">
-        <img id="modalPropertyImage" src="" alt="Property">
-        <div class="gallery-controls">
-          <button onclick="prevPropertyImage()">❮</button>
-          <button onclick="nextPropertyImage()">❯</button>
-        </div>
-      </div>
-
-      <div class="modal-details">
-        <h2 id="modalPropertyTitle"></h2>
-        <div class="property-specs">
-          <div class="spec">
-            <i class="fas fa-door-open"></i>
-            <span id="modalBedrooms"></span>
-          </div>
-          <div class="spec">
-            <i class="fas fa-bath"></i>
-            <span id="modalBathrooms"></span>
-          </div>
-          <div class="spec">
-            <i class="fas fa-ruler-combined"></i>
-            <span id="modalArea"></span>
-          </div>
-          <div class="spec">
-            <i class="fas fa-calendar"></i>
-            <span id="modalYear"></span>
-          </div>
-        </div>
-
-        <p class="price-modal" id="modalPropertyPrice"></p>
-        <p id="modalPropertyDescription"></p>
-
-        <div class="property-amenities">
-          <h3>Amenities</h3>
-          <ul id="amenitiesList"></ul>
-        </div>
-
-        <div class="map-container">
-          <h3>Location Map</h3>
-          <iframe id="propertyMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn btn-primary large" onclick="openPropertyForm()">Register Interest</button>
-          <button class="btn btn-secondary large" onclick="callNow('property')">Call Now</button>
-          <button class="btn btn-outline large" onclick="shareProperty()">Share Property</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PROPERTY REGISTRATION FORM MODAL -->
-<div id="registrationModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeRegistrationModal()">&times;</span>
-    <h2>Register Your Interest</h2>
-    <form onsubmit="submitPropertyForm(event)">
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <input type="text" placeholder="Current Address" required>
-      <select required>
-        <option value="">Select Purpose</option>
-        <option value="buy">Buy</option>
-        <option value="rent">Rent</option>
-        <option value="invest">Invest</option>
-      </select>
-      <select required>
-        <option value="">Budget Range</option>
-        <option value="0-50">₹0 - ₹50 Lakh</option>
-        <option value="50-100">₹50 Lakh - ₹1 Cr</option>
-        <option value="100-200">₹1 Cr - ₹2 Cr</option>
-        <option value="200+">₹2 Cr+</option>
-      </select>
-      <textarea placeholder="Additional Comments" rows="4"></textarea>
-      <button type="submit" class="btn btn-primary">Submit Registration</button>
+      <button type="submit" class="btn btn-primary full-width">
+        <i class="fas fa-paper-plane"></i> Submit Enquiry
+      </button>
+      <p class="form-note">We'll get back to you within 2 hours</p>
     </form>
   </div>
 </div>
 
-<!-- RESTAURANT DETAILS MODAL -->
-<div id="restaurantModal" class="modal">
-  <div class="modal-content large-modal">
-    <span class="close-btn" onclick="closeRestaurantModal()">&times;</span>
-    <div class="modal-body">
-      <div class="modal-gallery">
-        <img id="modalRestaurantImage" src="" alt="Restaurant">
-        <div class="gallery-controls">
-          <button onclick="prevRestaurantImage()">❮</button>
-          <button onclick="nextRestaurantImage()">❯</button>
-        </div>
-      </div>
-
-      <div class="modal-details">
-        <h2 id="modalRestaurantName"></h2>
-        <div class="restaurant-meta">
-          <span class="rating" id="modalRating"><i class="fas fa-star"></i></span>
-          <span class="cuisine" id="modalCuisine"></span>
-          <span class="location" id="modalLocation"><i class="fas fa-map-marker-alt"></i></span>
-        </div>
-
-        <p id="modalRestaurantDescription"></p>
-
-        <div class="restaurant-amenities">
-          <h3>Facilities</h3>
-          <ul id="facilitiesList"></ul>
-        </div>
-
-        <div class="restaurant-reviews">
-          <h3>Guest Reviews</h3>
-          <div id="restaurantReviews"></div>
-        </div>
-
-        <div class="map-container">
-          <h3>Location Map</h3>
-          <iframe id="restaurantMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn btn-primary large" onclick="openRestaurantBooking(currentRestaurant)">Book Now</button>
-          <button class="btn btn-secondary large" onclick="callNow('restaurant')">Call Now</button>
-          <button class="btn btn-outline large" onclick="openGallery(currentRestaurant)">View Gallery</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RESTAURANT BOOKING MODAL -->
+<!-- ==================== BOOKING REGISTRATION MODAL ==================== -->
 <div id="bookingModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeBookingModal()">&times;</span>
-    <h2>Book Your Table</h2>
-    <form onsubmit="submitRestaurantBooking(event)">
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <input type="date" required>
-      <input type="time" required>
-      <select required>
-        <option value="">Number of Guests</option>
-        <option value="1">1 Guest</option>
-        <option value="2">2 Guests</option>
-        <option value="3">3 Guests</option>
-        <option value="4">4 Guests</option>
-        <option value="5">5 Guests</option>
-        <option value="6">6+ Guests</option>
-      </select>
-      <textarea placeholder="Special Requests" rows="3"></textarea>
-      <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+    <div class="modal-header">
+      <h2><i class="fas fa-calendar"></i> Book a Site Visit</h2>
+      <p>Schedule your personal tour with our experts</p>
+    </div>
+    <form class="modal-form" onsubmit="submitBooking(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" placeholder="+971 XXX XXXX" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date *</label>
+          <input type="date" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred Time *</label>
+          <input type="time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Property/Location *</label>
+        <input type="text" placeholder="Which property interested?" required>
+      </div>
+      <button type="submit" class="btn btn-primary full-width">
+        <i class="fas fa-check"></i> Confirm Booking
+      </button>
+      <p class="form-note">Confirmation will be sent to your email</p>
     </form>
   </div>
 </div>
 
-<!-- GALLERY MODAL -->
-<div id="galleryModal" class="modal">
-  <div class="modal-content gallery-modal">
-    <span class="close-btn" onclick="closeGalleryModal()">&times;</span>
-    <div class="gallery-container">
-      <img id="galleryImage" src="" alt="Gallery">
-      <div class="gallery-nav">
-        <button onclick="prevGalleryImage()">❮ Previous</button>
-        <span id="galleryCounter">1 / 6</span>
-        <button onclick="nextGalleryImage()">Next ❯</button>
+<!-- ==================== HERO HOME SECTION ==================== -->
+<section id="home" class="hero">
+  <div class="hero-carousel">
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title animate-title">Premium Properties Await You</h1>
+          <p class="hero-subtitle">Luxury apartments, villas, and exclusive residences across Dubai and India</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg btn-hover-glow" onclick="openEnquiryModal()">
+            <i class="fas fa-phone"></i> Call to Enquiry
+          </button>
+          <button class="btn btn-secondary btn-lg btn-hover-glow" onclick="openBookingModal()">
+            <i class="fas fa-calendar"></i> Book Site Visit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Luxury Resort Escapes</h1>
+          <p class="hero-subtitle">Experience world-class hospitality and premium resort living</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="scrollToSection('#resorts')">Explore Resorts</button>
+          <button class="btn btn-secondary btn-lg" onclick="scrollToSection('#properties')">View Properties</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Prime Land Investments</h1>
+          <p class="hero-subtitle">Strategic locations for development and investment opportunities</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openEnquiryModal()">Learn More</button>
+          <button class="btn btn-secondary btn-lg" onclick="scrollToSection('#lands')">View Lands</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control prev" onclick="prevSlide()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-control next" onclick="nextSlide()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <span class="indicator active" onclick="currentSlide(0)"></span>
+      <span class="indicator" onclick="currentSlide(1)"></span>
+      <span class="indicator" onclick="currentSlide(2)"></span>
+    </div>
+  </div>
+
+  <!-- SEO Content Banner -->
+  <div class="hero-seo-banner">
+    <div class="container">
+      <div class="seo-content-grid">
+        <div class="seo-item">
+          <div class="seo-icon"><i class="fas fa-home"></i></div>
+          <h3>5000+ Properties</h3>
+          <p>Premium listings across Dubai & India</p>
+        </div>
+        <div class="seo-item">
+          <div class="seo-icon"><i class="fas fa-users"></i></div>
+          <h3>50,000+ Clients</h3>
+          <p>Trusted by satisfied customers</p>
+        </div>
+        <div class="seo-item">
+          <div class="seo-icon"><i class="fas fa-award"></i></div>
+          <h3>15+ Years</h3>
+          <p>Industry experience & excellence</p>
+        </div>
+        <div class="seo-item">
+          <div class="seo-icon"><i class="fas fa-check-circle"></i></div>
+          <h3>24/7 Support</h3>
+          <p>Dedicated customer service team</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>About TS Consultancy</h2>
+      <p>Leading Premium Real Estate & Resort Solutions</p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-text">
+        <h3>Your Trusted Real Estate Partner</h3>
+        <p>TS Consultancy is a premier platform specializing in luxury real estate, exclusive resorts, and land investment opportunities. With over 15 years of industry experience, we've connected thousands of clients with their dream properties.</p>
+        
+        <div class="about-features">
+          <div class="feature-item">
+            <i class="fas fa-certificate"></i>
+            <h4>Verified Properties</h4>
+            <p>All properties are legally verified and authenticated</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <h4>100% Safe Transactions</h4>
+            <p>Complete transparency in all property dealings</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Expert Consultation</h4>
+            <p>Professional guidance from experienced consultants</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-globe"></i>
+            <h4>Global Reach</h4>
+            <p>International property network and connections</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="openEnquiryModal()">
+          Get Your Free Consultation
+        </button>
+      </div>
+
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=600&fit=crop" alt="Luxury Apartment" class="about-img">
+        <div class="about-image-overlay">
+          <div class="image-stat">
+            <h4>Premium Quality</h4>
+            <p>Top-tier properties</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROPERTIES SECTION ==================== -->
+<section id="properties" class="properties-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Properties</h2>
+      <p>Explore Our Premium Real Estate Collection</p>
+    </div>
+
+    <div class="filters-bar">
+      <button class="filter-btn active" onclick="filterProperties('all')">All Properties</button>
+      <button class="filter-btn" onclick="filterProperties('apartment')">Apartments</button>
+      <button class="filter-btn" onclick="filterProperties('villa')">Villas</button>
+      <button class="filter-btn" onclick="filterProperties('penthouse')">Penthouses</button>
+    </div>
+
+    <div class="properties-grid">
+      <!-- Property Card 1 -->
+      <div class="property-card property-item apartment" onclick="openPropertyModal(1)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Luxury Villa">
+          <span class="property-badge premium">Premium</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Villa - Marina</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Dubai Marina, UAE</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 4 BHK</span>
+            <span><i class="fas fa-ruler"></i> 3000 sq.ft</span>
+          </div>
+          <p class="price">AED 2,500,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 2 -->
+      <div class="property-card property-item apartment" onclick="openPropertyModal(2)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=400&h=300&fit=crop" alt="Modern Flat">
+          <span class="property-badge modern">Modern</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Modern Apartment - Downtown</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Downtown Dubai, UAE</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 2 BHK</span>
+            <span><i class="fas fa-ruler"></i> 1200 sq.ft</span>
+          </div>
+          <p class="price">AED 1,200,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 3 -->
+      <div class="property-card property-item villa" onclick="openPropertyModal(3)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Beach House">
+          <span class="property-badge luxury">Luxury</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Beachfront Villa - Palm Jumeirah</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Palm Jumeirah, UAE</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 5 BHK</span>
+            <span><i class="fas fa-ruler"></i> 5000 sq.ft</span>
+          </div>
+          <p class="price">AED 4,500,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 4 -->
+      <div class="property-card property-item penthouse" onclick="openPropertyModal(4)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=400&h=300&fit=crop" alt="Penthouse">
+          <span class="property-badge new">New</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Penthouse - Burj Khalifa</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Downtown Dubai, UAE</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 3 BHK</span>
+            <span><i class="fas fa-ruler"></i> 2500 sq.ft</span>
+          </div>
+          <p class="price">AED 3,500,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 5 -->
+      <div class="property-card property-item apartment" onclick="openPropertyModal(5)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=400&h=300&fit=crop" alt="Villa Complex">
+          <span class="property-badge popular">Popular</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Villa Complex - Arabian Ranches</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Arabian Ranches, Dubai</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 3 BHK</span>
+            <span><i class="fas fa-ruler"></i> 1800 sq.ft</span>
+          </div>
+          <p class="price">AED 1,900,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 6 -->
+      <div class="property-card property-item villa" onclick="openPropertyModal(6)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=400&h=300&fit=crop" alt="Eco House">
+          <span class="property-badge green">Green</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Eco-Friendly Villa - Dubai Hills</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Dubai Hills Estate</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 4 BHK</span>
+            <span><i class="fas fa-ruler"></i> 2200 sq.ft</span>
+          </div>
+          <p class="price">AED 2,800,000</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RESORTS SECTION ==================== -->
+<section id="resorts" class="resorts-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Luxury Resorts & Hospitality</h2>
+      <p>Experience Premium Resort Living & Services</p>
+    </div>
+
+    <div class="resorts-grid">
+      <!-- Resort Card 1 -->
+      <div class="resort-card" onclick="openResortModal(1)">
+        <div class="resort-image">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop" alt="Beachfront Resort">
+          <div class="resort-overlay">
+            <span class="resort-rating"><i class="fas fa-star"></i> 4.9/5</span>
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="resort-info">
+          <h3>Beachfront Paradise Resort</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Jumeirah Beach, Dubai</p>
+          <p class="description">5-star beachfront resort with world-class amenities and services</p>
+          <div class="resort-features">
+            <span><i class="fas fa-water"></i> Private Beach</span>
+            <span><i class="fas fa-spa"></i> Spa & Wellness</span>
+            <span><i class="fas fa-utensils"></i> 5 Restaurants</span>
+          </div>
+          <div class="resort-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resort Card 2 -->
+      <div class="resort-card" onclick="openResortModal(2)">
+        <div class="resort-image">
+          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop" alt="Mountain Resort">
+          <div class="resort-overlay">
+            <span class="resort-rating"><i class="fas fa-star"></i> 4.8/5</span>
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="resort-info">
+          <h3>Mountain Serenity Resort</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Hatta, Dubai</p>
+          <p class="description">Alpine luxury resort nestled in scenic mountain views</p>
+          <div class="resort-features">
+            <span><i class="fas fa-hiking"></i> Adventure Sports</span>
+            <span><i class="fas fa-tree"></i> Nature Trails</span>
+            <span><i class="fas fa-fire"></i> Cozy Lodges</span>
+          </div>
+          <div class="resort-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resort Card 3 -->
+      <div class="resort-card" onclick="openResortModal(3)">
+        <div class="resort-image">
+          <img src="https://images.unsplash.com/photo-1528996044214-566174324b3e?w=400&h=300&fit=crop" alt="Desert Resort">
+          <div class="resort-overlay">
+            <span class="resort-rating"><i class="fas fa-star"></i> 4.7/5</span>
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="resort-info">
+          <h3>Desert Luxury Retreat</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Dubai Desert, UAE</p>
+          <p class="description">Exclusive desert resort with authentic Arabian hospitality</p>
+          <div class="resort-features">
+            <span><i class="fas fa-moon"></i> Star Gazing</span>
+            <span><i class="fas fa-horse"></i> Camel Safaris</span>
+            <span><i class="fas fa-music"></i> Live Entertainment</span>
+          </div>
+          <div class="resort-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resort Card 4 - Coming Soon Banner -->
+      <div class="resort-card coming-soon">
+        <div class="resort-image">
+          <img src="https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=400&h=300&fit=crop" alt="Dubai Tourism Experience">
+          <div class="coming-soon-banner">
+            <span class="badge-soon">COMING SOON</span>
+            <h4>Dubai Tourism</h4>
+            <p>Exclusive travel packages</p>
+          </div>
+        </div>
+        <div class="resort-info">
+          <h3>Tourism Experiences</h3>
+          <p class="location"><i class="fas fa-plane"></i> Dubai & Beyond</p>
+          <p class="description">Curated travel packages and tourism services launching soon</p>
+          <div class="resort-features">
+            <span><i class="fas fa-suitcase"></i> Tour Packages</span>
+            <span><i class="fas fa-camera"></i> City Tours</span>
+            <span><i class="fas fa-ticket-alt"></i> Event Access</span>
+          </div>
+          <div class="resort-actions">
+            <button class="btn btn-primary small disabled" disabled>Available Soon</button>
+            <button class="btn btn-secondary small" onclick="openEnquiryModal()">Notify Me</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LAND SALES SECTION ==================== -->
+<section id="lands" class="lands-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Prime Land Opportunities</h2>
+      <p>Investment-Grade Land for Development & Value Growth</p>
+    </div>
+
+    <div class="lands-grid">
+      <!-- Land 1 -->
+      <div class="land-card">
+        <div class="land-image">
+          <img src="https://images.unsplash.com/photo-1500382017468-f049863256f0?w=400&h=300&fit=crop" alt="Commercial Land">
+          <span class="land-badge commercial">Commercial</span>
+        </div>
+        <div class="land-info">
+          <h3>Prime Commercial Zone</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Business Bay, Dubai</p>
+          <div class="land-specs">
+            <span><i class="fas fa-expand"></i> 5000 sq.m</span>
+            <span><i class="fas fa-ruler"></i> Corner Plot</span>
+          </div>
+          <p class="price">AED 50 Million</p>
+          <div class="land-actions">
+            <button class="btn btn-primary small" onclick="openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="openBookingModal()">Schedule Site</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Land 2 -->
+      <div class="land-card">
+        <div class="land-image">
+          <img src="https://images.unsplash.com/photo-1473093295203-cad00df16e50?w=400&h=300&fit=crop" alt="Residential Land">
+          <span class="land-badge residential">Residential</span>
+        </div>
+        <div class="land-info">
+          <h3>Residential Development Land</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Dubai South, UAE</p>
+          <div class="land-specs">
+            <span><i class="fas fa-expand"></i> 10000 sq.m</span>
+            <span><i class="fas fa-chart-line"></i> High ROI</span>
+          </div>
+          <p class="price">AED 75 Million</p>
+          <div class="land-actions">
+            <button class="btn btn-primary small" onclick="openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="openBookingModal()">Schedule Site</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Land 3 -->
+      <div class="land-card">
+        <div class="land-image">
+          <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=300&fit=crop" alt="Investment Land">
+          <span class="land-badge investment">Investment</span>
+        </div>
+        <div class="land-info">
+          <h3>High-Growth Investment Land</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Expo City, Dubai</p>
+          <div class="land-specs">
+            <span><i class="fas fa-expand"></i> 3500 sq.m</span>
+            <span><i class="fas fa-bolt"></i> Fast Growth</span>
+          </div>
+          <p class="price">AED 35 Million</p>
+          <div class="land-actions">
+            <button class="btn btn-primary small" onclick="openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="openBookingModal()">Schedule Site</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEWS SECTION ==================== -->
+<section id="reviews" class="reviews-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Client Testimonials</h2>
+      <p>Real Experiences from Satisfied Customers</p>
+    </div>
+
+    <div class="reviews-carousel">
+      <div class="reviews-track">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">AK</div>
+            <div class="reviewer-info">
+              <h4>Ahmed Khan</h4>
+              <p class="review-type">Property Buyer</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"TS Consultancy helped me find my dream home in Dubai. The team was incredibly professional and transparent throughout the entire process. Highly recommended!"</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 2 weeks ago</p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">FS</div>
+            <div class="reviewer-info">
+              <h4>Fatima Shah</h4>
+              <p class="review-type">Resort Visitor</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"Amazing resort experience! The facilities were world-class and the service was impeccable. Definitely coming back for our next vacation!"</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 1 week ago</p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">MJ</div>
+            <div class="reviewer-info">
+              <h4>Mohammed Jamal</h4>
+              <p class="review-type">Land Investor</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"Very satisfied with my land investment through TS Consultancy. The team provided excellent market insights and guidance."</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 3 weeks ago</p>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">NP</div>
+            <div class="reviewer-info">
+              <h4>Neha Patel</h4>
+              <p class="review-type">Property Manager</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"Professional team, excellent service, and perfect execution. TS Consultancy is the best in the business!"</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 5 days ago</p>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">RK</div>
+            <div class="reviewer-info">
+              <h4>Rajesh Kumar</h4>
+              <p class="review-type">Corporate Client</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"Exceptional service and attention to detail. TS Consultancy truly understands the real estate market!"</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 1 day ago</p>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">LS</div>
+            <div class="reviewer-info">
+              <h4>Lara Smith</h4>
+              <p class="review-type">International Buyer</p>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">"Great experience working with TS Consultancy for my property purchase. The entire process was smooth and hassle-free."</p>
+          <p class="review-date"><i class="fas fa-calendar"></i> 3 days ago</p>
+        </div>
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control review-prev" onclick="prevReview()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control review-next" onclick="nextReview()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOGS SECTION ==================== -->
+<section id="blogs" class="blogs-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest Blog Posts</h2>
+      <p>Industry Insights & Real Estate Tips</p>
+    </div>
+
+    <div class="blogs-carousel">
+      <div class="blogs-track">
+        <!-- Blog Card 1 -->
+        <article class="blog-card" onclick="openBlogModal(1)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1554224311-beee415c15e7?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 15, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Top 10 Luxury Properties in Dubai 2024</h3>
+            <p>Discover the most prestigious and luxurious properties in Dubai's prime locations. Market analysis and investment tips.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 24</span>
+              <span><i class="fas fa-heart"></i> 156</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Card 2 -->
+        <article class="blog-card" onclick="openBlogModal(2)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1495564151525-2a7f81d2ccff?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 12, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Resort Living: Benefits & Lifestyle Guide</h3>
+            <p>Complete guide to resort living in UAE. Explore the advantages and lifestyle benefits of premium resort communities.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 18</span>
+              <span><i class="fas fa-heart"></i> 142</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Card 3 -->
+        <article class="blog-card" onclick="openBlogModal(3)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1560491676-04071c5f467b?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 10, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Real Estate Investment Trends 2024</h3>
+            <p>Market analysis and investment strategies for real estate. Expert insights and forecasts.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 32</span>
+              <span><i class="fas fa-heart"></i> 198</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Card 4 -->
+        <article class="blog-card" onclick="openBlogModal(4)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 8, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Coastal Living: Your Dream Home Guide</h3>
+            <p>Explore the benefits of beachfront and coastal properties and how seaside living transforms your lifestyle.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 28</span>
+              <span><i class="fas fa-heart"></i> 167</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Card 5 -->
+        <article class="blog-card" onclick="openBlogModal(5)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 5, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Smart Home Features in Luxury Properties</h3>
+            <p>Discover the latest smart home technologies that enhance comfort, security, and convenience in modern properties.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 22</span>
+              <span><i class="fas fa-heart"></i> 134</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Card 6 -->
+        <article class="blog-card" onclick="openBlogModal(6)">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1493536671697-6d302319b41e?w=400&h=250&fit=crop" alt="Blog">
+            <span class="blog-date">Mar 1, 2024</span>
+            <div class="blog-overlay">
+              <button class="btn btn-white">Read More</button>
+            </div>
+          </div>
+          <div class="blog-content">
+            <h3>Legal Documentation Guide for Property</h3>
+            <p>Complete guide to legal requirements and documentation needed for property transactions in UAE and India.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-comments"></i> 35</span>
+              <span><i class="fas fa-heart"></i> 189</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control blog-prev" onclick="prevBlog()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control blog-next" onclick="nextBlog()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT SECTION ==================== -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Get In Touch</h2>
+      <p>Our Offices & Contact Information</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <div class="contact-form-box">
+        <h3><i class="fas fa-envelope"></i> Send us a Message</h3>
+        <form class="contact-form" onsubmit="submitContactForm(event)">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" placeholder="+971 XXXX XXXX" required>
+            </div>
+            <div class="form-group">
+              <label>Subject *</label>
+              <input type="text" placeholder="Message subject" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea placeholder="Your message..." rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Office Locations -->
+      <div class="contact-info-box">
+        <h3><i class="fas fa-building"></i> Our Offices</h3>
+
+        <!-- Main Branch -->
+        <div class="office-card main-office">
+          <div class="office-badge">Main Branch</div>
+          <h4>Dubai Corporate Office</h4>
+          <div class="office-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <p><strong>Address:</strong></p>
+              <p>Eta Star House Building, Office No 723</p>
+              <p>Near Salah Al Din Metro Station</p>
+              <p>Dubai, UAE 29328</p>
+            </div>
+          </div>
+          <div class="office-detail">
+            <i class="fas fa-phone"></i>
+            <div>
+              <p><strong>Phone:</strong></p>
+              <p>+971 50 356 7945</p>
+              <p>+971 4 XXX XXXX</p>
+            </div>
+          </div>
+          <div class="office-detail">
+            <i class="fas fa-clock"></i>
+            <div>
+              <p><strong>Hours:</strong></p>
+              <p>Mon - Fri: 09:00 AM - 06:00 PM</p>
+              <p>Sat - Sun: 10:00 AM - 04:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Branch 1 -->
+        <div class="office-card">
+          <div class="office-badge">Sub-Branch 1</div>
+          <h4>Bengaluru Office</h4>
+          <div class="office-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <p><strong>Address:</strong></p>
+              <p>Tech Park Complex, Suite 450</p>
+              <p>Whitefield, Bengaluru</p>
+              <p>India - 560047</p>
+            </div>
+          </div>
+          <div class="office-detail">
+            <i class="fas fa-phone"></i>
+            <div>
+              <p><strong>Phone:</strong></p>
+              <p>+91 9791789497</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Branch 2 -->
+        <div class="office-card">
+          <div class="office-badge">Sub-Branch 2</div>
+          <h4>Chennai Office</h4>
+          <div class="office-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <p><strong>Address:</strong></p>
+              <p>Marina Bay Business Center</p>
+              <p>Nolambur, Chennai</p>
+              <p>India - 600089</p>
+            </div>
+          </div>
+          <div class="office-detail">
+            <i class="fas fa-phone"></i>
+            <div>
+              <p><strong>Phone:</strong></p>
+              <p>+91 XXXX XXXXXX</p>
+              <p>+971 50 XXXXXX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Maps Section -->
+    <div class="maps-section">
+      <h3><i class="fas fa-map"></i> Our Locations</h3>
+      <div class="maps-container">
+        <!-- Dubai Map -->
+        <div class="map-box">
+          <h4>Dubai Main Office</h4>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.995559130635!2d55.322021074444166!3d25.27073482871994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5cc812c56ded%3A0x1833b4e9e0095885!2sEta%20Star%20Holding!5e0!3m2!1sen!2sus!4v1776358221763" width="100%" height="400" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Bengaluru Map -->
+        <div class="map-box">
+          <h4>Bengaluru Office</h4>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8721495725433!2d77.6411!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1669e098fdff%3A0xea9b1cd5dd25a64e!2sWhitefield%2C%20Bengaluru!5e0!3m2!1sen!2sin!4v1776358221763" width="100%" height="400" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Chennai Map -->
+        <div class="map-box">
+          <h4>Chennai Office</h4>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.7123456789!2d80.2108!3d13.1939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526fc5d5d5d5d5%3A0x1234567890abcdef!2sNolambur%2C%20Chennai!5e0!3m2!1sen!2sin!4v1776358221763" width="100%" height="400" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
+      <!-- Footer Brand -->
       <div class="footer-section">
-        <h4>About Us</h4>
-        <p>TS Real Estates is your one-stop platform for luxury real estate and premium property experiences.</p>
+        <div class="footer-logo">
+          <img src="assets/logo2.png" alt="TS Consultancy" class="footer-img">
+          <h3>TS Consultancy</h3>
+        </div>
+        <p>Your premier destination for premium real estate, luxury resorts, and investment opportunities across Dubai and India.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+          <a href="#" onclick="openWhatsApp()" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+        </div>
       </div>
+
+      <!-- Quick Links -->
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
           <li><a href="#properties">Properties</a></li>
-          <li><a href="#restaurants">Restaurants</a></li>
-          <li><a href="#blogs">Blogs</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#resorts">Resorts</a></li>
+          <li><a href="#lands">Land Sales</a></li>
+          <li><a href="#blogs">Blog</a></li>
         </ul>
       </div>
+
+      <!-- Services -->
       <div class="footer-section">
-        <h4>Follow Us</h4>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#" onclick="openWhatsApp()" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Property Sales</a></li>
+          <li><a href="#">Property Rentals</a></li>
+          <li><a href="#">Resort Bookings</a></li>
+          <li><a href="#">Investment Consultation</a></li>
+          <li><a href="#">Legal Assistance</a></li>
+          <li><a href="#">Site Tours</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-phone"></i> +971 50 356 7945</p>
+        <p><i class="fas fa-envelope"></i> info@tsconsultancy.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+        <div class="newsletter-form">
+          <h5>Subscribe to Newsletter</h5>
+          <form onsubmit="subscribeNewsletter(event)">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit" class="btn btn-primary small">Subscribe</button>
+          </form>
         </div>
       </div>
-      <div class="footer-section">
-        <h4>Newsletter</h4>
-        <form>
-          <input type="email" placeholder="Your email">
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-      </div>
     </div>
+
+    <!-- Footer Bottom -->
     <div class="footer-bottom">
-      <p>&copy; 2026 TS Real Estates. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+      <div class="footer-credits">
+        <p>&copy; 2024 TS Consultancy. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <span>|</span>
+        <a href="#">Terms & Conditions</a>
+        <span>|</span>
+        <a href="#">Sitemap</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>

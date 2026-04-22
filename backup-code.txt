@@ -1,0 +1,3742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TS Consultancy - Premium Properties, Resorts & Land Sales</title>
+  <meta name="description" content="TS Consultancy offers premium real estate properties, luxury resorts, and land sales across Dubai and India. Find your dream home today.">
+  <meta name="keywords" content="real estate, properties, resorts, land sales, Dubai, apartments, villas">
+  
+  <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ==================== HEADER & NAVIGATION ==================== -->
+<header class="header">
+  <div class="container">
+    <div class="logo-section">
+      <img src="assets/logo.png" alt="TS Consultancy Logo" class="logo-img">
+      <span class="brand-name">TS Consultancy</span>
+    </div>
+    
+    <nav class="nav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About Us</a>
+      
+      <!-- SERVICES DROPDOWN -->
+      <div class="nav-dropdown">
+        <a href="#services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="#properties" class="dropdown-item"><i class="fas fa-building"></i> Properties</a>
+          <a href="#resorts" class="dropdown-item"><i class="fas fa-hotel"></i> Resorts</a>
+          <a href="#lands" class="dropdown-item"><i class="fas fa-map"></i> Land Sales</a>
+        </div>
+      </div>
+      
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#blogs" class="nav-link">Blog</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-call-enquiry" onclick="callNow()"><i class="fas fa-phone"></i> Call Enquiry</button>
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
+<div class="whatsapp-float" onclick="openWhatsApp()">
+  <i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- ==================== ENQUIRY REGISTRATION MODAL ==================== -->
+<div id="enquiryModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeEnquiryModal()">&times;</span>
+    <div class="modal-header">
+      <h2><i class="fas fa-edit"></i> Register Your Enquiry</h2>
+      <p>Get exclusive updates on premium properties and offers</p>
+    </div>
+    <form class="modal-form" onsubmit="submitEnquiry(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" placeholder="+971 XXX XXXX" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Service Interested *</label>
+          <select required>
+            <option value="">Select Service</option>
+            <option value="properties">Properties</option>
+            <option value="resorts">Resorts</option>
+            <option value="lands">Land Sales</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget Range *</label>
+          <select required>
+            <option value="">Select Range</option>
+            <option value="0-500k">Below 500K</option>
+            <option value="500k-1m">500K - 1M</option>
+            <option value="1m-2m">1M - 2M</option>
+            <option value="2m+">2M+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your requirements..." rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary full-width">
+        <i class="fas fa-paper-plane"></i> Submit Enquiry
+      </button>
+      <p class="form-note">We'll get back to you within 2 hours</p>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== BOOKING REGISTRATION MODAL ==================== -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+    <div class="modal-header">
+      <h2><i class="fas fa-calendar"></i> Book a Site Visit</h2>
+      <p>Schedule your personal tour with our experts</p>
+    </div>
+    <form class="modal-form" onsubmit="submitBooking(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" placeholder="+971 XXX XXXX" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date *</label>
+          <input type="date" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred Time *</label>
+          <input type="time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Property/Location *</label>
+        <input type="text" placeholder="Which property interested?" required>
+      </div>
+      <button type="submit" class="btn btn-primary full-width">
+        <i class="fas fa-check"></i> Confirm Booking
+      </button>
+      <p class="form-note">Confirmation will be sent to your email</p>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== HERO HOME SECTION ==================== -->
+<section id="home" class="hero">
+  <div class="hero-carousel">
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text" data-aos="fade-up">
+          <h1 class="hero-title animate-title">Premium Properties Await You</h1>
+          <p class="hero-subtitle">Luxury apartments, villas, and exclusive residences across Dubai and India</p>
+        </div>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+          <button class="btn btn-primary btn-lg btn-hover-glow" onclick="openEnquiryModal()">
+            <i class="fas fa-phone"></i> Call to Enquiry
+          </button>
+          <button class="btn btn-secondary btn-lg btn-hover-glow" onclick="openBookingModal()">
+            <i class="fas fa-calendar"></i> Book Site Visit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Luxury Resort Escapes</h1>
+          <p class="hero-subtitle">Experience world-class hospitality and premium resort living</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openEnquiryModal()">Explore Resorts</button>
+          <button class="btn btn-secondary btn-lg" onclick="openBookingModal()">View Properties</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=1080&fit=crop') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Prime Land Investments</h1>
+          <p class="hero-subtitle">Strategic locations for development and investment opportunities</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openEnquiryModal()">Learn More</button>
+          <button class="btn btn-secondary btn-lg" onclick="scrollToSection('#lands')">View Lands</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control prev" onclick="prevSlide()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-control next" onclick="nextSlide()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <span class="indicator active" onclick="currentSlide(0)"></span>
+      <span class="indicator" onclick="currentSlide(1)"></span>
+      <span class="indicator" onclick="currentSlide(2)"></span>
+    </div>
+  </div>
+
+  <!-- SEO Content Banner -->
+  <div class="hero-seo-banner">
+    <div class="container">
+      <div class="seo-content-grid">
+        <div class="seo-item animate-on-scroll">
+          <div class="seo-icon"><i class="fas fa-home"></i></div>
+          <h3>5000+ Properties</h3>
+          <p>Premium listings across Dubai & India</p>
+        </div>
+        <div class="seo-item animate-on-scroll">
+          <div class="seo-icon"><i class="fas fa-users"></i></div>
+          <h3>50,000+ Clients</h3>
+          <p>Trusted by satisfied customers</p>
+        </div>
+        <div class="seo-item animate-on-scroll">
+          <div class="seo-icon"><i class="fas fa-award"></i></div>
+          <h3>15+ Years</h3>
+          <p>Industry experience & excellence</p>
+        </div>
+        <div class="seo-item animate-on-scroll">
+          <div class="seo-icon"><i class="fas fa-check-circle"></i></div>
+          <h3>24/7 Support</h3>
+          <p>Dedicated customer service team</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2>About TS Consultancy</h2>
+      <p>Leading Premium Real Estate & Resort Solutions</p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-text" data-aos="fade-right">
+        <h3>Your Trusted Real Estate Partner</h3>
+        <p>TS Consultancy is a premier platform specializing in luxury real estate, exclusive resorts, and land investment opportunities. With over 15 years of industry experience, we've connected thousands of clients with their dream properties.</p>
+        
+        <div class="about-features">
+          <div class="feature-item">
+            <i class="fas fa-certificate"></i>
+            <h4>Verified Properties</h4>
+            <p>All properties are legally verified and authenticated</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <h4>100% Safe Transactions</h4>
+            <p>Complete transparency in all property dealings</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Expert Consultation</h4>
+            <p>Professional guidance from experienced consultants</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-globe"></i>
+            <h4>Global Reach</h4>
+            <p>International property network and connections</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="openEnquiryModal()">
+          Get Your Free Consultation
+        </button>
+      </div>
+
+      <div class="about-image" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=600&fit=crop" alt="Luxury Apartment" class="about-img">
+        <div class="about-image-overlay">
+          <div class="image-stat">
+            <h4>Premium Quality</h4>
+            <p>Top-tier properties</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section id="properties" class="properties">
+  <div class="container">
+    <h2>Featured Properties</h2>
+    <div class="property-grid">
+      <div class="property-card" onclick="openPropertyModal(1)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Luxury Villa">
+          <span class="property-badge">Premium</span>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Villa</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="price">₹1.2 Cr</p>
+          <p class="description">4 BHK, 3000 sq ft, Private garden</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(1)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(2)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=400&h=300&fit=crop" alt="Modern Flat">
+          <span class="property-badge">Modern</span>
+        </div>
+        <div class="property-info">
+          <h3>Modern Flat</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
+          <p class="price">₹75 Lakh</p>
+          <p class="description">2 BHK, 1200 sq ft, City view</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(2)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(3)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Beach House">
+          <span class="property-badge">Luxury</span>
+        </div>
+        <div class="property-info">
+          <h3>Beach House</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
+          <p class="price">₹2 Cr</p>
+          <p class="description">5 BHK, 5000 sq ft, Beachfront</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(3)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(4)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=400&h=300&fit=crop" alt="Penthouse">
+          <span class="property-badge">New</span>
+        </div>
+        <div class="property-info">
+          <h3>Luxury Penthouse</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+          <p class="price">₹3.5 Cr</p>
+          <p class="description">3 BHK, 2500 sq ft, Sky lounge</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(4)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(5)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=400&h=300&fit=crop" alt="Villa Complex">
+          <span class="property-badge">Popular</span>
+        </div>
+        <div class="property-info">
+          <h3>Villa Complex</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
+          <p class="price">₹95 Lakh</p>
+          <p class="description">3 BHK, 1800 sq ft, Gated community</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(5)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card" onclick="openPropertyModal(6)">
+        <div class="property-image">
+          <img src="https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=400&h=300&fit=crop" alt="Eco House">
+          <span class="property-badge">Green</span>
+        </div>
+        <div class="property-info">
+          <h3>Eco-Friendly Home</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
+          <p class="price">₹1.5 Cr</p>
+          <p class="description">4 BHK, 2200 sq ft, Solar powered</p>
+          <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(6)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="property" class="property container">
+  <h2>Amrit Kalash Apartment</h2>
+
+  <div class="property-card">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+
+    <div class="property-details">
+      <p>📍 Nolambur, Chennai</p>
+      <p>🏠 2BHK & 3BHK</p>
+      <p>💰 ₹1.5cr onwards</p>
+      <p>📐 900 - 1400 sq.ft</p>
+      <p>✔ Ready to Move</p>
+      <div class="property-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openPropertyModal(6)">View Details</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('property')">Call Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+
+
+<!-- SPECIFICATIONS SECTION -->
+<section id="specifications" class="specifications">
+  <div class="container">
+    <h2 class="section-title">Specifications</h2>
+
+    <div class="spec-grid">
+
+      <div class="spec-box" onclick="openModal('Structure','Pile foundation with RCC framed structure ensures strong durability and earthquake resistance.')">
+        <div class="icon">🏗️</div>
+        <h3>Structure</h3>
+      </div>
+
+      <div class="spec-box" onclick="openModal('Walls','External walls with AAC blocks improve insulation and strength.')">
+        <div class="icon">🧱</div>
+        <h3>Walls</h3>
+      </div>
+
+      <div class="spec-box" onclick="openModal('Flooring','Premium vitrified tiles in living areas and granite kitchen platform.')">
+        <div class="icon">🪵</div>
+        <h3>Flooring</h3>
+      </div>
+
+      <div class="spec-box" onclick="openModal('Electrical','Orbit wiring with AC points and CCTV provision for safety.')">
+        <div class="icon">💡</div>
+        <h3>Electrical</h3>
+      </div>
+
+      <div class="spec-box" onclick="openModal('Plumbing','European fittings with hot and cold water system.')">
+        <div class="icon">🚿</div>
+        <h3>Plumbing</h3>
+      </div>
+
+      <div class="spec-box" onclick="openModal('General','Lift, power backup and rainwater harvesting system.')">
+        <div class="icon">🏢</div>
+        <h3>General</h3>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="why-project">
+  <div class="container">
+    <h2 class="section-title">Why Amrit Kalash?</h2>
+
+    <p class="why-desc">
+      Premium apartments in Nolambur, Chennai with modern lifestyle amenities and excellent connectivity.
+    </p>
+
+    <div class="why-grid">
+      <div class="why-item" onclick="openModal('Vaastu Compliant','Designed as per Vaastu principles for positive energy.')">🏡 Vaastu Compliant</div>
+      <div class="why-item" onclick="openModal('2 Flats per Floor','Limited units ensure privacy and peaceful living.')">🏢 2 Flats per Floor</div>
+      <div class="why-item" onclick="openModal('CMDA Approved','Legally approved property ensuring safe investment.')">📜 CMDA Approved</div>
+      <div class="why-item" onclick="openModal('Covered Parking','Dedicated parking with high-quality tiles.')">🚗 Covered Parking</div>
+      <div class="why-item" onclick="openModal('EV Charging','Provision for electric vehicle charging.')">⚡ EV Charging</div>
+      <div class="why-item" onclick="openModal('CCTV Security','24/7 surveillance for complete safety.')">📹 CCTV Security</div>
+      <div class="why-item" onclick="openModal('Power Backup','Uninterrupted electricity supply.')">🔋 Power Backup</div>
+      <div class="why-item" onclick="openModal('Anti-termite','Advanced anti-termite treatment for durability.')">🛡️ Anti-termite</div>
+    </div>
+
+    <h3 class="amenities-title">Amenities</h3>
+
+    <div class="amenities-grid">
+      <div class="amenity" onclick="openModal('Digital Lock','Smart locking system for enhanced security.')">🔐 Digital Lock</div>
+      <div class="amenity" onclick="openModal('Rainwater Harvesting','Eco-friendly water saving system.')">💧 Rainwater Harvesting</div>
+      <div class="amenity" onclick="openModal('CCTV','High-resolution security cameras.')">📹 CCTV</div>
+      <div class="amenity" onclick="openModal('Parking Tiles','Durable anti-skid parking flooring.')">🚗 Parking Tiles</div>
+      <div class="amenity" onclick="openModal('Lift','High-speed automatic lift.')">🛗 Lift</div>
+      <div class="amenity" onclick="openModal('Lobby','Premium designed entrance lobby.')">🏢 Lobby</div>
+      <div class="amenity" onclick="openModal('Toilet','Common restroom facilities.')">🚻 Toilet</div>
+      <div class="amenity" onclick="openModal('Terrace','Open terrace space for relaxation.')">🌿 Terrace</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeModal()" class="close">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+
+
+
+
+<section class="cost-section">
+  <div class="container">
+    <h2 class="section-title">Amrit Kalash Apartment Cost Sheet – Nolambur</h2>
+
+    <p class="cost-desc">
+      Explore detailed pricing for premium 3BHK apartments at Amrit Kalash, Nolambur, Chennai.
+    </p>
+
+    <div class="table-wrapper">
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>Details</th>
+            <th>Flat A (3BHK)</th>
+            <th>Flat B (3BHK)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr><td>UDS (Sq.ft)</td><td>479</td><td>507</td></tr>
+          <tr><td>Super Builtup Area</td><td>1566 Sq.ft</td><td>1650 Sq.ft</td></tr>
+          <tr><td>Rate per Sq.ft</td><td>₹8750</td><td>₹8750</td></tr>
+          <tr><td>Basic Cost</td><td>₹1,37,02,500</td><td>₹1,44,37,500</td></tr>
+          <tr><td>Car Parking</td><td>₹7,00,000</td><td>₹7,00,000</td></tr>
+          <tr><td>CMDA Charges</td><td>₹3,00,000</td><td>₹3,00,000</td></tr>
+          <tr><td>EB & Property</td><td>₹3,00,000</td><td>₹3,00,000</td></tr>
+          <tr><td>Legal Charges</td><td>₹1,45,000</td><td>₹1,45,000</td></tr>
+          <tr><td>Drainage & Metro</td><td>₹2,00,000</td><td>₹2,00,000</td></tr>
+
+          <tr class="total">
+            <td>Total Cost</td>
+            <td onclick="openModal('Flat A Total Cost','₹1,53,47,500 (excluding GST)')">₹1,53,47,500</td>
+            <td onclick="openModal('Flat B Total Cost','₹1,60,82,500 (excluding GST)')">₹1,60,82,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn" onclick="openModal('GST Details','5% GST applicable on apartment cost as per government rules.')">
+      View GST Info
+    </button>
+
+  </div>
+</section>
+
+
+<section class="terms-section">
+  <div class="container">
+    <h2 class="section-title">Terms & Conditions</h2>
+
+    <ul class="terms-list">
+      <li onclick="openModal('Government Charges','Any future statutory charges by government will be borne by the buyer.')">
+        Govt Charges
+      </li>
+
+      <li onclick="openModal('GST','5% GST applicable on apartment cost.')">
+        GST Policy
+      </li>
+
+      <li onclick="openModal('Registration','Guideline value changes will be adjusted in construction cost.')">
+        Registration Policy
+      </li>
+
+      <li onclick="openModal('Cancellation','3% of total cost or ₹5,00,000 will be deducted on cancellation.')">
+        Cancellation Charges
+      </li>
+
+      <li onclick="openModal('Payment Mode','Payments should be made to MAANSAROVAR INFRA PROJECTS PVT LTD.')">
+        Payment Details
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+
+
+
+<!-- DOCUMENTS SECTION -->
+<section id="documents" class="documents">
+  <div class="container">
+    <h2>Property Documents</h2>
+    <p class="section-description">Access all necessary property documents and legal paperwork for your real estate transactions</p>
+
+    <div class="documents-grid">
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="document-info">
+          <h3>Property Brochure</h3>
+          <p>General property information and company overview with all essential details.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-file-alt"></i>
+              <span>Company Overview</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Updated 2024</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-eye"></i> Essential information</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <div class="document-info">
+          <h3>Amrit Kalash Apartment</h3>
+          <p>Detailed brochure for Amrit Kalash Apartment project by Maansarovar developers.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Prime Location</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Premium Project</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-star"></i> Featured property</span>
+            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="document-info">
+          <h3>Property Features</h3>
+          <p>Complete guide to property features including modern amenities and facilities.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-cog"></i>
+              <span>Amenities Guide</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Latest Features</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-check-circle"></i> Comprehensive guide</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="document-info">
+          <h3>Developer Information</h3>
+          <p>Detailed information about Maansarovar developers and their track record.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-building"></i>
+              <span>Developer Profile</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Established Builder</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-award"></i> Trusted developer</span>
+            <a href="documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-map"></i>
+        </div>
+        <div class="document-info">
+          <h3>Location Guide</h3>
+          <p>Complete location guide with connectivity, nearby amenities, and landmarks.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-route"></i>
+              <span>Connectivity Info</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>Area Guide</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-download"></i>
+              <span>PDF Format</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-location-arrow"></i> Prime location</span>
+            <a href="documents/1.pdf" class="btn btn-small" target="_blank">Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="document-card">
+        <div class="document-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <div class="document-info">
+          <h3>Contact & Support</h3>
+          <p>Get in touch with our team for personalized property consultation and guidance.</p>
+          <div class="document-details">
+            <div class="detail-item">
+              <i class="fas fa-phone"></i>
+              <span>Direct Contact</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>24/7 Support</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-info-circle"></i>
+              <span>Contact Details</span>
+            </div>
+          </div>
+          <div class="document-meta">
+            <span><i class="fas fa-headset"></i> Expert assistance</span>
+            <button class="btn btn-small" onclick="callNow('documents')">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="documents-contact">
+      <h3>Need Help with Documents?</h3>
+      <p>Our legal experts are here to assist you with all property documentation needs. Contact us for personalized guidance.</p>
+      <button class="btn btn-primary" onclick="callNow('documents')">Call Legal Team</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED RESTAURANTS -->
+<!-- <section id="restaurants" class="restaurants">
+  <div class="container">
+    <h2>Featured Restaurants</h2>
+    <div class="restaurant-grid">
+      <div class="restaurant-card" onclick="openRestaurantModal(1)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=300&fit=crop" alt="Fine Dining Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.8
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(1)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Elegance Fine Dining</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> French, Continental</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="description">Award-winning fine dining with 5-star service</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(1)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(1)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(2)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1567655366169-8269849e9a12?w=400&h=300&fit=crop" alt="Italian Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.6
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(2)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>La Bella Italia</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Italian, Pasta</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+          <p class="description">Authentic Italian cuisine with homemade pasta</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(2)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(2)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(3)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Asian Fusion">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.7
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(3)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Orient Express</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Asian Fusion, Japanese</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
+          <p class="description">Asian fusion with premium sushi and sashimi</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(3)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(3)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(4)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1504674900961-9f5815edf4a7?w=400&h=300&fit=crop" alt="Rooftop Bar">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.5
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(4)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Skyline Lounge</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Cocktails, Casual</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
+          <p class="description">Rooftop bar with panoramic city views</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(4)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(4)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(5)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1585518419759-1b4fad5aaf4f?w=400&h=300&fit=crop" alt="Indian Restaurant">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.9
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(5)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>Maharaja Palace</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Indian, Mughlai</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
+          <p class="description">Authentic Indian cuisine with royal flavors</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(5)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(5)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card" onclick="openRestaurantModal(6)">
+        <div class="restaurant-image">
+          <img src="https://images.unsplash.com/photo-1537457519924-2d3726e93e26?w=400&h=300&fit=crop" alt="Cafe">
+          <span class="restaurant-rating">
+            <i class="fas fa-star"></i> 4.4
+          </span>
+          <div class="gallery-preview">
+            <button class="gallery-btn" onclick="event.stopPropagation(); openGallery(6)">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+        </div>
+        <div class="restaurant-info">
+          <h3>The Corner Cafe</h3>
+          <p class="cuisine"><i class="fas fa-utensils"></i> Cafe, Casual</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, India</p>
+          <p class="description">Cozy cafe with artisan coffee and pastries</p>
+          <div class="restaurant-actions">
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantModal(6)">View Details</button>
+            <button class="btn btn-small" onclick="event.stopPropagation(); openRestaurantBooking(6)">Book Now</button>
+            <button class="btn btn-small outline" onclick="event.stopPropagation(); callNow('restaurant')">Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- REVIEWS & TESTIMONIALS -->
+<section id="reviews" class="reviews">
+  <div class="container">
+    <h2>Customer Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">RK</div>
+          <div class="review-meta">
+            <h4>Rahul Kumar</h4>
+            <p class="review-type">Property Purchase</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"EstateBite helped me find my dream home in Bangalore. Their team was professional and transparent throughout the process. Highly recommended!"</p>
+        <p class="review-date">2 weeks ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">PS</div>
+          <div class="review-meta">
+            <h4>Priya Singh</h4>
+            <p class="review-type">Restaurant Booking</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"The restaurant booking experience was seamless. Had a wonderful dinner at Elegance Fine Dining. Will use EstateBite again!"</p>
+        <p class="review-date">1 week ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">AJ</div>
+          <div class="review-meta">
+            <h4>Arjun Joshi</h4>
+            <p class="review-type">Property Viewing</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Great platform with excellent property listings. The virtual tour feature was very helpful. Loved the dining integration feature!"</p>
+        <p class="review-date">3 weeks ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">NP</div>
+          <div class="review-meta">
+            <h4>Neha Patel</h4>
+            <p class="review-type">Property + Dining</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Fantastic experience with both property search and restaurant bookings. The all-in-one platform is a game changer!"</p>
+        <p class="review-date">5 days ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">MK</div>
+          <div class="review-meta">
+            <h4>Manoj Kumar</h4>
+            <p class="review-type">Investor</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"As an investor, I found EstateBite's platform very reliable. Great market insights and responsive customer support."</p>
+        <p class="review-date">1 day ago</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-avatar">SK</div>
+          <div class="review-meta">
+            <h4>Sneha Kapoor</h4>
+            <p class="review-type">Restaurant Enthusiast</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="review-text">"Love the restaurant collection on EstateBite. Perfect for finding new places to dine. Great booking process too!"</p>
+        <p class="review-date">4 days ago</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS SECTION -->
+<section id="blogs" class="blogs">
+  <div class="container">
+    <h2>Latest Blog Posts</h2>
+    <div class="blogs-grid">
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1554224311-beee415c15e7?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 15, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Top 5 Luxury Properties in Bangalore</h3>
+          <p>Discover the most prestigious and luxurious properties in Bangalore's prime locations...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1495564151525-2a7f81d2ccff?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 12, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Fine Dining Guide: 2024 Edition</h3>
+          <p>Complete guide to the best fine dining restaurants offering exceptional culinary experiences...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1560491676-04071c5f467b?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 10, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Investment Guide: Real Estate Trends</h3>
+          <p>Market analysis and investment strategies for real estate in emerging Indian markets...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 8, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Coastal Living: Benefits & Lifestyle</h3>
+          <p>Explore the advantages of beachfront living and how it transforms your lifestyle...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 5, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Culinary Trends: What's Hot in 2024</h3>
+          <p>Discover the latest food trends and dining concepts revolutionizing the restaurant industry...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1493536671697-6d302319b41e?w=400&h=250&fit=crop" alt="Blog">
+          <span class="blog-date">Mar 1, 2024</span>
+        </div>
+        <div class="blog-content">
+          <h3>Home Automation: Smart Living Solutions</h3>
+          <p>Get insights into smart home technologies that enhance comfort and security...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h4>Phone</h4>
+            <p>Dubai: +971 50 356 7945</p>
+            <p>Bengaluru: +91 9791789497</p>
+            <p>Chennai: +91 xxxxxxxxxx</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h4>Email</h4>
+            <p>info@tsrealestates.com</p>
+            <p>support@tsrealestates.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Address</h4>
+            <p>Eta Start House Building, Office No 723, </p>
+              <p>Near by Salah al din metro Station</p>
+            <p>Dubai, UAE 29328</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Working Hours</h4>
+            <p>Mon - Fri: 09:00 AM - 06:00 PM</p>
+            <p>Sat - Sun: 10:00 AM - 04:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="tel" placeholder="Your Phone" required>
+        <select required>
+          <option value="">Select Subject</option>
+          <option value="property">Property Inquiry</option>
+          <option value="restaurant">Restaurant Booking</option>
+          <option value="general">General Inquiry</option>
+        </select>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+
+    <!-- EMBEDDED MAPS -->
+    <h3 style="margin-top: 50px;">Our Locations</h3>
+    <div class="maps-container">
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.995559130635!2d55.322021074444166!3d25.27073482871994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5cc812c56ded%3A0x1833b4e9e0095885!2sEta%20Star%20Holding!5e0!3m2!1sen!2sus!4v1776358221763!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Dubai Office</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS -->
+
+<!-- PROPERTY DETAILS MODAL -->
+<div id="propertyModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closePropertyModal()">&times;</span>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img id="modalPropertyImage" src="" alt="Property">
+        <div class="gallery-controls">
+          <button onclick="prevPropertyImage()">❮</button>
+          <button onclick="nextPropertyImage()">❯</button>
+        </div>
+      </div>
+
+      <div class="modal-details">
+        <h2 id="modalPropertyTitle"></h2>
+        <div class="property-specs">
+          <div class="spec">
+            <i class="fas fa-door-open"></i>
+            <span id="modalBedrooms"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-bath"></i>
+            <span id="modalBathrooms"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-ruler-combined"></i>
+            <span id="modalArea"></span>
+          </div>
+          <div class="spec">
+            <i class="fas fa-calendar"></i>
+            <span id="modalYear"></span>
+          </div>
+        </div>
+
+        <p class="price-modal" id="modalPropertyPrice"></p>
+        <p id="modalPropertyDescription"></p>
+
+        <div class="property-amenities">
+          <h3>Amenities</h3>
+          <ul id="amenitiesList"></ul>
+        </div>
+
+        <div class="map-container">
+          <h3>Location Map</h3>
+          <iframe id="propertyMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary large" onclick="openPropertyForm()">Register Interest</button>
+          <button class="btn btn-secondary large" onclick="callNow('property')">Call Now</button>
+          <button class="btn btn-outline large" onclick="shareProperty()">Share Property</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY REGISTRATION FORM MODAL -->
+<div id="registrationModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeRegistrationModal()">&times;</span>
+    <h2>Register Your Interest</h2>
+    <form onsubmit="submitPropertyForm(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="text" placeholder="Current Address" required>
+      <select required>
+        <option value="">Select Purpose</option>
+        <option value="buy">Buy</option>
+        <option value="rent">Rent</option>
+        <option value="invest">Invest</option>
+      </select>
+      <select required>
+        <option value="">Budget Range</option>
+        <option value="0-50">₹0 - ₹50 Lakh</option>
+        <option value="50-100">₹50 Lakh - ₹1 Cr</option>
+        <option value="100-200">₹1 Cr - ₹2 Cr</option>
+        <option value="200+">₹2 Cr+</option>
+      </select>
+      <textarea placeholder="Additional Comments" rows="4"></textarea>
+      <button type="submit" class="btn btn-primary">Submit Registration</button>
+    </form>
+  </div>
+</div>
+
+<!-- RESTAURANT DETAILS MODAL -->
+<div id="restaurantModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closeRestaurantModal()">&times;</span>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img id="modalRestaurantImage" src="" alt="Restaurant">
+        <div class="gallery-controls">
+          <button onclick="prevRestaurantImage()">❮</button>
+          <button onclick="nextRestaurantImage()">❯</button>
+        </div>
+      </div>
+
+      <div class="modal-details">
+        <h2 id="modalRestaurantName"></h2>
+        <div class="restaurant-meta">
+          <span class="rating" id="modalRating"><i class="fas fa-star"></i></span>
+          <span class="cuisine" id="modalCuisine"></span>
+          <span class="location" id="modalLocation"><i class="fas fa-map-marker-alt"></i></span>
+        </div>
+
+        <p id="modalRestaurantDescription"></p>
+
+        <div class="restaurant-amenities">
+          <h3>Facilities</h3>
+          <ul id="facilitiesList"></ul>
+        </div>
+
+        <div class="restaurant-reviews">
+          <h3>Guest Reviews</h3>
+          <div id="restaurantReviews"></div>
+        </div>
+
+        <div class="map-container">
+          <h3>Location Map</h3>
+          <iframe id="restaurantMap" width="100%" height="300" frameborder="0" style="border-radius: 10px; margin-top: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary large" onclick="openRestaurantBooking(currentRestaurant)">Book Now</button>
+          <button class="btn btn-secondary large" onclick="callNow('restaurant')">Call Now</button>
+          <button class="btn btn-outline large" onclick="openGallery(currentRestaurant)">View Gallery</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESTAURANT BOOKING MODAL -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeBookingModal()">&times;</span>
+    <h2>Book Your Table</h2>
+    <form onsubmit="submitRestaurantBooking(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="date" required>
+      <input type="time" required>
+      <select required>
+        <option value="">Number of Guests</option>
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+        <option value="5">5 Guests</option>
+        <option value="6">6+ Guests</option>
+      </select>
+      <textarea placeholder="Special Requests" rows="3"></textarea>
+      <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" class="modal">
+  <div class="modal-content gallery-modal">
+    <span class="close-btn" onclick="closeGalleryModal()">&times;</span>
+    <div class="gallery-container">
+      <img id="galleryImage" src="" alt="Gallery">
+      <div class="gallery-nav">
+        <button onclick="prevGalleryImage()">❮ Previous</button>
+        <span id="galleryCounter">1 / 6</span>
+        <button onclick="nextGalleryImage()">Next ❯</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>TS Consultancy is your one-stop platform for luxury real estate and premium property experiences.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#restaurants">Restaurants</a></li>
+          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#" onclick="openWhatsApp()" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <form>
+          <input type="email" placeholder="Your email">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 TS Consultancy. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============ HEADER & NAVIGATION ============ */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  animation: headerSlideDown 0.8s ease-out;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255,215,0,0.3);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: 0.3s;
+}
+
+/* ============ HERO SECTION ============ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+.hero-carousel {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+  width: 100%;
+  padding: 0 20px;
+  background: rgba(0,0,0,0.4);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: slideUp 0.8s ease-out;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  animation: slideUp 1s ease-out;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border: none;
+  padding: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.carousel-control:hover {
+  background: rgba(255,255,255,1);
+}
+
+.carousel-control.prev {
+  left: 20px;
+}
+
+.carousel-control.next {
+  right: 20px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 20;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.indicator.active {
+  background: white;
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* ============ BUTTONS ============ */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  animation: buttonPulse 2s infinite;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-secondary {
+  background: #f8a106;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #e69200;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+}
+
+.btn-outline:hover {
+  background: #667eea;
+  color: white;
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn.large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* ============ ABOUT SECTION ============ */
+.about {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+  animation: fadeInUp 1s ease-out;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.about-content p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.feature:nth-child(1) { animation-delay: 0.6s; }
+.feature:nth-child(2) { animation-delay: 0.8s; }
+.feature:nth-child(3) { animation-delay: 1s; }
+.feature:nth-child(4) { animation-delay: 1.2s; }
+
+.feature:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.feature i {
+  font-size: 2.5rem;
+  color: #667eea;
+  margin-bottom: 1rem;
+  animation: iconBounce 1s ease-out;
+}
+
+.feature h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.feature p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* ============ PROPERTIES SECTION ============ */
+.properties {
+  padding: 80px 0;
+}
+
+.properties h2, .restaurants h2, .reviews h2, .blogs h2, .contact h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.property-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.property-card:nth-child(1) { animation-delay: 0.1s; }
+.property-card:nth-child(2) { animation-delay: 0.2s; }
+.property-card:nth-child(3) { animation-delay: 0.3s; }
+.property-card:nth-child(4) { animation-delay: 0.4s; }
+.property-card:nth-child(5) { animation-delay: 0.5s; }
+.property-card:nth-child(6) { animation-delay: 0.6s; }
+
+.property-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.property-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.property-card:hover .property-image img {
+  transform: scale(1.15) rotate(1deg);
+}
+
+.property-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  animation: badgeSlideIn 0.8s ease-out;
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.property-info {
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.property-card:hover .property-info {
+  padding-top: 2rem;
+}
+
+.property-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.property-card:hover .property-info h3 {
+  color: #1e3c72;
+}
+
+.location {
+  color: #f8a106;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  color: #667eea;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.description {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.property-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.property-actions .btn {
+  flex: 1;
+}
+
+
+
+/* SPECIFICATIONS */
+/* COMMON */
+.section-title {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* SPEC SECTION */
+.specifications {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.spec-box {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  transition: 0.3s;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.spec-box:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.icon {
+  font-size: 35px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.spec-box:hover .icon {
+  transform: rotate(10deg) scale(1.2);
+}
+
+/* WHY SECTION */
+.why-project {
+  padding: 80px 20px;
+  background: #0b3d91;
+  color: white;
+  text-align: center;
+}
+
+.why-desc {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.why-item {
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.why-item:hover {
+  background: gold;
+  color: black;
+  transform: scale(1.05);
+}
+
+/* AMENITIES */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.amenity {
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.amenity:hover {
+  transform: translateY(-5px);
+  background: gold;
+}
+
+
+.property {
+  padding:80px 0;
+}
+
+.property-card {
+  display:flex;
+  flex-wrap:wrap;
+  /* background:#1e293b; */
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.property-card img {
+  width:100%;
+  max-width:500px;
+}
+
+.property-details {
+  padding:30px;
+}
+
+.specifications, .why-project {
+  padding:80px 20px;
+}
+
+.section-title {
+  text-align:center;
+  font-size:32px;
+  margin-bottom:30px;
+}
+
+.spec-grid, .why-grid, .amenities-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.spec-box, .why-item, .amenity {
+  /* background:#1e293b; */
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.spec-box:hover, .why-item:hover, .amenity:hover {
+  background:#09366e;
+  transform:translateY(-8px);
+}
+
+.icon {
+  font-size:30px;
+}
+
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  top:0;
+  left:0;
+}
+
+.modal-content {
+  background:#1e293b;
+  padding:30px;
+  margin:10% auto;
+  width:90%;
+  max-width:400px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.close {
+  float:right;
+  font-size:25px;
+  cursor:pointer;
+}
+
+
+.cost-section, .terms-section {
+  padding:80px 20px;
+}
+
+.section-title {
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.cost-desc {
+  text-align:center;
+  margin-bottom:30px;
+}
+
+/* TABLE */
+.table-wrapper {
+  overflow-x:auto;
+}
+
+.cost-table {
+  width:100%;
+  border-collapse:collapse;
+  background:#94b2e4;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.cost-table th, .cost-table td {
+  padding:15px;
+  text-align:center;
+  border-bottom:1px solid #333;
+}
+
+.cost-table th {
+  background:#0072ff;
+}
+
+.cost-table tr:hover {
+  background:#334155;
+}
+
+.total {
+  font-weight:bold;
+  background:#405bd4;
+  cursor:pointer;
+}
+
+/* TERMS */
+.terms-list {
+  list-style:none;
+  padding:0;
+}
+
+.terms-list li {
+  background:#1e293b;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.terms-list li:hover {
+  background:#0072ff;
+}
+
+/* BUTTON */
+.btn {
+  display:block;
+  margin:20px auto;
+  padding:10px 20px;
+  background:#00c6ff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background:#1e293b;
+  margin:10% auto;
+  padding:30px;
+  width:90%;
+  max-width:400px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.close {
+  float:right;
+  cursor:pointer;
+  font-size:25px;
+}
+
+
+
+/* ============ RESTAURANTS SECTION ============ */
+.restaurants {
+  background: #f8f9fa;
+  padding: 80px 0;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.restaurant-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.restaurant-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.restaurant-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.restaurant-card:hover .restaurant-image img {
+  transform: scale(1.1);
+}
+
+.restaurant-rating {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f8a106;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.gallery-preview {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.gallery-btn {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-btn:hover {
+  background: white;
+}
+
+.restaurant-info {
+  padding: 1.5rem;
+}
+
+.restaurant-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.cuisine {
+  color: #667eea;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.restaurant-actions {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.restaurant-actions .btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* ============ REVIEWS SECTION ============ */
+.reviews {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  animation: fadeInUp 1s ease-out;
+}
+
+.reviews h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.review-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.review-card:nth-child(1) { animation-delay: 0.4s; }
+.review-card:nth-child(2) { animation-delay: 0.6s; }
+.review-card:nth-child(3) { animation-delay: 0.8s; }
+.review-card:nth-child(4) { animation-delay: 1s; }
+.review-card:nth-child(5) { animation-delay: 1.2s; }
+
+.review-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.review-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reviewer-avatar {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: avatarPulse 2s infinite;
+}
+
+.review-meta h4 {
+  margin: 0;
+  color: #333;
+}
+
+.review-type {
+  color: #f8a106;
+  font-size: 0.85rem;
+  margin: 0.2rem 0;
+}
+
+.stars {
+  color: #f8a106;
+  font-size: 0.9rem;
+}
+
+.review-text {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.review-date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+/* ============ BLOGS SECTION ============ */
+.blogs {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+  animation: fadeInUp 1s ease-out;
+}
+
+.blogs h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.blog-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.blog-card:nth-child(1) { animation-delay: 0.4s; }
+.blog-card:nth-child(2) { animation-delay: 0.6s; }
+.blog-card:nth-child(3) { animation-delay: 0.8s; }
+.blog-card:nth-child(4) { animation-delay: 1s; }
+
+.blog-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.blog-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.1);
+}
+
+.blog-date {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.blog-content {
+  padding: 1.5rem;
+}
+
+.blog-content h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.blog-content p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.read-more:hover {
+  color: #764ba2;
+  text-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+}
+
+/* ============ CONTACT SECTION ============ */
+.contact {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  animation: fadeInUp 1s ease-out;
+}
+
+.contact h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.contact-info h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.contact-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: #667eea;
+  min-width: 40px;
+}
+
+.contact-item h4 {
+  margin: 0 0 0.3rem 0;
+  color: #333;
+}
+
+.contact-item p {
+  margin: 0;
+  color: #666;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+  transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+/* ============ MAPS ============ */
+.maps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.map {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.map iframe {
+  width: 100%;
+  height: 300px;
+}
+
+.map h4 {
+  padding: 1rem;
+  background: #f8f9fa;
+  margin: 0;
+  color: #333;
+}
+
+/* ============ MODALS ============ */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  overflow-y: auto;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+.large-modal {
+  max-width: 1000px;
+}
+
+.gallery-modal {
+  max-width: 800px;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.modal-gallery {
+  position: relative;
+}
+
+.modal-gallery img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.gallery-controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-controls button {
+  flex: 1;
+  padding: 0.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-controls button:hover {
+  background: #764ba2;
+}
+
+.modal-details h2 {
+  margin-bottom: 1rem;
+}
+
+.property-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.spec {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.spec i {
+  color: #667eea;
+  font-size: 1.2rem;
+}
+
+.price-modal {
+  color: #f8a106;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.property-amenities, .restaurant-amenities {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.property-amenities h3, .restaurant-amenities h3 {
+  margin-bottom: 1rem;
+}
+
+.property-amenities ul, .restaurant-amenities ul {
+  list-style: none;
+}
+
+.property-amenities li, .restaurant-amenities li {
+  padding: 0.3rem 0;
+  color: #666;
+}
+
+.property-amenities li:before, .restaurant-amenities li:before {
+  content: "✓ ";
+  color: #667eea;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.restaurant-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.restaurant-reviews {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.map-container {
+  margin: 2rem 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+.close-btn {
+  float: right;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: #222;
+  color: white;
+  padding: 3rem 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #ffd700;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-section a:hover {
+  color: #ffd700;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.social-links a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #ffd700;
+}
+
+.whatsapp-link {
+  color: #25d366 !important;
+}
+
+.whatsapp-link:hover {
+  color: #128c7e !important;
+  transform: scale(1.1);
+}
+
+/* ============ FLOATING WHATSAPP BUTTON ============ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+  background: #128c7e;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+}
+
+.footer-section form {
+  display: flex;
+}
+
+.footer-section form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.footer-section form button {
+  border-radius: 0 5px 5px 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  text-align: center;
+  color: #999;
+}
+
+/* ============ ENQUIRY MODAL ============ */
+.enquiry-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.enquiry-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enquiry-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: slideInUp 0.4s ease-out;
+  border: 2px solid #1e3c72;
+}
+
+.enquiry-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.enquiry-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.close-enquiry {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.close-enquiry:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.enquiry-body {
+  padding: 2rem;
+}
+
+.enquiry-body p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group:focus-within {
+  border-color: #1e3c72;
+  box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group i {
+  color: #1e3c72;
+  margin-right: 0.8rem;
+  font-size: 1rem;
+  width: 16px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  background: transparent;
+  color: #333;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.enquiry-submit {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.enquiry-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(30, 60, 114, 0.3);
+  background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.enquiry-submit:active {
+  transform: translateY(0);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes headerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes badgeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes avatarPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .property-grid, .restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews-grid, .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: auto;
+  }
+
+  .carousel-slide h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.3rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .hero-buttons {
+    gap: 0.75rem;
+  }
+
+  .carousel-control {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .property-grid,
+  .restaurant-grid,
+  .reviews-grid,
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .carousel-indicators {
+    gap: 0.5rem;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicator.active {
+    width: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  .header .container {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .hero-carousel {
+    height: 520px;
+  }
+
+  .hero-content {
+    padding: 16px;
+    border-radius: 8px;
+    max-width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 1.1rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .carousel-control.prev {
+    left: 10px;
+  }
+
+  .carousel-control.next {
+    right: 10px;
+  }
+
+  .property-card,
+  .restaurant-card,
+  .blog-card,
+  .review-card,
+  .feature,
+  .map,
+  .modal-content {
+    border-radius: 8px;
+  }
+
+  .property-image,
+  .restaurant-image,
+  .blog-image {
+    height: 220px;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    padding: 0.9rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-item i {
+    min-width: auto;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-section form {
+    flex-direction: column;
+  }
+
+  .footer-section form input,
+  .footer-section form button {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .footer-section form button {
+    margin-top: 0.75rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .gallery-controls {
+    flex-direction: column;
+  }
+}
+
+/* ============ DOCUMENTS SECTION ============ */
+.documents {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.documents .container {
+  max-width: 1000px;
+}
+
+.documents h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.section-description {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.document-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.document-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.document-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.document-info h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.document-info p {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.document-details {
+  margin: 1rem 0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.detail-item i {
+  color: #667eea;
+  width: 16px;
+}
+
+.document-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.documents-contact {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  border: 1px solid #e9ecef;
+}
+
+.documents-contact h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.documents-contact p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============ MOBILE RESPONSIVE ENHANCEMENTS ============ */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .logo-img {
+    height: 35px;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: 0;
+    background: rgba(255,255,255,0.95);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 1rem 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .nav.show {
+    display: flex !important;
+  }
+
+  .nav-link {
+    color: #333 !important;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .hero {
+    margin-top: 80px;
+  }
+
+  .hero-carousel {
+    height: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .property-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .documents-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .document-card {
+    padding: 1.5rem;
+  }
+
+  .document-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .contact-form {
+    margin-top: 2rem;
+  }
+
+  .maps-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+  }
+
+  .modal-content.large-modal {
+    width: 98%;
+    height: 90vh;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .modal-gallery {
+    width: 100%;
+    height: 250px;
+  }
+
+  .modal-details {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .property-card,
+  .review-card,
+  .blog-card,
+  .document-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .document-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .modal-details {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .property-card,
+  .review-card,
+  .blog-card,
+  .document-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .document-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .detail-item {
+    font-size: 0.8rem;
+  }
+
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    bottom: 15px;
+    right: 15px;
+  }
+}

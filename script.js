@@ -1,565 +1,611 @@
-// ============ CAROUSEL FUNCTIONALITY ============
-let currentSlideIndex = 1;
+// ==================== MODAL MANAGEMENT ====================
+const enquiryModal = document.getElementById('enquiryModal');
+const bookingModal = document.getElementById('bookingModal');
+
+function openEnquiryModal() {
+  enquiryModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEnquiryModal() {
+  enquiryModal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+function openBookingModal() {
+  bookingModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBookingModal() {
+  bookingModal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Close modal on X button click
+document.querySelectorAll('.close-modal').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.modal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+});
+
+// Close modal on background click
+window.addEventListener('click', function(e) {
+  if (e.target === enquiryModal) {
+    closeEnquiryModal();
+  }
+  if (e.target === bookingModal) {
+    closeBookingModal();
+  }
+});
+
+// ==================== HERO CAROUSEL ====================
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const indicators = document.querySelectorAll('.indicator');
+
+function showSlide(n) {
+  slides.forEach(slide => slide.classList.remove('active'));
+  indicators.forEach(ind => ind.classList.remove('active'));
+  
+  if (n >= slides.length) currentSlide = 0;
+  if (n < 0) currentSlide = slides.length - 1;
+  
+  slides[currentSlide].classList.add('active');
+  indicators[currentSlide].classList.add('active');
+}
 
 function nextSlide() {
-  showSlide(currentSlideIndex += 1);
+  currentSlide++;
+  showSlide(currentSlide);
 }
 
 function prevSlide() {
-  showSlide(currentSlideIndex -= 1);
+  currentSlide--;
+  showSlide(currentSlide);
 }
 
-function currentSlide(n) {
-  showSlide(currentSlideIndex = n);
+// Indicator click navigation
+indicators.forEach((ind, i) => {
+  ind.addEventListener('click', () => {
+    currentSlide = i;
+    showSlide(currentSlide);
+  });
+});
+
+// Auto-rotate carousel every 6 seconds
+setInterval(nextSlide, 6000);
+
+// Initialize hero carousel
+showSlide(currentSlide);
+
+// ==================== REVIEWS CAROUSEL ====================
+let reviewScrollPosition = 0;
+const reviewsTrack = document.querySelector('.reviews-track');
+
+function nextReview() {
+  if (reviewsTrack) {
+    reviewsTrack.scrollBy({ left: 350, behavior: 'smooth' });
+  }
 }
 
-function showSlide(n) {
-  let slides = document.getElementsByClassName("carousel-slide");
-  let indicators = document.getElementsByClassName("indicator");
-  
-  if (n > slides.length) {
-    currentSlideIndex = 1;
+function prevReview() {
+  if (reviewsTrack) {
+    reviewsTrack.scrollBy({ left: -350, behavior: 'smooth' });
   }
-  if (n < 1) {
-    currentSlideIndex = slides.length;
-  }
-  
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
-  }
-  for (let i = 0; i < indicators.length; i++) {
-    indicators[i].classList.remove("active");
-  }
-  
-  slides[currentSlideIndex - 1].classList.add("active");
-  indicators[currentSlideIndex - 1].classList.add("active");
 }
 
-// Auto-advance carousel
-setInterval(() => {
-  nextSlide();
-}, 5000);
+// ==================== BLOGS CAROUSEL ====================
+const blogsTrack = document.querySelector('.blogs-track');
 
-// ============ SCROLL TO SECTION ============
-function scrollToSection(sectionId) {
-  const section = document.querySelector(sectionId);
+function nextBlog() {
+  if (blogsTrack) {
+    blogsTrack.scrollBy({ left: 350, behavior: 'smooth' });
+  }
+}
+
+function prevBlog() {
+  if (blogsTrack) {
+    blogsTrack.scrollBy({ left: -350, behavior: 'smooth' });
+  }
+}
+
+// ==================== PROPERTY FILTERING ====================
+const filterBtns = document.querySelectorAll('.filter-btn');
+const propertyCards = document.querySelectorAll('.property-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    // Remove active class from all buttons
+    filterBtns.forEach(b => b.classList.remove('active'));
+    // Add active class to clicked button
+    this.classList.add('active');
+    
+    const filterValue = this.getAttribute('data-filter');
+    
+    propertyCards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      
+      if (filterValue === 'all' || cardCategory === filterValue) {
+        card.style.display = 'grid';
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        }, 50);
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 300);
+      }
+    });
+  });
+});
+
+// ==================== FORM SUBMISSION ====================
+async function submitEnquiry(event) {
+  event.preventDefault();
+  
+  const formData = {
+    name: document.querySelector('[name="name"]').value,
+    email: document.querySelector('[name="email"]').value,
+    phone: document.querySelector('[name="phone"]').value,
+    service: document.querySelector('[name="service"]').value,
+    budget: document.querySelector('[name="budget"]').value,
+    message: document.querySelector('[name="message"]').value
+  };
+  
+  try {
+    // Replace with your FormSpree endpoint or backend URL
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    
+    if (response.ok) {
+      alert('Thank you! We will contact you shortly.');
+      event.target.reset();
+      closeEnquiryModal();
+    } else {
+      alert('There was an error. Please try again.');
+    }
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+
+async function submitBooking(event) {
+  event.preventDefault();
+  
+  const formData = {
+    name: document.querySelector('[name="visitName"]').value,
+    email: document.querySelector('[name="visitEmail"]').value,
+    phone: document.querySelector('[name="visitPhone"]').value,
+    date: document.querySelector('[name="preferredDate"]').value,
+    time: document.querySelector('[name="preferredTime"]').value,
+    location: document.querySelector('[name="propertyLocation"]').value
+  };
+  
+  try {
+    // Replace with your FormSpree endpoint or backend URL
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    
+    if (response.ok) {
+      alert('Booking confirmed! We will contact you shortly.');
+      event.target.reset();
+      closeBookingModal();
+    } else {
+      alert('There was an error. Please try again.');
+    }
+  } catch (error) {
+    console.error('Booking error:', error);
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+
+async function submitContactForm(event) {
+  event.preventDefault();
+  
+  const formData = {
+    name: event.target.querySelector('[name="contactName"]').value,
+    email: event.target.querySelector('[name="contactEmail"]').value,
+    phone: event.target.querySelector('[name="contactPhone"]').value,
+    subject: event.target.querySelector('[name="contactSubject"]').value,
+    message: event.target.querySelector('[name="contactMessage"]').value
+  };
+  
+  try {
+    // Replace with your FormSpree endpoint or backend URL
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    
+    if (response.ok) {
+      alert('Message sent successfully! We will get back to you soon.');
+      event.target.reset();
+    } else {
+      alert('There was an error. Please try again.');
+    }
+  } catch (error) {
+    console.error('Contact form error:', error);
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+
+async function subscribeNewsletter(event) {
+  event.preventDefault();
+  
+  const email = event.target.querySelector('input[type="email"]').value;
+  
+  try {
+    // Replace with your FormSpree endpoint or backend URL
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify({ email: email })
+    });
+    
+    if (response.ok) {
+      alert('Thank you for subscribing!');
+      event.target.reset();
+    } else {
+      alert('Subscription failed. Please try again.');
+    }
+  } catch (error) {
+    console.error('Newsletter error:', error);
+  }
+}
+
+// ==================== UTILITY FUNCTIONS ====================
+function openWhatsApp() {
+  const phoneNumber = '+971503567945'; // TS Consultancy main number
+  const message = encodeURIComponent('Hello! I am interested in your properties and services.');
+  window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+}
+
+function callNow() {
+  // Get the phone number from the contact info
+  window.location.href = 'tel:+971503567945';
+}
+
+function scrollToSection(selector) {
+  const section = document.querySelector(selector);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
-// ============ HAMBURGER MENU ============
-const hamburger = document.getElementById('hamburger');
+
+// ==================== SMOOTH SCROLL FOR ANCHORS ====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href !== '#' && document.querySelector(href)) {
+      e.preventDefault();
+      document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// ==================== NAVIGATION ACTIVE STATE ====================
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (scrollY >= sectionTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// ==================== HAMBURGER MENU ====================
+const hamburger = document.querySelector('.hamburger');
 const nav = document.querySelector('.nav');
 
 if (hamburger) {
   hamburger.addEventListener('click', () => {
-    nav.classList.toggle('show');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    hamburger.classList.toggle('active');
   });
-}
-
-// ============ PROPERTY DATA ============
-const properties = {
-  1: {
-    title: "Luxury Villa",
-    price: "₹1.2 Cr",
-    location: "Bangalore, India",
-    bedrooms: "4 BHK",
-    bathrooms: "3 Bathrooms",
-    area: "3000 sq ft",
-    year: "Built: 2023",
-    description: "Stunning luxury villa with premium finishes, private garden, and smart home automation. Perfect for families seeking comfort and elegance.",
-    images: [
-      "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Smart Home", "Private Garden", "Swimming Pool", "Gym", "Cinema Hall", "Guest House"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6180722395535!2d77.6298!3d12.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1729f1e4c9e1%3A0xb3f6c5e4d9e1a2e3!2sBangalore!5e0!3m2!1sen!2sin!4v1234567890"
-  },
-  2: {
-    title: "Modern Flat",
-    price: "₹75 Lakh",
-    location: "Chennai, India",
-    bedrooms: "2 BHK",
-    bathrooms: "2 Bathrooms",
-    area: "1200 sq ft",
-    year: "Built: 2024",
-    description: "Modern apartment with city view, state-of-the-art kitchen, and spacious balcony. Located in prime area with excellent connectivity.",
-    images: [
-      "https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Parking", "Security", "Gym", "Community Hall", "High-Speed Internet"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6180722395535!2d80.2707!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f6f0c6c6f0c7%3A0xb3f6c5e4d9e1a2e3!2sChennai!5e0!3m2!1sen!2sin!4v1234567890"
-  },
-  3: {
-    title: "Beach House",
-    price: "₹2 Cr",
-    location: "Goa, India",
-    bedrooms: "5 BHK",
-    bathrooms: "4 Bathrooms",
-    area: "5000 sq ft",
-    year: "Built: 2022",
-    description: "Spectacular beachfront property with direct beach access, private jetty, and panoramic ocean views. Perfect for luxury living and investment.",
-    images: [
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1583608694915-064fee7a7024?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1511576661531-b34c7c5aab4d?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Beach Access", "Private Jetty", "Helipad", "Wine Cellar", "Spa", "Observation Deck"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.6180722395535!2d73.8279!3d15.4909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfba6e1e1e1e1f%3A0xb3f6c5e4d9e1a2e3!2sGoa!5e0!3m2!1sen!2sin!4v1234567890"
-  },
-  4: {
-    title: "Luxury Penthouse",
-    price: "₹3.5 Cr",
-    location: "Mumbai, India",
-    bedrooms: "3 BHK",
-    bathrooms: "3 Bathrooms",
-    area: "2500 sq ft",
-    year: "Built: 2023",
-    description: "Exclusive penthouse with 360-degree city view, private sky lounge, and world-class amenities. Premium address in Mumbai.",
-    images: [
-      "https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1512314889357-e0c47778de39?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Sky Lounge", "Concierge", "Private Elevator", "Wine Bar", "Home Cinema"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5!2d72.8479!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x9b9b9b9b9b9b!2sMumbai!5e0!3m2!1sen!2sin!4v1234567890"
-  },
-  5: {
-    title: "Villa Complex",
-    price: "₹95 Lakh",
-    location: "Pune, India",
-    bedrooms: "3 BHK",
-    bathrooms: "2 Bathrooms",
-    area: "1800 sq ft",
-    year: "Built: 2023",
-    description: "Gated villa community with excellent security, maintenance services, and recreational facilities. Ideal for families.",
-    images: [
-      "https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Gated Security", "Community Garden", "Tennis Court", "Swimming Pool", "Jogging Track"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.1!2d73.8479!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b63aceef0c69%3A0x9b9b9b9b9b9b!2sPune!5e0!3m2!1sen!2sin!4v1234567890"
-  },
-  6: {
-    title: "Eco-Friendly Home",
-    price: "₹1.5 Cr",
-    location: "Hyderabad, India",
-    bedrooms: "4 BHK",
-    bathrooms: "3 Bathrooms",
-    area: "2200 sq ft",
-    year: "Built: 2023",
-    description: "Sustainable architecture with solar panels, rainwater harvesting, and energy-efficient systems. Modern eco-living at its best.",
-    images: [
-      "https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1512314889357-e0c47778de39?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop"
-    ],
-    amenities: ["Solar Power", "Rainwater Harvesting", "Organic Garden", "Green Roof", "Zero-Waste System"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.0!2d78.4744!3d17.3850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91b6b0b0b0b1%3A0x9b9b9b9b9b9b!2sHyderabad!5e0!3m2!1sen!2sin!4v1234567890"
-  }
-};
-
-// ============ RESTAURANT DATA ============
-const restaurants = {
-  1: {
-    name: "Elegance Fine Dining",
-    rating: "4.8",
-    cuisine: "French, Continental",
-    location: "Bangalore, India",
-    description: "Award-winning fine dining restaurant with exquisite French cuisine and impeccable service. Perfect for special occasions.",
-    images: [
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1504674900961-9f5815edf4a7?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "John Doe", text: "Absolutely phenomenal experience! The food was exquisite.", rating: 5 },
-      { name: "Sarah Khan", text: "Best fine dining in Bangalore. Highly recommended!", rating: 5 },
-      { name: "Rajesh Nair", text: "Elegant ambiance and world-class service.", rating: 5 }
-    ],
-    facilities: ["Valet Parking", "Private Dining", "Wine Cellar", "Chef's Table", "Michelin Star"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6180722395535!2d77.6298!3d12.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1729f1e4c9e1%3A0xb3f6c5e4d9e1a2e3!2sBangalore!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-80-2345-6789"
-  },
-  2: {
-    name: "La Bella Italia",
-    rating: "4.6",
-    cuisine: "Italian, Pasta",
-    location: "Mumbai, India",
-    description: "Authentic Italian restaurant with homemade pasta and traditional recipes straight from Italy.",
-    images: [
-      "https://images.unsplash.com/photo-1567655366169-8269849e9a12?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1555939594-58d7cb561049?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "Maria Rossi", text: "Authentic Italian taste! Feels like dining in Rome.", rating: 5 },
-      { name: "Priya Singh", text: "Amazing pasta and pizza. Very fresh ingredients.", rating: 5 },
-      { name: "Marco Lodi", text: "Best Italian outside Italy. Bravo!", rating: 5 }
-    ],
-    facilities: ["Wood-fired Oven", "Outdoor Seating", "Wine Selection", "Family Friendly", "Takeaway"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5!2d72.8479!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x9b9b9b9b9b9b!2sMumbai!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-22-1234-5678"
-  },
-  3: {
-    name: "Orient Express",
-    rating: "4.7",
-    cuisine: "Asian Fusion, Japanese",
-    location: "Delhi, India",
-    description: "Premium asian fusion restaurant with fresh sushi, sashimi, and authentic Japanese techniques.",
-    images: [
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1553621042-f06b0ecae76d?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "Akira Yamamoto", text: "Authentic Japanese preparation. Simply divine!", rating: 5 },
-      { name: "Neha Sharma", text: "Best sushi in Delhi. Chef is incredibly skilled.", rating: 5 },
-      { name: "Deepak Kumar", text: "Unique flavors and excellent presentation.", rating: 5 }
-    ],
-    facilities: ["Sushi Bar", "Tepanyaki Grill", "Bar Counter", "Private Rooms", "Sake Selection"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.6180722395535!2d77.1025!3d28.6139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91b6b0b0b0b1%3A0x9b9b9b9b9b9b!2sDelhi!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-11-3456-7890"
-  },
-  4: {
-    name: "Skyline Lounge",
-    rating: "4.5",
-    cuisine: "Cocktails, Casual",
-    location: "Bangalore, India",
-    description: "Rooftop lounge with panoramic city views, craft cocktails, and vibrant nightlife atmosphere.",
-    images: [
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1542849403-6f2dd92df0f0?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1448160521204-c33d5a00a5a3?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "Alex Turner", text: "Best rooftop bar in the city! Amazing cocktails.", rating: 5 },
-      { name: "Sneha Gupta", text: "Perfect for sunset drinks. Great ambiance!", rating: 4 },
-      { name: "Rahul Bhat", text: "Skilled bartenders and excellent music.", rating: 5 }
-    ],
-    facilities: ["Rooftop Bar", "DJ Nights", "Cocktail Bar", "Lounge Seating", "Private Events"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6180722395535!2d77.6298!3d12.9352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1729f1e4c9e1%3A0xb3f6c5e4d9e1a2e3!2sBangalore!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-80-2345-6789"
-  },
-  5: {
-    name: "Maharaja Palace",
-    rating: "4.9",
-    cuisine: "Indian, Mughlai",
-    location: "Chennai, India",
-    description: "Authentic Indian cuisine with royal Mughlai preparations and traditional recipes passed down for generations.",
-    images: [
-      "https://images.unsplash.com/photo-1585518419759-1b4fad5aaf4f?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1556867297522-411cf82efdb2?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1505253149230-18f556406b5e?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "Fatima Khan", text: "Authentic Mughlai taste. Just like home cooking!", rating: 5 },
-      { name: "Arjun Kumar", text: "Best Indian restaurant. Great flavors!", rating: 5 },
-      { name: "Pooja Sharma", text: "Royal dining experience. Highly recommended!", rating: 5 }
-    ],
-    facilities: ["Tandoor", "Private Dining", "Bulk Catering", "Vegetarian Options", "Halal Certified"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6180722395535!2d80.2707!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f6f0c6c6f0c7%3A0xb3f6c5e4d9e1a2e3!2sChennai!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-44-2345-6789"
-  },
-  6: {
-    name: "The Corner Cafe",
-    rating: "4.4",
-    cuisine: "Cafe, Casual",
-    location: "Pune, India",
-    description: "Cozy cafe with artisan coffee, fresh pastries, and relaxed ambiance. Perfect for work or casual meetups.",
-    images: [
-      "https://images.unsplash.com/photo-1537457519924-2d3726e93e26?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1495474472916-b85d387c4cb1?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"
-    ],
-    reviews: [
-      { name: "Emma Wilson", text: "The best cappuccino in Pune! Cozy atmosphere.", rating: 5 },
-      { name: "Kavya Desai", text: "Pastries are fresh and delicious. Love this place!", rating: 4 },
-      { name: "Nikhil Joshi", text: "Perfect for working and meeting friends.", rating: 4 }
-    ],
-    facilities: ["Free WiFi", "Outdoor Seating", "Pastries", "Espresso Bar", "Meeting Rooms"],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.1!2d73.8479!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b63aceef0c69%3A0x9b9b9b9b9b9b!2sPune!5e0!3m2!1sen!2sin!4v1234567890",
-    phone: "+91-20-1234-5678"
-  }
-};
-
-// Gallery image index
-let currentPropertyImageIndex = 0;
-let currentRestaurantImageIndex = 0;
-let currentGalleryImageIndex = 0;
-let currentRestaurant = 1;
-
-// ============ PROPERTY MODAL ============
-function openPropertyModal(propertyId) {
-  const property = properties[propertyId];
-  currentPropertyImageIndex = 0;
   
-  document.getElementById("modalPropertyTitle").innerText = property.title;
-  document.getElementById("modalPropertyPrice").innerText = property.price;
-  document.getElementById("modalPropertyDescription").innerText = property.description;
-  document.getElementById("modalBedrooms").innerText = property.bedrooms;
-  document.getElementById("modalBathrooms").innerText = property.bathrooms;
-  document.getElementById("modalArea").innerText = property.area;
-  document.getElementById("modalYear").innerText = property.year;
-  
-  // Set image
-  document.getElementById("modalPropertyImage").src = property.images[0];
-  
-  // Set amenities
-  const amenitiesList = document.getElementById("amenitiesList");
-  amenitiesList.innerHTML = property.amenities.map(a => `<li>${a}</li>`).join("");
-  
-  // Set map
-  document.getElementById("propertyMap").src = property.mapUrl;
-  
-  // Show modal
-  document.getElementById("propertyModal").style.display = "flex";
-}
-
-function closePropertyModal() {
-  document.getElementById("propertyModal").style.display = "none";
-}
-
-function prevPropertyImage() {
-  const property = properties[Object.keys(properties)[Object.values(properties).indexOf(
-    properties[Object.keys(properties).find(k => properties[k].title === document.getElementById("modalPropertyTitle").innerText)]
-  )]];
-  
-  const images = document.getElementById("modalPropertyImage").src.includes("1200") ? 
-    properties[Object.keys(properties).find(k => properties[k].title === document.getElementById("modalPropertyTitle").innerText)].images :
-    properties[Object.keys(properties).find(k => properties[k].title === document.getElementById("modalPropertyTitle").innerText)].images;
-  
-  currentPropertyImageIndex = (currentPropertyImageIndex - 1 + images.length) % images.length;
-  document.getElementById("modalPropertyImage").src = images[currentPropertyImageIndex];
-}
-
-function nextPropertyImage() {
-  const propertyId = Object.keys(properties).find(k => 
-    properties[k].title === document.getElementById("modalPropertyTitle").innerText
-  );
-  const images = properties[propertyId].images;
-  currentPropertyImageIndex = (currentPropertyImageIndex + 1) % images.length;
-  document.getElementById("modalPropertyImage").src = images[currentPropertyImageIndex];
-}
-
-function openPropertyForm() {
-  document.getElementById("propertyModal").style.display = "none";
-  document.getElementById("registrationModal").style.display = "flex";
-}
-
-function closeRegistrationModal() {
-  document.getElementById("registrationModal").style.display = "none";
-}
-
-function submitPropertyForm(event) {
-  event.preventDefault();
-  alert("Thank you for your interest! We will contact you soon with more details.");
-  event.target.reset();
-  closeRegistrationModal();
-}
-
-function shareProperty() {
-  const title = document.getElementById("modalPropertyTitle").innerText;
-  const text = `Check out this amazing property: ${title}`;
-  
-  if (navigator.share) {
-    navigator.share({
-      title: 'EstateBite Property',
-      text: text,
-      url: window.location.href
+  // Close menu when link is clicked
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.style.display = 'none';
+      hamburger.classList.remove('active');
     });
-  } else {
-    alert(`Share: ${text}`);
-  }
+  });
 }
 
-// ============ RESTAURANT MODAL ============
-function openRestaurantModal(restaurantId) {
-  const restaurant = restaurants[restaurantId];
-  currentRestaurantImageIndex = 0;
-  currentRestaurant = restaurantId;
-  
-  document.getElementById("modalRestaurantName").innerText = restaurant.name;
-  document.getElementById("modalRating").innerText = `⭐ ${restaurant.rating}`;
-  document.getElementById("modalCuisine").innerText = restaurant.cuisine;
-  document.getElementById("modalLocation").innerText = restaurant.location;
-  document.getElementById("modalRestaurantDescription").innerText = restaurant.description;
-  
-  // Set image
-  document.getElementById("modalRestaurantImage").src = restaurant.images[0];
-  
-  // Set facilities
-  const facilitiesList = document.getElementById("facilitiesList");
-  facilitiesList.innerHTML = restaurant.facilities.map(f => `<li>${f}</li>`).join("");
-  
-  // Set reviews
-  const reviewsDiv = document.getElementById("restaurantReviews");
-  reviewsDiv.innerHTML = restaurant.reviews.map(r => `
-    <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 5px; border-left: 4px solid #667eea;">
-      <strong>${r.name}</strong> <span style="color: #f8a106;">${'⭐'.repeat(r.rating)}</span>
-      <p>${r.text}</p>
-    </div>
-  `).join("");
-  
-  // Set map
-  document.getElementById("restaurantMap").src = restaurant.mapUrl;
-  
-  // Show modal
-  document.getElementById("restaurantModal").style.display = "flex";
-}
-
-function closeRestaurantModal() {
-  document.getElementById("restaurantModal").style.display = "none";
-}
-
-function prevRestaurantImage() {
-  const restaurant = restaurants[currentRestaurant];
-  currentRestaurantImageIndex = (currentRestaurantImageIndex - 1 + restaurant.images.length) % restaurant.images.length;
-  document.getElementById("modalRestaurantImage").src = restaurant.images[currentRestaurantImageIndex];
-}
-
-function nextRestaurantImage() {
-  const restaurant = restaurants[currentRestaurant];
-  currentRestaurantImageIndex = (currentRestaurantImageIndex + 1) % restaurant.images.length;
-  document.getElementById("modalRestaurantImage").src = restaurant.images[currentRestaurantImageIndex];
-}
-
-// ============ RESTAURANT BOOKING ============
-function openRestaurantBooking(restaurantId) {
-  currentRestaurant = restaurantId;
-  document.getElementById("restaurantModal").style.display = "none";
-  document.getElementById("bookingModal").style.display = "flex";
-}
-
-function closeBookingModal() {
-  document.getElementById("bookingModal").style.display = "none";
-}
-
-function submitRestaurantBooking(event) {
-  event.preventDefault();
-  alert("Booking confirmed! You will receive a confirmation email shortly. Thank you for choosing our restaurant!");
-  event.target.reset();
-  closeBookingModal();
-  
-  // Show payment modal or redirect to payment
-  setTimeout(() => {
-    window.location.href = "https://rzp.io/i/w2CEwbJ"; // Demo Razorpay link
-  }, 1000);
-}
-
-// ============ GALLERY MODAL ============
-let currentGalleryRestaurant = 1;
-
-function openGallery(restaurantId) {
-  currentGalleryRestaurant = restaurantId;
-  currentGalleryImageIndex = 0;
-  const restaurant = restaurants[restaurantId];
-  document.getElementById("galleryImage").src = restaurant.images[0];
-  document.getElementById("galleryCounter").innerText = `1 / ${restaurant.images.length}`;
-  document.getElementById("galleryModal").style.display = "flex";
-}
-
-function closeGalleryModal() {
-  document.getElementById("galleryModal").style.display = "none";
-}
-
-function prevGalleryImage() {
-  const restaurant = restaurants[currentGalleryRestaurant];
-  currentGalleryImageIndex = (currentGalleryImageIndex - 1 + restaurant.images.length) % restaurant.images.length;
-  document.getElementById("galleryImage").src = restaurant.images[currentGalleryImageIndex];
-  document.getElementById("galleryCounter").innerText = `${currentGalleryImageIndex + 1} / ${restaurant.images.length}`;
-}
-
-function nextGalleryImage() {
-  const restaurant = restaurants[currentGalleryRestaurant];
-  currentGalleryImageIndex = (currentGalleryImageIndex + 1) % restaurant.images.length;
-  document.getElementById("galleryImage").src = restaurant.images[currentGalleryImageIndex];
-  document.getElementById("galleryCounter").innerText = `${currentGalleryImageIndex + 1} / ${restaurant.images.length}`;
-}
-
-// ============ CONTACT & CALL FUNCTIONS ============
-function callNow(type) {
-  if (type === 'property') {
-    window.location.href = "tel:+971503567945";
-    alert("Opening phone app to call: +971-50-356-7945");
-  } else if (type === 'restaurant') {
-    const phone = restaurants[currentRestaurant]?.phone || "+971-503567945";
-    window.location.href = `tel:${phone}`;
-    alert(`Opening phone app to call: ${phone}`);
-  } else {
-    alert("Calling EstateBite: +971-50-356-7945");
-    window.location.href = "tel:+971503567945";
-  }
-}
-
-function openWhatsApp() {
-  const phoneNumber = "919715207988"; // +91 97152 07988 without + and spaces
-  const whatsappUrl = `https://wa.me/${phoneNumber}`;
-  window.open(whatsappUrl, '_blank');
-}
-
-function submitContactForm(event) {
-  event.preventDefault();
-  alert("Thank you for contacting us! We will get back to you within 24 hours.");
-  event.target.reset();
-}
-
-// ============ ENQUIRY MODAL FUNCTIONS ============
-function showEnquiryModal() {
-  const modal = document.getElementById('enquiryModal');
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-function closeEnquiryModal() {
-  const modal = document.getElementById('enquiryModal');
-  modal.classList.remove('active');
-  document.body.style.overflow = 'auto'; // Restore scrolling
-}
-
-function submitEnquiry(event) {
-  event.preventDefault();
-  alert("Thank you for your enquiry! Our property experts will contact you within 24 hours with the best property options.");
-  closeEnquiryModal();
-  event.target.reset();
-}
-
-// Show enquiry modal on page load (after 3 seconds)
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    // Check if user hasn't seen the modal in this session
-    if (!sessionStorage.getItem('enquiryShown')) {
-      showEnquiryModal();
-      sessionStorage.setItem('enquiryShown', 'true');
-    }
-  }, 3000); // 3 seconds delay
-});
-
-// ============ CLOSE MODALS ON OUTSIDE CLICK ============
-window.onclick = function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = "none";
-  }
-  if (event.target.classList.contains('enquiry-modal')) {
-    closeEnquiryModal();
-  }
-}
-
-// ============ SMOOTH SCROLL FOR NAVIGATION ============
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (href !== '#' && href !== '#home') {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+// ==================== LAZY LOADING IMAGES ====================
+const images = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.remove('lazy');
+      observer.unobserve(img);
     }
   });
 });
+
+images.forEach(img => imageObserver.observe(img));
+
+// ==================== ANIMATION ON SCROLL ====================
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.property-card, .resort-card, .land-card, .review-card, .blog-card, .feature-item').forEach(el => {
+  observer.observe(el);
+});
+
+// ==================== FORM VALIDATION ====================
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function validatePhone(phone) {
+  const re = /^[0-9+\-\s()]{10,}$/;
+  return re.test(phone);
+}
+
+// Add validation to form inputs
+document.querySelectorAll('input[type="email"]').forEach(input => {
+  input.addEventListener('blur', function() {
+    if (this.value && !validateEmail(this.value)) {
+      this.style.borderColor = '#e74c3c';
+    } else {
+      this.style.borderColor = 'inherit';
+    }
+  });
+});
+
+document.querySelectorAll('input[type="tel"], input[name="phone"], input[name="visitPhone"], input[name="contactPhone"]').forEach(input => {
+  input.addEventListener('blur', function() {
+    if (this.value && !validatePhone(this.value)) {
+      this.style.borderColor = '#e74c3c';
+    } else {
+      this.style.borderColor = 'inherit';
+    }
+  });
+});
+
+// ==================== MOBILE RESPONSIVE MENU ====================
+function handleResize() {
+  const width = window.innerWidth;
+  const nav = document.querySelector('.nav');
+  const hamburger = document.querySelector('.hamburger');
+  
+  if (width > 768) {
+    if (nav) nav.style.display = 'flex';
+    if (hamburger) hamburger.style.display = 'none';
+  } else {
+    if (nav) nav.style.display = 'none';
+    if (hamburger) hamburger.style.display = 'flex';
+  }
+}
+
+window.addEventListener('resize', handleResize);
+window.addEventListener('load', handleResize);
+
+// ==================== COUNTER ANIMATION ====================
+function animateCounter(element, target, duration = 2000) {
+  const start = 0;
+  const increment = target / (duration / 16);
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target;
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current);
+    }
+  }, 16);
+}
+
+// Trigger counter animation on scroll
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+      const counters = entry.target.querySelectorAll('[data-count]');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        animateCounter(counter, target);
+      });
+      entry.target.classList.add('counted');
+    }
+  });
+});
+
+const seoItems = document.querySelector('.hero-seo-banner');
+if (seoItems) statsObserver.observe(seoItems);
+
+// ==================== DROPDOWN MENU ENHANCEMENT ====================
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const menu = toggle.nextElementSibling;
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+      menu.style.display = 'none';
+    });
+  }
+});
+
+// ==================== PROPERTY MODAL ====================
+function openResortModal(resortName) {
+  alert(`Viewing details for: ${resortName}\n\nFull details, availability, and booking options will be displayed here.`);
+}
+
+function openLandModal(landName) {
+  alert(`Investment opportunity: ${landName}\n\nDetailed legal documents, ROI projections, and booking details will be displayed here.`);
+}
+
+function openBlogModal(blogTitle) {
+  alert(`Reading: ${blogTitle}\n\nFull blog content will be displayed here.`);
+}
+
+// ==================== LIKE AND COMMENT HANDLERS ====================
+document.querySelectorAll('.blog-card').forEach(card => {
+  const likeBtn = card.querySelector('.like-btn');
+  const commentBtn = card.querySelector('.comment-btn');
+  
+  if (likeBtn) {
+    likeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      likeBtn.classList.toggle('liked');
+      let likes = parseInt(likeBtn.textContent);
+      likeBtn.innerHTML = likeBtn.classList.contains('liked') ? 
+        `<i class="fas fa-heart"></i> ${likes + 1}` : 
+        `<i class="far fa-heart"></i> ${likes}`;
+    });
+  }
+  
+  if (commentBtn) {
+    commentBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      alert('Open comment section for this blog post.');
+    });
+  }
+});
+
+// ==================== SCROLL TO TOP BUTTON ====================
+const scrollTopBtn = document.createElement('button');
+scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+scrollTopBtn.className = 'scroll-top-btn';
+scrollTopBtn.style.cssText = `
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background: var(--primary-color);
+  color: var(--dark-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: none;
+  z-index: 998;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+  transition: all 0.3s;
+`;
+
+document.body.appendChild(scrollTopBtn);
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.style.display = 'flex';
+    scrollTopBtn.style.alignItems = 'center';
+    scrollTopBtn.style.justifyContent = 'center';
+  } else {
+    scrollTopBtn.style.display = 'none';
+  }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+scrollTopBtn.addEventListener('hover', () => {
+  scrollTopBtn.style.transform = 'translateY(-3px)';
+});
+
+// ==================== KEYBOARD SHORTCUTS ====================
+document.addEventListener('keydown', (e) => {
+  // Press ? for help
+  if (e.key === '?') {
+    alert('Keyboard Shortcuts:\nEsc - Close modals\nH - Go to home\nC - Contact us');
+  }
+  
+  // Press Escape to close modals
+  if (e.key === 'Escape') {
+    closeEnquiryModal();
+    closeBookingModal();
+  }
+  
+  // Arrow keys for carousel
+  if (e.key === 'ArrowRight') {
+    nextSlide();
+  }
+  if (e.key === 'ArrowLeft') {
+    prevSlide();
+  }
+});
+
+// ==================== PAGE LOAD ANIMATIONS ====================
+window.addEventListener('load', () => {
+  document.body.style.animationDuration = '0.5s';
+  
+  // Add loading class before removing
+  document.body.classList.add('loaded');
+});
+
+// ==================== PERFORMANCE OPTIMIZATION ====================
+// Debounce function for resize events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+const debouncedResize = debounce(handleResize, 250);
+window.addEventListener('resize', debouncedResize);
+
+// ==================== INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Website initialized successfully');
+});
+
+
+
+
+
