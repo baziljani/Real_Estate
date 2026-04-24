@@ -13,6 +13,18 @@ const propertyData = {
       { icon: 'fa-building', label: 'Builder', value: 'Maansarovar Developers' },
       { icon: 'fa-map-marker-alt', label: 'Location', value: 'Prime location with excellent connectivity' },
     ],
+    facilities: [
+      { icon: 'fa-swimming-pool', label: 'Swimming Pool' },
+      { icon: 'fa-dumbbell', label: 'Gymnasium' },
+      { icon: 'fa-shield-alt', label: '24/7 Security' },
+      { icon: 'fa-car', label: 'Ample Parking' },
+      { icon: 'fa-tree', label: 'Garden / Green Spaces' },
+      { icon: 'fa-child', label: 'Children\'s Play Area' },
+      { icon: 'fa-bolt', label: 'Power Backup' },
+      { icon: 'fa-tint', label: 'Rainwater Harvesting' },
+      { icon: 'fa-video', label: 'CCTV Surveillance' },
+      { icon: 'fa-elevator', label: 'High-Speed Elevators' },
+    ],
     description: 'Amrit Kalash Apartment by Maansarovar is a premium residential project offering modern amenities, green spaces, top-notch security, and ample parking. Designed for luxurious living with excellent connectivity.'
   }
 };
@@ -30,6 +42,20 @@ const resortData = {
       { icon: 'fa-water', label: 'Type', value: 'Beachfront Resort' },
       { icon: 'fa-star', label: 'Rating', value: '4.9/5 Premium' },
     ],
+    facilities: [
+      { icon: 'fa-water', label: 'Private Beach Access' },
+      { icon: 'fa-spa', label: 'Spa & Wellness Center' },
+      { icon: 'fa-swimming-pool', label: 'Infinity Pool' },
+      { icon: 'fa-utensils', label: 'Multi-Cuisine Restaurant' },
+      { icon: 'fa-glass-martini', label: 'Beachfront Bar' },
+      { icon: 'fa-dumbbell', label: 'Fitness Center' },
+      { icon: 'fa-wifi', label: 'High-Speed WiFi' },
+      { icon: 'fa-concierge-bell', label: '24/7 Room Service' },
+      { icon: 'fa-car', label: 'Valet Parking' },
+      { icon: 'fa-ship', label: 'Water Sports' },
+      { icon: 'fa-child', label: 'Kids Club' },
+      { icon: 'fa-music', label: 'Live Entertainment' },
+    ],
     description: 'Sprawling 6-ground luxury beachfront resort in Kovalam Nemili offering premium amenities, fine dining, spa & pool, and breathtaking ocean views. An exclusive investment and lifestyle opportunity.'
   }
 };
@@ -46,6 +72,18 @@ const landData = {
       { icon: 'fa-door-open', label: 'House', value: '4 BHK' },
       { icon: 'fa-tag', label: 'Price', value: '₹ 6 Crore' },
       { icon: 'fa-map-marker-alt', label: 'Location', value: 'Panayur, Chennai' },
+    ],
+    facilities: [
+      { icon: 'fa-swimming-pool', label: 'Private Swimming Pool' },
+      { icon: 'fa-tree', label: 'Lush Garden & Landscapes' },
+      { icon: 'fa-car', label: 'Car Parking (3+ Cars)' },
+      { icon: 'fa-solar-panel', label: 'Solar Power Backup' },
+      { icon: 'fa-tint', label: 'Borewell + Metro Water' },
+      { icon: 'fa-shield-alt', label: 'Gated Community Security' },
+      { icon: 'fa-wind', label: 'Spacious Balconies' },
+      { icon: 'fa-utensils', label: 'Modular Kitchen' },
+      { icon: 'fa-couch', label: 'Servant Quarters' },
+      { icon: 'fa-bus', label: 'Near Bus & Metro' },
     ],
     description: 'Spacious individual house on 4 grounds of land in Panayur, Chennai. Features 4 BHK with resort-style amenities, lush surroundings, and excellent connectivity to the city.'
   }
@@ -101,6 +139,17 @@ function openDetailModal(type, id) {
       <strong>${s.label}:</strong> ${s.value}
     </div>
   `).join('');
+  const facilitiesHtml = data.facilities ? `
+    <h3 style="margin:25px 0 12px;color:var(--dark-color);"><i class="fas fa-concierge-bell" style="color:var(--primary-color);margin-right:8px;"></i>Amenities & Facilities</h3>
+    <div class="detail-facilities" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px;">
+      ${data.facilities.map(f => `
+        <div class="facility-item" style="display:flex;align-items:center;gap:10px;background:#f8f9fa;padding:12px 15px;border-radius:10px;border-left:3px solid var(--primary-color);">
+          <i class="fas ${f.icon}" style="color:var(--primary-color);width:20px;text-align:center;"></i>
+          <span style="font-size:13px;color:#444;font-weight:500;">${f.label}</span>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
   const docHtml = data.document ? `
     <a href="${data.document}" target="_blank" class="btn btn-secondary" style="flex:1;justify-content:center">
       <i class="fas fa-file-pdf"></i> View Brochure
@@ -119,6 +168,7 @@ function openDetailModal(type, id) {
       <p style="color:#666;line-height:1.7;margin-bottom:20px;">${data.description}</p>
       <div class="detail-specs">${specsHtml}</div>
       ${videosHtml}
+      ${facilitiesHtml}
       <h3 style="margin:20px 0 10px;color:var(--dark-color);">Gallery</h3>
       <div class="detail-gallery">${imagesHtml}</div>
       <div class="detail-actions">
@@ -207,6 +257,9 @@ function filterProperties(category) {
   event.target.classList.add('active');
 
   document.querySelectorAll('.property-item').forEach(card => {
+    if (card.classList.contains('hidden')) {
+      return;
+    }
     if (category === 'all' || card.classList.contains(category)) {
       card.style.display = 'grid';
     } else {
@@ -216,7 +269,7 @@ function filterProperties(category) {
 }
 
 // ==================== FORM SUBMISSION WITH EMAIL FALLBACK ====================
-const COMPANY_EMAIL = 'info@tsconsultancy.com';
+const COMPANY_EMAIL = 'tsconsultancy26@gmail.com';
 
 function formToObject(form) {
   const data = {};
@@ -226,40 +279,25 @@ function formToObject(form) {
   return data;
 }
 
-function submitEnquiry(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = formToObject(form);
-  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Property Enquiry&body=${encodeURIComponent(body)}`;
-  closeEnquiryModal();
-  form.reset();
+function handleFormSubmit(event, subject, closeCallback) {
+  if (window.location.protocol === 'file:') {
+    event.preventDefault();
+    const form = event.target;
+    const data = formToObject(form);
+    const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
+    window.location.href = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    form.reset();
+    if (typeof closeCallback === 'function') closeCallback();
+  }
 }
 
-function submitBooking(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = formToObject(form);
-  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Site Visit Booking&body=${encodeURIComponent(body)}`;
-  closeBookingModal();
-  form.reset();
-}
-
-function submitContactForm(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = formToObject(form);
-  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Contact Form Submission&body=${encodeURIComponent(body)}`;
-  form.reset();
-}
-
-function subscribeNewsletter(event) {
-  event.preventDefault();
-  const email = event.target.querySelector('input[type="email"]').value;
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Newsletter Subscription&body=${encodeURIComponent('Email: ' + email)}`;
-  event.target.reset();
+function handleNewsletterSubmit(event) {
+  if (window.location.protocol === 'file:') {
+    event.preventDefault();
+    const email = event.target.querySelector('input[type="email"]').value;
+    window.location.href = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent('Newsletter Subscription')}&body=${encodeURIComponent('Email: ' + email)}`;
+    event.target.reset();
+  }
 }
 
 // ==================== UTILITY FUNCTIONS ====================
@@ -267,6 +305,120 @@ function openWhatsApp() {
   const phoneNumber = '+971503567945';
   const message = encodeURIComponent('Hello! I am interested in your properties and services.');
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+}
+
+// ==================== BLOG DATA ====================
+const blogData = {
+  1: {
+    title: 'Top 10 Luxury Properties in Dubai 2024',
+    date: 'Mar 15, 2024',
+    image: 'https://images.unsplash.com/photo-1554224311-beee415c15e7?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'Dubai continues to be a global hub for luxury real estate. From the iconic Burj Khalifa residences to the exclusive Palm Jumeirah villas, the market offers unparalleled opportunities. In this comprehensive guide, we explore the top 10 luxury properties that define opulence in 2024. Each property features world-class amenities, breathtaking views, and exceptional investment potential. Whether you seek a waterfront apartment or a desert oasis villa, Dubai\'s property market has something for every discerning buyer.',
+    highlights: [
+      { icon: 'fa-building', text: 'Burj Khalifa Penthouses' },
+      { icon: 'fa-water', text: 'Palm Jumeirah Villas' },
+      { icon: 'fa-anchor', text: 'Dubai Marina Waterfront' }
+    ]
+  },
+  2: {
+    title: 'Resort Living: Benefits & Lifestyle Guide',
+    date: 'Mar 12, 2024',
+    image: 'https://images.unsplash.com/photo-1495564151525-2a7f81d2ccff?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'Resort living offers a unique blend of luxury, convenience, and community. Imagine waking up to pristine beaches, world-class spas, and gourmet dining just steps from your door. In the UAE and India, resort communities are redefining residential living. From private beach access to championship golf courses, resort properties provide an unmatched lifestyle. Our guide covers the key benefits, investment potential, and what to look for when choosing your resort home.',
+    highlights: [
+      { icon: 'fa-spa', text: 'Wellness & Spa Access' },
+      { icon: 'fa-utensils', text: 'Fine Dining On-Site' },
+      { icon: 'fa-users', text: 'Vibrant Community' }
+    ]
+  },
+  3: {
+    title: 'Real Estate Investment Trends 2024',
+    date: 'Mar 10, 2024',
+    image: 'https://images.unsplash.com/photo-1560491676-04071c5f467b?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'The real estate landscape in 2024 is shaped by emerging trends in sustainability, smart technology, and changing buyer preferences. Dubai and India remain hotspots for international investors seeking high ROI. Key trends include eco-friendly developments, integrated smart home systems, and mixed-use communities. Our market analysis reveals prime locations poised for growth, helping investors make informed decisions in a dynamic market.',
+    highlights: [
+      { icon: 'fa-leaf', text: 'Sustainable Developments' },
+      { icon: 'fa-microchip', text: 'Smart Home Integration' },
+      { icon: 'fa-chart-line', text: 'High ROI Locations' }
+    ]
+  },
+  4: {
+    title: 'Coastal Living: Your Dream Home Guide',
+    date: 'Mar 8, 2024',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'There is something magical about living by the sea. Coastal properties offer not just stunning views but a lifestyle centered around nature, relaxation, and recreation. From Kovalam\'s serene beaches to Dubai\'s vibrant coastline, our guide explores the best coastal living options. Learn about property types, price ranges, and the unique advantages of seaside homes for both personal enjoyment and investment.',
+    highlights: [
+      { icon: 'fa-sun', text: 'Beachfront Access' },
+      { icon: 'fa-ship', text: 'Water Sports' },
+      { icon: 'fa-umbrella-beach', text: 'Resort Lifestyle' }
+    ]
+  },
+  5: {
+    title: 'Smart Home Features in Luxury Properties',
+    date: 'Mar 5, 2024',
+    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'Modern luxury homes are embracing cutting-edge technology to enhance comfort, security, and energy efficiency. Smart home features now include AI-powered climate control, biometric access systems, automated lighting, and integrated home theaters. In Dubai and India\'s premium developments, these technologies come standard. Discover how smart home innovations are transforming the way we live and adding significant value to properties.',
+    highlights: [
+      { icon: 'fa-fingerprint', text: 'Biometric Security' },
+      { icon: 'fa-temperature-high', text: 'Climate Control' },
+      { icon: 'fa-lightbulb', text: 'Automated Lighting' }
+    ]
+  },
+  6: {
+    title: 'Legal Documentation Guide for Property',
+    date: 'Mar 1, 2024',
+    image: 'https://images.unsplash.com/photo-1493536671697-6d302319b41e?w=800&h=400&fit=crop',
+    author: 'Admin',
+    content: 'Navigating property documentation can be complex, especially for international buyers. This comprehensive guide covers the essential legal requirements for property transactions in both the UAE and India. From title deeds and NOCs to RERA registration and tax implications, we break down every document you need. Understanding these requirements ensures a smooth, secure transaction and protects your investment for years to come.',
+    highlights: [
+      { icon: 'fa-file-signature', text: 'Title Deeds' },
+      { icon: 'fa-gavel', text: 'RERA Compliance' },
+      { icon: 'fa-shield-alt', text: 'Buyer Protection' }
+    ]
+  }
+};
+
+// ==================== BLOG MODAL ====================
+function openBlogModal(id) {
+  const data = blogData[id];
+  if (!data) return;
+  
+  const highlightsHtml = data.highlights.map(h => `
+    <div class="blog-highlight-item">
+      <i class="fas ${h.icon}"></i>
+      <span>${h.text}</span>
+    </div>
+  `).join('');
+
+  const modalBody = document.getElementById('detailModalBody');
+  const modal = document.getElementById('detailModal');
+  
+  modalBody.innerHTML = `
+    <div class="detail-hero">
+      <img src="${data.image}" alt="${data.title}">
+      <div class="detail-hero-overlay">
+        <h2>${data.title}</h2>
+        <p><i class="fas fa-calendar"></i> ${data.date} &nbsp;|&nbsp; <i class="fas fa-user"></i> ${data.author}</p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <p style="color:#666;line-height:1.8;margin-bottom:20px;font-size:15px;">${data.content}</p>
+      <h3 style="margin:20px 0 12px;color:var(--dark-color);"><i class="fas fa-star" style="color:var(--primary-color);margin-right:8px;"></i>Key Highlights</h3>
+      <div class="detail-specs">${highlightsHtml}</div>
+      <div class="detail-actions">
+        <button class="btn btn-primary" onclick="openEnquiryModal()"><i class="fas fa-phone"></i> Enquire Now</button>
+        <button class="btn btn-secondary" onclick="closeDetailModal()"><i class="fas fa-times"></i> Close</button>
+      </div>
+    </div>
+  `;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function scrollToSection(selector) {

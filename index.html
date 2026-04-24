@@ -39,6 +39,7 @@
         </div>
       </div>
       
+      <a href="#tourism" class="nav-link">Tourism</a>
       <a href="#reviews" class="nav-link">Reviews</a>
       <a href="#blogs" class="nav-link">Blog</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -68,7 +69,10 @@
       <h2><i class="fas fa-edit"></i> Register Your Enquiry</h2>
       <p>Get exclusive updates on premium properties and offers</p>
     </div>
-    <form class="modal-form" onsubmit="submitEnquiry(event)">
+    <form class="modal-form" onsubmit="handleFormSubmit(event, 'Property Enquiry', closeEnquiryModal)" action="https://formsubmit.co/tsconsultancy26@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Property Enquiry - TS Consultancy">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-group">
         <label>Full Name *</label>
         <input type="text" name="name" placeholder="Your Name" required>
@@ -124,7 +128,10 @@
       <h2><i class="fas fa-calendar"></i> Book a Site Visit</h2>
       <p>Schedule your personal tour with our experts</p>
     </div>
-    <form class="modal-form" onsubmit="submitBooking(event)">
+    <form class="modal-form" onsubmit="handleFormSubmit(event, 'Site Visit Booking', closeBookingModal)" action="https://formsubmit.co/tsconsultancy26@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Site Visit Booking - TS Consultancy">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-group">
         <label>Full Name *</label>
         <input type="text" name="name" placeholder="Your Name" required>
@@ -165,7 +172,7 @@
 <section id="home" class="hero">
   <div class="hero-carousel">
     <!-- Slide 1 -->
-    <div class="hero-slide active" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop') center/cover;">
+    <div class="hero-slide active" id="heroSlide1" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/p1.png') center/cover;">
       <div class="hero-content">
         <div class="hero-text">
           <h1 class="hero-title animate-title">Premium Properties Await You</h1>
@@ -183,7 +190,7 @@
     </div>
 
     <!-- Slide 2 -->
-    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1920&h=1080&fit=crop') center/cover;">
+    <div class="hero-slide" id="heroSlide2" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/resort/r1.jpeg') center/cover;">
       <div class="hero-content">
         <div class="hero-text">
           <h1 class="hero-title">Luxury Resort Escapes</h1>
@@ -197,15 +204,57 @@
     </div>
 
     <!-- Slide 3 -->
-    <div class="hero-slide" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=1080&fit=crop') center/cover;">
+    <div class="hero-slide" id="heroSlide3" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/p5.png') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Amrit Kalash Apartments</h1>
+          <p class="hero-subtitle">Premium 2 & 3 BHK residences with modern amenities in Maansarovar</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openDetailModal('property','amrit-kalash')">View Details</button>
+          <button class="btn btn-secondary btn-lg" onclick="openEnquiryModal()">Enquire Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="hero-slide" id="heroSlide4" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/resort/r21.jpeg') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Kovalam Nemili Resort</h1>
+          <p class="hero-subtitle">Sprawling 6-ground beachfront luxury resort — an exclusive investment</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openDetailModal('resort','kovalam-nemili')">Explore Resort</button>
+          <button class="btn btn-secondary btn-lg" onclick="openBookingModal()">Book Visit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="hero-slide" id="heroSlide5" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/p9.png') center/cover;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Panayur Individual House</h1>
+          <p class="hero-subtitle">Spacious 4 BHK on 4 grounds of land with resort-style amenities in Chennai</p>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="openDetailModal('land','panayur-house')">View Details</button>
+          <button class="btn btn-secondary btn-lg" onclick="openEnquiryModal()">Enquire Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="hero-slide" id="heroSlide6" style="background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/resort/r25.jpeg') center/cover;">
       <div class="hero-content">
         <div class="hero-text">
           <h1 class="hero-title">Prime Land Investments</h1>
-          <p class="hero-subtitle">Strategic locations for development and investment opportunities</p>
+          <p class="hero-subtitle">Secure your future with high-growth land opportunities across India & UAE</p>
         </div>
         <div class="hero-buttons">
-          <button class="btn btn-primary btn-lg" onclick="openEnquiryModal()">Learn More</button>
-          <button class="btn btn-secondary btn-lg" onclick="scrollToSection('#lands')">View Lands</button>
+          <button class="btn btn-primary btn-lg" onclick="scrollToSection('#lands')">Explore Lands</button>
+          <button class="btn btn-secondary btn-lg" onclick="openEnquiryModal()">Get in Touch</button>
         </div>
       </div>
     </div>
@@ -223,6 +272,9 @@
       <span class="indicator active" onclick="currentSlide(0)"></span>
       <span class="indicator" onclick="currentSlide(1)"></span>
       <span class="indicator" onclick="currentSlide(2)"></span>
+      <span class="indicator" onclick="currentSlide(3)"></span>
+      <span class="indicator" onclick="currentSlide(4)"></span>
+      <span class="indicator" onclick="currentSlide(5)"></span>
     </div>
   </div>
 
@@ -326,7 +378,7 @@
 
     <div class="properties-grid">
       <!-- Property Card 1 -->
-      <div class="property-card property-item apartment" onclick="openPropertyModal(1)">
+      <div class="property-card property-item apartment hidden" style="display:none !important;" onclick="openPropertyModal(1)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Luxury Villa">
           <span class="property-badge premium">Premium</span>
@@ -350,7 +402,7 @@
       </div>
 
       <!-- Property Card 2 -->
-      <div class="property-card property-item apartment" onclick="openPropertyModal(2)">
+      <div class="property-card property-item apartment hidden" style="display:none !important;" onclick="openPropertyModal(2)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1560448204-e02f7cbb8f0c?w=400&h=300&fit=crop" alt="Modern Flat">
           <span class="property-badge modern">Modern</span>
@@ -374,7 +426,7 @@
       </div>
 
       <!-- Property Card 3 -->
-      <div class="property-card property-item villa" onclick="openPropertyModal(3)">
+      <div class="property-card property-item villa hidden" style="display:none !important;" onclick="openPropertyModal(3)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop" alt="Beach House">
           <span class="property-badge luxury">Luxury</span>
@@ -398,7 +450,7 @@
       </div>
 
       <!-- Property Card 4 -->
-      <div class="property-card property-item penthouse" onclick="openPropertyModal(4)">
+      <div class="property-card property-item penthouse hidden" style="display:none !important;" onclick="openPropertyModal(4)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f3f?w=400&h=300&fit=crop" alt="Penthouse">
           <span class="property-badge new">New</span>
@@ -422,7 +474,7 @@
       </div>
 
       <!-- Property Card 5 -->
-      <div class="property-card property-item apartment" onclick="openPropertyModal(5)">
+      <div class="property-card property-item apartment hidden" style="display:none !important;" onclick="openPropertyModal(5)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1496442097846-7ae963ef14b5?w=400&h=300&fit=crop" alt="Villa Complex">
           <span class="property-badge popular">Popular</span>
@@ -446,7 +498,7 @@
       </div>
 
       <!-- Property Card 6 -->
-      <div class="property-card property-item villa" onclick="openPropertyModal(6)">
+      <div class="property-card property-item villa hidden" style="display:none !important;" onclick="openPropertyModal(6)">
         <div class="property-image">
           <img src="https://images.unsplash.com/photo-1516594915910-c51f1db30deb?w=400&h=300&fit=crop" alt="Eco House">
           <span class="property-badge green">Green</span>
@@ -470,7 +522,7 @@
       </div>
 
       <!-- Property Card 7 - AMRIT KALASH APARTMENT -->
-      <div class="property-card property-item apartment" onclick="openDetailModal('property','amrit-kalash')">
+      <div class="property-card property-item apartment featured-card" onclick="openDetailModal('property','amrit-kalash')">
         <div class="property-image">
           <img src="assets/p1.png" alt="Amrit Kalash Apartment">
           <span class="property-badge premium">New Launch</span>
@@ -506,7 +558,7 @@
 
     <div class="resorts-grid">
       <!-- Resort Card 1 -->
-      <div class="resort-card" onclick="openResortModal(1)">
+      <div class="resort-card hidden" style="display:none !important;" onclick="openResortModal(1)">
         <div class="resort-image">
           <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop" alt="Beachfront Resort">
           <div class="resort-overlay">
@@ -531,7 +583,7 @@
       </div>
 
       <!-- Resort Card 2 -->
-      <div class="resort-card" onclick="openResortModal(2)">
+      <div class="resort-card hidden" style="display:none !important;" onclick="openResortModal(2)">
         <div class="resort-image">
           <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop" alt="Mountain Resort">
           <div class="resort-overlay">
@@ -556,7 +608,7 @@
       </div>
 
       <!-- Resort Card 3 -->
-      <div class="resort-card" onclick="openResortModal(3)">
+      <div class="resort-card hidden" style="display:none !important;" onclick="openResortModal(3)">
         <div class="resort-image">
           <img src="https://images.unsplash.com/photo-1528996044214-566174324b3e?w=400&h=300&fit=crop" alt="Desert Resort">
           <div class="resort-overlay">
@@ -581,7 +633,7 @@
       </div>
 
       <!-- Resort Card 4 - Kovalam Nemili -->
-      <div class="resort-card" onclick="openDetailModal('resort','kovalam-nemili')">
+      <div class="resort-card featured-card" onclick="openDetailModal('resort','kovalam-nemili')">
         <div class="resort-image">
           <img src="assets/resort/r21.jpeg" alt="Kovalam Nemili Resort">
           <div class="resort-overlay">
@@ -618,7 +670,7 @@
 
     <div class="lands-grid">
       <!-- Land 1 -->
-      <div class="land-card">
+      <div class="land-card hidden" style="display:none !important;">
         <div class="land-image">
           <img src="https://images.unsplash.com/photo-1500382017468-f049863256f0?w=400&h=300&fit=crop" alt="Commercial Land">
           <span class="land-badge commercial">Commercial</span>
@@ -639,7 +691,7 @@
       </div>
 
       <!-- Land 2 -->
-      <div class="land-card">
+      <div class="land-card hidden" style="display:none !important;">
         <div class="land-image">
           <img src="https://images.unsplash.com/photo-1473093295203-cad00df16e50?w=400&h=300&fit=crop" alt="Residential Land">
           <span class="land-badge residential">Residential</span>
@@ -660,7 +712,7 @@
       </div>
 
       <!-- Land 3 -->
-      <div class="land-card">
+      <div class="land-card hidden" style="display:none !important;">
         <div class="land-image">
           <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=300&fit=crop" alt="Investment Land">
           <span class="land-badge investment">Investment</span>
@@ -681,7 +733,7 @@
       </div>
 
       <!-- Land 4 - Panayur Individual House -->
-      <div class="land-card" onclick="openDetailModal('land','panayur-house')">
+      <div class="land-card featured-card" onclick="openDetailModal('land','panayur-house')">
         <div class="land-image">
           <img src="assets/resort/r1.jpeg" alt="Panayur House">
           <span class="land-badge residential">Residential</span>
@@ -844,6 +896,89 @@
   </div>
 </section>
 
+<!-- ==================== DUBAI TOURISM SECTION ==================== -->
+<section id="tourism" class="tourism-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Dubai Tourism Packages</h2>
+      <p>Explore the Magic of Dubai — Premium Travel Experiences</p>
+    </div>
+    <div class="tourism-grid">
+      <!-- Tourism Card 1 -->
+      <div class="tourism-card coming-soon">
+        <div class="tourism-image">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=300&fit=crop" alt="Dubai City Tour">
+          <div class="coming-soon-overlay">
+            <span class="badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+          </div>
+        </div>
+        <div class="tourism-info">
+          <h3>Dubai City Tour</h3>
+          <p>Experience the iconic Burj Khalifa, Dubai Mall, and Palm Jumeirah in a full-day guided tour.</p>
+          <div class="tourism-features">
+            <span><i class="fas fa-clock"></i> Full Day</span>
+            <span><i class="fas fa-user"></i> Family</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tourism Card 2 -->
+      <div class="tourism-card coming-soon">
+        <div class="tourism-image">
+          <img src="https://images.unsplash.com/photo-1548613053-220e257b43e0?w=400&h=300&fit=crop" alt="Desert Safari">
+          <div class="coming-soon-overlay">
+            <span class="badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+          </div>
+        </div>
+        <div class="tourism-info">
+          <h3>Desert Safari Adventure</h3>
+          <p>Thrilling dune bashing, camel rides, BBQ dinner, and live entertainment under the stars.</p>
+          <div class="tourism-features">
+            <span><i class="fas fa-moon"></i> Evening</span>
+            <span><i class="fas fa-users"></i> Group</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tourism Card 3 -->
+      <div class="tourism-card coming-soon">
+        <div class="tourism-image">
+          <img src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=400&h=300&fit=crop" alt="Luxury Yacht">
+          <div class="coming-soon-overlay">
+            <span class="badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+          </div>
+        </div>
+        <div class="tourism-info">
+          <h3>Luxury Yacht Cruise</h3>
+          <p>Private yacht charter along the Dubai Marina with gourmet dining and stunning skyline views.</p>
+          <div class="tourism-features">
+            <span><i class="fas fa-ship"></i> Cruise</span>
+            <span><i class="fas fa-gem"></i> Premium</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tourism Card 4 -->
+      <div class="tourism-card coming-soon">
+        <div class="tourism-image">
+          <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?w=400&h=300&fit=crop" alt="Abu Dhabi">
+          <div class="coming-soon-overlay">
+            <span class="badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+          </div>
+        </div>
+        <div class="tourism-info">
+          <h3>Abu Dhabi Day Trip</h3>
+          <p>Visit the Grand Mosque, Louvre Museum, and Yas Island for a complete capital experience.</p>
+          <div class="tourism-features">
+            <span><i class="fas fa-bus"></i> Day Trip</span>
+            <span><i class="fas fa-camera"></i> Sightseeing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== BLOGS SECTION ==================== -->
 <section id="blogs" class="blogs-section">
   <div class="container">
@@ -998,28 +1133,31 @@
       <!-- Contact Form -->
       <div class="contact-form-box">
         <h3><i class="fas fa-envelope"></i> Send us a Message</h3>
-        <form class="contact-form" onsubmit="submitContactForm(event)">
-          <div class="form-group">
+        <form class="contact-form" onsubmit="handleFormSubmit(event, 'Contact Form Submission', null)" action="https://formsubmit.co/tsconsultancy26@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Contact Form Message - TS Consultancy">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+              <div class="form-group">
             <label>Full Name *</label>
-            <input type="text" name="contactName" placeholder="Your Name" required>
+            <input type="text" name="name" placeholder="Your Name" required>
           </div>
           <div class="form-group">
             <label>Email *</label>
-            <input type="email" name="contactEmail" placeholder="your@email.com" required>
+            <input type="email" name="email" placeholder="your@email.com" required>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Phone *</label>
-              <input type="tel" name="contactPhone" placeholder="+971 XXXX XXXX" required>
+              <input type="tel" name="phone" placeholder="+971 XXXX XXXX" required>
             </div>
             <div class="form-group">
               <label>Subject *</label>
-              <input type="text" name="contactSubject" placeholder="Message subject" required>
+              <input type="text" name="subject" placeholder="Message subject" required>
             </div>
           </div>
           <div class="form-group">
             <label>Message *</label>
-            <textarea name="contactMessage" placeholder="Your message..." rows="5" required></textarea>
+            <textarea name="message" placeholder="Your message..." rows="5" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary full-width">
             <i class="fas fa-paper-plane"></i> Send Message
@@ -1164,6 +1302,7 @@
           <li><a href="#properties">Properties</a></li>
           <li><a href="#resorts">Resorts</a></li>
           <li><a href="#lands">Land Sales</a></li>
+          <li><a href="#tourism">Tourism</a></li>
           <li><a href="#blogs">Blog</a></li>
         </ul>
       </div>
@@ -1189,8 +1328,11 @@
         <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
         <div class="newsletter-form">
           <h5>Subscribe to Newsletter</h5>
-          <form onsubmit="subscribeNewsletter(event)">
-            <input type="email" placeholder="Your email" required>
+          <form onsubmit="handleNewsletterSubmit(event)" action="https://formsubmit.co/tsconsultancy26@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Newsletter Subscription - TS Consultancy">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+                  <input type="email" name="email" placeholder="Your email" required>
             <button type="submit" class="btn btn-primary small">Subscribe</button>
           </form>
         </div>
