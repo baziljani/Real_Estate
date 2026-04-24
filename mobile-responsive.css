@@ -8,6 +8,34 @@
 /* Mobile responsive navigation */
 .nav.show {
   display: flex !important;
+  flex-direction: column;
+  width: 80%;
+  margin-left: auto;
+  margin-right: 0;
+  background: rgba(26, 26, 46, 0.98);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 1rem 0;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.nav.show .nav-link {
+  color: #fff !important;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav.show .dropdown-menu {
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  background: rgba(0,0,0,0.3);
+  box-shadow: none;
+  margin-top: 0;
 }
 
 /* Document section specific styles */
@@ -133,16 +161,53 @@
   margin-right: auto;
 }
 
+/* Detail modal responsive */
+@media (max-width: 768px) {
+  .detail-modal-content {
+    width: 98%;
+    max-height: 95vh;
+  }
+
+  .detail-hero {
+    height: 200px;
+  }
+
+  .detail-hero-overlay h2 {
+    font-size: 20px;
+  }
+
+  .detail-body {
+    padding: 20px;
+  }
+
+  .detail-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+
+  .detail-gallery img {
+    height: 80px;
+  }
+
+  .detail-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+  }
+}
+
 /* Mobile responsive design */
 @media (max-width: 768px) {
   .header .container {
-    flex-direction: column;
+    flex-direction: row;
     padding: 1rem;
+    position: relative;
   }
 
   .logo {
     font-size: 1.3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
   .logo-img {
@@ -151,6 +216,7 @@
 
   .nav {
     display: none;
+    margin-left: auto;
     flex-direction: column;
     width: 100%;
     background: rgba(255,255,255,0.95);
@@ -177,7 +243,11 @@
   }
 
   .hamburger {
-    display: flex;
+    display: flex !important;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .hero {
@@ -287,6 +357,11 @@
     padding: 0 15px;
   }
 
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
   .hero-content h1 {
     font-size: 1.8rem;
   }
@@ -327,3 +402,4 @@
     font-size: 0.8rem;
   }
 }
+

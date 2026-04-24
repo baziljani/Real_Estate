@@ -11,6 +11,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile-responsive.css">
+  <link rel="stylesheet" href="share.css">
 </head>
 
 <body>
@@ -69,22 +71,22 @@
     <form class="modal-form" onsubmit="submitEnquiry(event)">
       <div class="form-group">
         <label>Full Name *</label>
-        <input type="text" placeholder="Your Name" required>
+        <input type="text" name="name" placeholder="Your Name" required>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Email *</label>
-          <input type="email" placeholder="your@email.com" required>
+          <input type="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
           <label>Phone *</label>
-          <input type="tel" placeholder="+971 XXX XXXX" required>
+          <input type="tel" name="phone" placeholder="+971 XXX XXXX" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Service Interested *</label>
-          <select required>
+          <select name="service" required>
             <option value="">Select Service</option>
             <option value="properties">Properties</option>
             <option value="resorts">Resorts</option>
@@ -93,7 +95,7 @@
         </div>
         <div class="form-group">
           <label>Budget Range *</label>
-          <select required>
+          <select name="budget" required>
             <option value="">Select Range</option>
             <option value="0-500k">Below 500K</option>
             <option value="500k-1m">500K - 1M</option>
@@ -104,7 +106,7 @@
       </div>
       <div class="form-group">
         <label>Message</label>
-        <textarea placeholder="Tell us about your requirements..." rows="4"></textarea>
+        <textarea name="message" placeholder="Tell us about your requirements..." rows="4"></textarea>
       </div>
       <button type="submit" class="btn btn-primary full-width">
         <i class="fas fa-paper-plane"></i> Submit Enquiry
@@ -125,31 +127,31 @@
     <form class="modal-form" onsubmit="submitBooking(event)">
       <div class="form-group">
         <label>Full Name *</label>
-        <input type="text" placeholder="Your Name" required>
+        <input type="text" name="name" placeholder="Your Name" required>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Email *</label>
-          <input type="email" placeholder="your@email.com" required>
+          <input type="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
           <label>Phone *</label>
-          <input type="tel" placeholder="+971 XXX XXXX" required>
+          <input type="tel" name="phone" placeholder="+971 XXX XXXX" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Preferred Date *</label>
-          <input type="date" required>
+          <input type="date" name="preferredDate" required>
         </div>
         <div class="form-group">
           <label>Preferred Time *</label>
-          <input type="time" required>
+          <input type="time" name="preferredTime" required>
         </div>
       </div>
       <div class="form-group">
         <label>Property/Location *</label>
-        <input type="text" placeholder="Which property interested?" required>
+        <input type="text" name="propertyLocation" placeholder="Which property interested?" required>
       </div>
       <button type="submit" class="btn btn-primary full-width">
         <i class="fas fa-check"></i> Confirm Booking
@@ -466,6 +468,30 @@
           </div>
         </div>
       </div>
+
+      <!-- Property Card 7 - AMRIT KALASH APARTMENT -->
+      <div class="property-card property-item apartment" onclick="openDetailModal('property','amrit-kalash')">
+        <div class="property-image">
+          <img src="assets/p1.png" alt="Amrit Kalash Apartment">
+          <span class="property-badge premium">New Launch</span>
+          <div class="property-overlay">
+            <button class="btn btn-white">View Details</button>
+          </div>
+        </div>
+        <div class="property-info">
+          <h3>Amrit Kalash Apartment - Maansarovar</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Maansarovar, India</p>
+          <div class="property-specs">
+            <span><i class="fas fa-door-open"></i> 2/3 BHK</span>
+            <span><i class="fas fa-ruler"></i> 950-1400 sq.ft</span>
+          </div>
+          <p class="price">On Request</p>
+          <div class="property-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Visit</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -554,28 +580,27 @@
         </div>
       </div>
 
-      <!-- Resort Card 4 - Coming Soon Banner -->
-      <div class="resort-card coming-soon">
+      <!-- Resort Card 4 - Kovalam Nemili -->
+      <div class="resort-card" onclick="openDetailModal('resort','kovalam-nemili')">
         <div class="resort-image">
-          <img src="https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=400&h=300&fit=crop" alt="Dubai Tourism Experience">
-          <div class="coming-soon-banner">
-            <span class="badge-soon">COMING SOON</span>
-            <h4>Dubai Tourism</h4>
-            <p>Exclusive travel packages</p>
+          <img src="assets/resort/r21.jpeg" alt="Kovalam Nemili Resort">
+          <div class="resort-overlay">
+            <span class="resort-rating"><i class="fas fa-star"></i> 4.9/5</span>
+            <button class="btn btn-white">View Details</button>
           </div>
         </div>
         <div class="resort-info">
-          <h3>Tourism Experiences</h3>
-          <p class="location"><i class="fas fa-plane"></i> Dubai & Beyond</p>
-          <p class="description">Curated travel packages and tourism services launching soon</p>
+          <h3>Kovalam Nemili Resort</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Kovalam, Nemili, India</p>
+          <p class="description">Sprawling 6-ground luxury beachfront resort with premium amenities</p>
           <div class="resort-features">
-            <span><i class="fas fa-suitcase"></i> Tour Packages</span>
-            <span><i class="fas fa-camera"></i> City Tours</span>
-            <span><i class="fas fa-ticket-alt"></i> Event Access</span>
+            <span><i class="fas fa-water"></i> Beachfront</span>
+            <span><i class="fas fa-spa"></i> Spa & Pool</span>
+            <span><i class="fas fa-utensils"></i> Fine Dining</span>
           </div>
           <div class="resort-actions">
-            <button class="btn btn-primary small disabled" disabled>Available Soon</button>
-            <button class="btn btn-secondary small" onclick="openEnquiryModal()">Notify Me</button>
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Book Now</button>
           </div>
         </div>
       </div>
@@ -651,6 +676,27 @@
           <div class="land-actions">
             <button class="btn btn-primary small" onclick="openEnquiryModal()">Enquire</button>
             <button class="btn btn-secondary small" onclick="openBookingModal()">Schedule Site</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Land 4 - Panayur Individual House -->
+      <div class="land-card" onclick="openDetailModal('land','panayur-house')">
+        <div class="land-image">
+          <img src="assets/resort/r1.jpeg" alt="Panayur House">
+          <span class="land-badge residential">Residential</span>
+        </div>
+        <div class="land-info">
+          <h3>Individual House - Panayur</h3>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Panayur, Chennai, India</p>
+          <div class="land-specs">
+            <span><i class="fas fa-expand"></i> 4 Ground</span>
+            <span><i class="fas fa-door-open"></i> 4 BHK</span>
+          </div>
+          <p class="price">₹ 6 Crore</p>
+          <div class="land-actions">
+            <button class="btn btn-primary small" onclick="event.stopPropagation(); openEnquiryModal()">Enquire</button>
+            <button class="btn btn-secondary small" onclick="event.stopPropagation(); openBookingModal()">Schedule Site</button>
           </div>
         </div>
       </div>
@@ -955,25 +1001,25 @@
         <form class="contact-form" onsubmit="submitContactForm(event)">
           <div class="form-group">
             <label>Full Name *</label>
-            <input type="text" placeholder="Your Name" required>
+            <input type="text" name="contactName" placeholder="Your Name" required>
           </div>
           <div class="form-group">
             <label>Email *</label>
-            <input type="email" placeholder="your@email.com" required>
+            <input type="email" name="contactEmail" placeholder="your@email.com" required>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Phone *</label>
-              <input type="tel" placeholder="+971 XXXX XXXX" required>
+              <input type="tel" name="contactPhone" placeholder="+971 XXXX XXXX" required>
             </div>
             <div class="form-group">
               <label>Subject *</label>
-              <input type="text" placeholder="Message subject" required>
+              <input type="text" name="contactSubject" placeholder="Message subject" required>
             </div>
           </div>
           <div class="form-group">
             <label>Message *</label>
-            <textarea placeholder="Your message..." rows="5" required></textarea>
+            <textarea name="contactMessage" placeholder="Your message..." rows="5" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary full-width">
             <i class="fas fa-paper-plane"></i> Send Message
@@ -1166,6 +1212,14 @@
     </div>
   </div>
 </footer>
+
+<!-- ==================== DETAIL MODAL ==================== -->
+<div id="detailModal" class="modal detail-modal">
+  <div class="modal-content detail-modal-content">
+    <span class="close-modal" onclick="closeDetailModal()">&times;</span>
+    <div id="detailModalBody"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

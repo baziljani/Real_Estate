@@ -1,290 +1,332 @@
+// ==================== DATA ====================
+const propertyData = {
+  'amrit-kalash': {
+    title: 'Amrit Kalash Apartment - Maansarovar',
+    location: 'Maansarovar, India',
+    heroImage: 'assets/p1.png',
+    images: Array.from({length: 12}, (_, i) => `assets/p${i+1}.png`),
+    videos: [],
+    document: 'documents/AMRIT KALASH APARTMENT BY MAANSAROVAR.pdf',
+    specs: [
+      { icon: 'fa-door-open', label: 'Type', value: '2/3 BHK Apartments' },
+      { icon: 'fa-ruler', label: 'Size', value: '950 - 1400 sq.ft' },
+      { icon: 'fa-building', label: 'Builder', value: 'Maansarovar Developers' },
+      { icon: 'fa-map-marker-alt', label: 'Location', value: 'Prime location with excellent connectivity' },
+    ],
+    description: 'Amrit Kalash Apartment by Maansarovar is a premium residential project offering modern amenities, green spaces, top-notch security, and ample parking. Designed for luxurious living with excellent connectivity.'
+  }
+};
+
+const resortData = {
+  'kovalam-nemili': {
+    title: 'Kovalam Nemili Resort',
+    location: 'Kovalam, Nemili, India',
+    heroImage: 'assets/resort/r21.jpeg',
+    images: Array.from({length: 17}, (_, i) => `assets/resort/r${21+i}.jpeg`),
+    videos: ['assets/resort/rv3.mp4'],
+    specs: [
+      { icon: 'fa-expand', label: 'Area', value: '6 Ground' },
+      { icon: 'fa-tag', label: 'Price', value: '₹ 8 Crore' },
+      { icon: 'fa-water', label: 'Type', value: 'Beachfront Resort' },
+      { icon: 'fa-star', label: 'Rating', value: '4.9/5 Premium' },
+    ],
+    description: 'Sprawling 6-ground luxury beachfront resort in Kovalam Nemili offering premium amenities, fine dining, spa & pool, and breathtaking ocean views. An exclusive investment and lifestyle opportunity.'
+  }
+};
+
+const landData = {
+  'panayur-house': {
+    title: 'Individual House - Panayur',
+    location: 'Panayur, Chennai, India',
+    heroImage: 'assets/resort/r1.jpeg',
+    images: Array.from({length: 15}, (_, i) => `assets/resort/r${i+1}.jpeg`),
+    videos: ['assets/resort/rv1.mp4', 'assets/resort/rv2.mp4'],
+    specs: [
+      { icon: 'fa-expand', label: 'Land', value: '4 Ground' },
+      { icon: 'fa-door-open', label: 'House', value: '4 BHK' },
+      { icon: 'fa-tag', label: 'Price', value: '₹ 6 Crore' },
+      { icon: 'fa-map-marker-alt', label: 'Location', value: 'Panayur, Chennai' },
+    ],
+    description: 'Spacious individual house on 4 grounds of land in Panayur, Chennai. Features 4 BHK with resort-style amenities, lush surroundings, and excellent connectivity to the city.'
+  }
+};
+
 // ==================== MODAL MANAGEMENT ====================
 const enquiryModal = document.getElementById('enquiryModal');
 const bookingModal = document.getElementById('bookingModal');
+const detailModal = document.getElementById('detailModal');
 
 function openEnquiryModal() {
-  enquiryModal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  if(enquiryModal) {
+    enquiryModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeEnquiryModal() {
-  enquiryModal.classList.remove('active');
-  document.body.style.overflow = 'auto';
+  if(enquiryModal) {
+    enquiryModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
 }
 
 function openBookingModal() {
-  bookingModal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  if(bookingModal) {
+    bookingModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeBookingModal() {
-  bookingModal.classList.remove('active');
-  document.body.style.overflow = 'auto';
+  if(bookingModal) {
+    bookingModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
 }
 
-// Close modal on X button click
-document.querySelectorAll('.close-modal').forEach(btn => {
-  btn.addEventListener('click', function() {
-    this.closest('.modal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-  });
-});
+function openDetailModal(type, id) {
+  let data;
+  if (type === 'property') data = propertyData[id];
+  else if (type === 'resort') data = resortData[id];
+  else if (type === 'land') data = landData[id];
 
-// Close modal on background click
-window.addEventListener('click', function(e) {
-  if (e.target === enquiryModal) {
-    closeEnquiryModal();
+  if (!data || !detailModal) return;
+
+  const heroImg = data.heroImage || data.images[0];
+  const imagesHtml = data.images.map(img => `<img src="${img}" alt="${data.title}" onclick="window.open('${img}','_blank')">`).join('');
+  const videosHtml = data.videos.map(vid => `<video controls class="detail-video"><source src="${vid}" type="video/mp4"></video>`).join('');
+  const specsHtml = data.specs.map(s => `
+    <div class="detail-spec-item">
+      <i class="fas ${s.icon}"></i>
+      <strong>${s.label}:</strong> ${s.value}
+    </div>
+  `).join('');
+  const docHtml = data.document ? `
+    <a href="${data.document}" target="_blank" class="btn btn-secondary" style="flex:1;justify-content:center">
+      <i class="fas fa-file-pdf"></i> View Brochure
+    </a>
+  ` : '';
+
+  document.getElementById('detailModalBody').innerHTML = `
+    <div class="detail-hero">
+      <img src="${heroImg}" alt="${data.title}">
+      <div class="detail-hero-overlay">
+        <h2>${data.title}</h2>
+        <p><i class="fas fa-map-marker-alt"></i> ${data.location}</p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <p style="color:#666;line-height:1.7;margin-bottom:20px;">${data.description}</p>
+      <div class="detail-specs">${specsHtml}</div>
+      ${videosHtml}
+      <h3 style="margin:20px 0 10px;color:var(--dark-color);">Gallery</h3>
+      <div class="detail-gallery">${imagesHtml}</div>
+      <div class="detail-actions">
+        <button class="btn btn-primary" onclick="openEnquiryModal()"><i class="fas fa-phone"></i> Enquire Now</button>
+        <button class="btn btn-secondary" onclick="openBookingModal()"><i class="fas fa-calendar"></i> Book Site Visit</button>
+        ${docHtml}
+      </div>
+    </div>
+  `;
+
+  detailModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailModal() {
+  if(detailModal) {
+    detailModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
   }
-  if (e.target === bookingModal) {
+}
+
+// Close modals on X or background click
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('modal')) {
+    closeEnquiryModal();
     closeBookingModal();
+    closeDetailModal();
   }
 });
 
 // ==================== HERO CAROUSEL ====================
-let currentSlide = 0;
+let currentSlideIdx = 0;
 const slides = document.querySelectorAll('.hero-slide');
 const indicators = document.querySelectorAll('.indicator');
 
 function showSlide(n) {
   slides.forEach(slide => slide.classList.remove('active'));
   indicators.forEach(ind => ind.classList.remove('active'));
-  
-  if (n >= slides.length) currentSlide = 0;
-  if (n < 0) currentSlide = slides.length - 1;
-  
-  slides[currentSlide].classList.add('active');
-  indicators[currentSlide].classList.add('active');
+
+  if (n >= slides.length) currentSlideIdx = 0;
+  if (n < 0) currentSlideIdx = slides.length - 1;
+
+  slides[currentSlideIdx].classList.add('active');
+  indicators[currentSlideIdx].classList.add('active');
 }
 
 function nextSlide() {
-  currentSlide++;
-  showSlide(currentSlide);
+  currentSlideIdx++;
+  showSlide(currentSlideIdx);
 }
 
 function prevSlide() {
-  currentSlide--;
-  showSlide(currentSlide);
+  currentSlideIdx--;
+  showSlide(currentSlideIdx);
 }
 
-// Indicator click navigation
-indicators.forEach((ind, i) => {
-  ind.addEventListener('click', () => {
-    currentSlide = i;
-    showSlide(currentSlide);
-  });
-});
+function currentSlide(n) {
+  currentSlideIdx = n;
+  showSlide(currentSlideIdx);
+}
 
-// Auto-rotate carousel every 6 seconds
+// Auto-rotate every 6 seconds
 setInterval(nextSlide, 6000);
 
-// Initialize hero carousel
-showSlide(currentSlide);
-
-// ==================== REVIEWS CAROUSEL ====================
-let reviewScrollPosition = 0;
-const reviewsTrack = document.querySelector('.reviews-track');
-
+// ==================== REVIEWS/BLOGS CAROUSEL ====================
 function nextReview() {
-  if (reviewsTrack) {
-    reviewsTrack.scrollBy({ left: 350, behavior: 'smooth' });
-  }
+  const track = document.querySelector('.reviews-track');
+  if (track) track.scrollBy({ left: 350, behavior: 'smooth' });
 }
-
 function prevReview() {
-  if (reviewsTrack) {
-    reviewsTrack.scrollBy({ left: -350, behavior: 'smooth' });
-  }
+  const track = document.querySelector('.reviews-track');
+  if (track) track.scrollBy({ left: -350, behavior: 'smooth' });
 }
-
-// ==================== BLOGS CAROUSEL ====================
-const blogsTrack = document.querySelector('.blogs-track');
-
 function nextBlog() {
-  if (blogsTrack) {
-    blogsTrack.scrollBy({ left: 350, behavior: 'smooth' });
-  }
+  const track = document.querySelector('.blogs-track');
+  if (track) track.scrollBy({ left: 350, behavior: 'smooth' });
 }
-
 function prevBlog() {
-  if (blogsTrack) {
-    blogsTrack.scrollBy({ left: -350, behavior: 'smooth' });
-  }
+  const track = document.querySelector('.blogs-track');
+  if (track) track.scrollBy({ left: -350, behavior: 'smooth' });
 }
 
 // ==================== PROPERTY FILTERING ====================
-const filterBtns = document.querySelectorAll('.filter-btn');
-const propertyCards = document.querySelectorAll('.property-card');
+function filterProperties(category) {
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
 
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', function() {
-    // Remove active class from all buttons
-    filterBtns.forEach(b => b.classList.remove('active'));
-    // Add active class to clicked button
-    this.classList.add('active');
-    
-    const filterValue = this.getAttribute('data-filter');
-    
-    propertyCards.forEach(card => {
-      const cardCategory = card.getAttribute('data-category');
-      
-      if (filterValue === 'all' || cardCategory === filterValue) {
-        card.style.display = 'grid';
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-        }, 50);
-      } else {
-        card.style.opacity = '0';
-        card.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          card.style.display = 'none';
-        }, 300);
-      }
-    });
+  document.querySelectorAll('.property-item').forEach(card => {
+    if (category === 'all' || card.classList.contains(category)) {
+      card.style.display = 'grid';
+    } else {
+      card.style.display = 'none';
+    }
   });
-});
-
-// ==================== FORM SUBMISSION ====================
-async function submitEnquiry(event) {
-  event.preventDefault();
-  
-  const formData = {
-    name: document.querySelector('[name="name"]').value,
-    email: document.querySelector('[name="email"]').value,
-    phone: document.querySelector('[name="phone"]').value,
-    service: document.querySelector('[name="service"]').value,
-    budget: document.querySelector('[name="budget"]').value,
-    message: document.querySelector('[name="message"]').value
-  };
-  
-  try {
-    // Replace with your FormSpree endpoint or backend URL
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-    
-    if (response.ok) {
-      alert('Thank you! We will contact you shortly.');
-      event.target.reset();
-      closeEnquiryModal();
-    } else {
-      alert('There was an error. Please try again.');
-    }
-  } catch (error) {
-    console.error('Submission error:', error);
-    alert('Network error. Please check your connection and try again.');
-  }
 }
 
-async function submitBooking(event) {
-  event.preventDefault();
-  
-  const formData = {
-    name: document.querySelector('[name="visitName"]').value,
-    email: document.querySelector('[name="visitEmail"]').value,
-    phone: document.querySelector('[name="visitPhone"]').value,
-    date: document.querySelector('[name="preferredDate"]').value,
-    time: document.querySelector('[name="preferredTime"]').value,
-    location: document.querySelector('[name="propertyLocation"]').value
-  };
-  
-  try {
-    // Replace with your FormSpree endpoint or backend URL
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-    
-    if (response.ok) {
-      alert('Booking confirmed! We will contact you shortly.');
-      event.target.reset();
-      closeBookingModal();
-    } else {
-      alert('There was an error. Please try again.');
-    }
-  } catch (error) {
-    console.error('Booking error:', error);
-    alert('Network error. Please check your connection and try again.');
-  }
+// ==================== FORM SUBMISSION WITH EMAIL FALLBACK ====================
+const COMPANY_EMAIL = 'info@tsconsultancy.com';
+
+function formToObject(form) {
+  const data = {};
+  form.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.name) data[el.name] = el.value;
+  });
+  return data;
 }
 
-async function submitContactForm(event) {
+function submitEnquiry(event) {
   event.preventDefault();
-  
-  const formData = {
-    name: event.target.querySelector('[name="contactName"]').value,
-    email: event.target.querySelector('[name="contactEmail"]').value,
-    phone: event.target.querySelector('[name="contactPhone"]').value,
-    subject: event.target.querySelector('[name="contactSubject"]').value,
-    message: event.target.querySelector('[name="contactMessage"]').value
-  };
-  
-  try {
-    // Replace with your FormSpree endpoint or backend URL
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-    
-    if (response.ok) {
-      alert('Message sent successfully! We will get back to you soon.');
-      event.target.reset();
-    } else {
-      alert('There was an error. Please try again.');
-    }
-  } catch (error) {
-    console.error('Contact form error:', error);
-    alert('Network error. Please check your connection and try again.');
-  }
+  const form = event.target;
+  const data = formToObject(form);
+  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
+  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Property Enquiry&body=${encodeURIComponent(body)}`;
+  closeEnquiryModal();
+  form.reset();
 }
 
-async function subscribeNewsletter(event) {
+function submitBooking(event) {
   event.preventDefault();
-  
+  const form = event.target;
+  const data = formToObject(form);
+  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
+  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Site Visit Booking&body=${encodeURIComponent(body)}`;
+  closeBookingModal();
+  form.reset();
+}
+
+function submitContactForm(event) {
+  event.preventDefault();
+  const form = event.target;
+  const data = formToObject(form);
+  const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
+  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Contact Form Submission&body=${encodeURIComponent(body)}`;
+  form.reset();
+}
+
+function subscribeNewsletter(event) {
+  event.preventDefault();
   const email = event.target.querySelector('input[type="email"]').value;
-  
-  try {
-    // Replace with your FormSpree endpoint or backend URL
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: JSON.stringify({ email: email })
-    });
-    
-    if (response.ok) {
-      alert('Thank you for subscribing!');
-      event.target.reset();
-    } else {
-      alert('Subscription failed. Please try again.');
-    }
-  } catch (error) {
-    console.error('Newsletter error:', error);
-  }
+  window.location.href = `mailto:${COMPANY_EMAIL}?subject=Newsletter Subscription&body=${encodeURIComponent('Email: ' + email)}`;
+  event.target.reset();
 }
 
 // ==================== UTILITY FUNCTIONS ====================
 function openWhatsApp() {
-  const phoneNumber = '+971503567945'; // TS Consultancy main number
+  const phoneNumber = '+971503567945';
   const message = encodeURIComponent('Hello! I am interested in your properties and services.');
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 }
 
-function callNow() {
-  // Get the phone number from the contact info
-  window.location.href = 'tel:+971503567945';
-}
-
 function scrollToSection(selector) {
   const section = document.querySelector(selector);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
+  if (section) section.scrollIntoView({ behavior: 'smooth' });
 }
 
+// ==================== NAVBAR SCROLL EFFECT ====================
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('.header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// ==================== HAMBURGER & MOBILE MENU ====================
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('.nav');
+
+if (hamburger && nav) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nav.classList.toggle('show');
+    hamburger.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('show');
+      hamburger.classList.remove('active');
+    });
+  });
+}
+
+// ==================== DROPDOWN MENU ====================
+let dropdownOpen = false;
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const menu = toggle.nextElementSibling;
+    if (menu) {
+      dropdownOpen = !dropdownOpen;
+      menu.style.opacity = dropdownOpen ? '1' : '0';
+      menu.style.visibility = dropdownOpen ? 'visible' : 'hidden';
+      menu.style.transform = dropdownOpen ? 'translateY(0)' : 'translateY(-10px)';
+    }
+  });
+});
+
+document.addEventListener('click', () => {
+  dropdownOpen = false;
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.style.opacity = '0';
+    menu.style.visibility = 'hidden';
+    menu.style.transform = 'translateY(-10px)';
+  });
+});
 
 // ==================== SMOOTH SCROLL FOR ANCHORS ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -301,16 +343,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-  
   let current = '';
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
     if (scrollY >= sectionTop - 200) {
       current = section.getAttribute('id');
     }
   });
-  
   navLinks.forEach(link => {
     link.classList.remove('active');
     if (link.getAttribute('href') === `#${current}`) {
@@ -319,197 +358,21 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ==================== HAMBURGER MENU ====================
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('.nav');
-
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-    hamburger.classList.toggle('active');
-  });
-  
-  // Close menu when link is clicked
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.style.display = 'none';
-      hamburger.classList.remove('active');
+// ==================== LAZY LOADING ====================
+const lazyImages = document.querySelectorAll('img[data-src]');
+if ('IntersectionObserver' in window) {
+  const imgObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        observer.unobserve(img);
+      }
     });
   });
+  lazyImages.forEach(img => imgObserver.observe(img));
 }
-
-// ==================== LAZY LOADING IMAGES ====================
-const images = document.querySelectorAll('img[data-src]');
-const imageObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src;
-      img.classList.remove('lazy');
-      observer.unobserve(img);
-    }
-  });
-});
-
-images.forEach(img => imageObserver.observe(img));
-
-// ==================== ANIMATION ON SCROLL ====================
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.property-card, .resort-card, .land-card, .review-card, .blog-card, .feature-item').forEach(el => {
-  observer.observe(el);
-});
-
-// ==================== FORM VALIDATION ====================
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
-
-function validatePhone(phone) {
-  const re = /^[0-9+\-\s()]{10,}$/;
-  return re.test(phone);
-}
-
-// Add validation to form inputs
-document.querySelectorAll('input[type="email"]').forEach(input => {
-  input.addEventListener('blur', function() {
-    if (this.value && !validateEmail(this.value)) {
-      this.style.borderColor = '#e74c3c';
-    } else {
-      this.style.borderColor = 'inherit';
-    }
-  });
-});
-
-document.querySelectorAll('input[type="tel"], input[name="phone"], input[name="visitPhone"], input[name="contactPhone"]').forEach(input => {
-  input.addEventListener('blur', function() {
-    if (this.value && !validatePhone(this.value)) {
-      this.style.borderColor = '#e74c3c';
-    } else {
-      this.style.borderColor = 'inherit';
-    }
-  });
-});
-
-// ==================== MOBILE RESPONSIVE MENU ====================
-function handleResize() {
-  const width = window.innerWidth;
-  const nav = document.querySelector('.nav');
-  const hamburger = document.querySelector('.hamburger');
-  
-  if (width > 768) {
-    if (nav) nav.style.display = 'flex';
-    if (hamburger) hamburger.style.display = 'none';
-  } else {
-    if (nav) nav.style.display = 'none';
-    if (hamburger) hamburger.style.display = 'flex';
-  }
-}
-
-window.addEventListener('resize', handleResize);
-window.addEventListener('load', handleResize);
-
-// ==================== COUNTER ANIMATION ====================
-function animateCounter(element, target, duration = 2000) {
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
-  
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      element.textContent = target;
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(current);
-    }
-  }, 16);
-}
-
-// Trigger counter animation on scroll
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-      const counters = entry.target.querySelectorAll('[data-count]');
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        animateCounter(counter, target);
-      });
-      entry.target.classList.add('counted');
-    }
-  });
-});
-
-const seoItems = document.querySelector('.hero-seo-banner');
-if (seoItems) statsObserver.observe(seoItems);
-
-// ==================== DROPDOWN MENU ENHANCEMENT ====================
-document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    const menu = toggle.nextElementSibling;
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  });
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.nav-dropdown')) {
-    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-      menu.style.display = 'none';
-    });
-  }
-});
-
-// ==================== PROPERTY MODAL ====================
-function openResortModal(resortName) {
-  alert(`Viewing details for: ${resortName}\n\nFull details, availability, and booking options will be displayed here.`);
-}
-
-function openLandModal(landName) {
-  alert(`Investment opportunity: ${landName}\n\nDetailed legal documents, ROI projections, and booking details will be displayed here.`);
-}
-
-function openBlogModal(blogTitle) {
-  alert(`Reading: ${blogTitle}\n\nFull blog content will be displayed here.`);
-}
-
-// ==================== LIKE AND COMMENT HANDLERS ====================
-document.querySelectorAll('.blog-card').forEach(card => {
-  const likeBtn = card.querySelector('.like-btn');
-  const commentBtn = card.querySelector('.comment-btn');
-  
-  if (likeBtn) {
-    likeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      likeBtn.classList.toggle('liked');
-      let likes = parseInt(likeBtn.textContent);
-      likeBtn.innerHTML = likeBtn.classList.contains('liked') ? 
-        `<i class="fas fa-heart"></i> ${likes + 1}` : 
-        `<i class="far fa-heart"></i> ${likes}`;
-    });
-  }
-  
-  if (commentBtn) {
-    commentBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      alert('Open comment section for this blog post.');
-    });
-  }
-});
 
 // ==================== SCROLL TO TOP BUTTON ====================
 const scrollTopBtn = document.createElement('button');
@@ -531,15 +394,14 @@ scrollTopBtn.style.cssText = `
   font-size: 18px;
   box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
   transition: all 0.3s;
+  align-items: center;
+  justify-content: center;
 `;
-
 document.body.appendChild(scrollTopBtn);
 
 window.addEventListener('scroll', () => {
   if (window.pageYOffset > 300) {
     scrollTopBtn.style.display = 'flex';
-    scrollTopBtn.style.alignItems = 'center';
-    scrollTopBtn.style.justifyContent = 'center';
   } else {
     scrollTopBtn.style.display = 'none';
   }
@@ -549,63 +411,99 @@ scrollTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-scrollTopBtn.addEventListener('hover', () => {
-  scrollTopBtn.style.transform = 'translateY(-3px)';
-});
-
 // ==================== KEYBOARD SHORTCUTS ====================
 document.addEventListener('keydown', (e) => {
-  // Press ? for help
-  if (e.key === '?') {
-    alert('Keyboard Shortcuts:\nEsc - Close modals\nH - Go to home\nC - Contact us');
-  }
-  
-  // Press Escape to close modals
   if (e.key === 'Escape') {
     closeEnquiryModal();
     closeBookingModal();
+    closeDetailModal();
   }
-  
-  // Arrow keys for carousel
-  if (e.key === 'ArrowRight') {
-    nextSlide();
-  }
-  if (e.key === 'ArrowLeft') {
-    prevSlide();
-  }
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
 });
-
-// ==================== PAGE LOAD ANIMATIONS ====================
-window.addEventListener('load', () => {
-  document.body.style.animationDuration = '0.5s';
-  
-  // Add loading class before removing
-  document.body.classList.add('loaded');
-});
-
-// ==================== PERFORMANCE OPTIMIZATION ====================
-// Debounce function for resize events
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-const debouncedResize = debounce(handleResize, 250);
-window.addEventListener('resize', debouncedResize);
 
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Website initialized successfully');
+  console.log('TS Consultancy website initialized');
 });
 
 
 
+// ==================== SHARE & HASH ROUTING ====================
+function getBaseUrl() {
+  return window.location.href.split('#')[0].replace(/\/+$/, '');
+}
 
+function shareItem(platform, title, hash) {
+  const url = getBaseUrl() + '/' + hash;
+  const text = encodeURIComponent(title + ' - TS Consultancy');
+  if (platform === 'whatsapp') {
+    window.open('https://wa.me/?text=' + text + '%0A' + encodeURIComponent(url), '_blank');
+  } else if (platform === 'copy') {
+    navigator.clipboard.writeText(url).then(() => showToast('Link copied to clipboard!'));
+  } else if (platform === 'native' && navigator.share) {
+    navigator.share({ title: title, text: title + ' - TS Consultancy', url: url });
+  } else {
+    window.open(url, '_blank');
+  }
+}
 
+function showToast(message) {
+  const existing = document.querySelector('.share-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'share-toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
+}
+
+function openHashModal() {
+  const hash = window.location.hash;
+  if (!hash || hash.length < 2) return;
+  const parts = hash.substring(1).split('/');
+  if (parts.length >= 2) {
+    const type = parts[0];
+    const id = parts[1];
+    if (['property','resort','land'].includes(type)) {
+      setTimeout(() => openDetailModal(type, id), 300);
+    }
+  }
+}
+
+window.addEventListener('hashchange', openHashModal);
+document.addEventListener('DOMContentLoaded', openHashModal);
+
+// ==================== AUTO-ADD SHARE BARS ====================
+function addShareBars() {
+  const cards = document.querySelectorAll('.property-card, .resort-card, .land-card');
+  cards.forEach(card => {
+    if (card.querySelector('.share-bar')) return;
+    const info = card.querySelector('.property-info, .resort-info, .land-info');
+    if (!info) return;
+    const titleEl = info.querySelector('h3');
+    const title = titleEl ? titleEl.textContent.trim() : 'TS Consultancy Property';
+    const onclick = card.getAttribute('onclick') || '';
+    let type = 'property', id = '';
+    const match = onclick.match(/openDetailModal\('([^']+)',\s*'([^']+)'\)/);
+    if (match) { type = match[1]; id = match[2]; }
+    else {
+      const match2 = onclick.match(/open(Detail|Resort|Property)Modal\((\d+)\)/);
+      if (match2) { type = 'property'; id = 'legacy-' + match2[2]; }
+    }
+    if (!id) return;
+    const hash = '#' + type + '/' + id;
+    const safeTitle = title.replace(/'/g, "\\'");
+    const bar = document.createElement('div');
+    bar.className = 'share-bar';
+    bar.onclick = (e) => e.stopPropagation();
+    bar.innerHTML = '<button class="share-btn" onclick="shareItem(\'whatsapp\',\'' + safeTitle + '\',\'' + hash + '\')" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
+      '<button class="share-btn" onclick="shareItem(\'copy\',\'' + safeTitle + '\',\'' + hash + '\')" title="Copy Link"><i class="fas fa-link"></i></button>' +
+      '<button class="share-btn" onclick="shareItem(\'native\',\'' + safeTitle + '\',\'' + hash + '\')" title="Share"><i class="fas fa-share-alt"></i></button>';
+    info.appendChild(bar);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  addShareBars();
+});
