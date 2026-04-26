@@ -268,7 +268,7 @@ function filterProperties(category) {
   });
 }
 
-// ==================== FORM SUBMISSION WITH EMAIL FALLBACK ====================
+// ==================== FORM SUBMISSION WITH SUPABASE + EMAIL FALLBACK ====================
 const COMPANY_EMAIL = 'tsconsultancy26@gmail.com';
 
 function formToObject(form) {
@@ -279,26 +279,170 @@ function formToObject(form) {
   return data;
 }
 
-function handleFormSubmit(event, subject, closeCallback) {
-  if (window.location.protocol === 'file:') {
-    event.preventDefault();
-    const form = event.target;
-    const data = formToObject(form);
-    const body = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('\n');
-    window.location.href = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    form.reset();
-    if (typeof closeCallback === 'function') closeCallback();
+function showDbToast(message, type = 'success') {
+  const existing = document.querySelector('.db-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'db-toast';
+  toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+  toast.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 10px;
+    z-index: 9999;
+    font-weight: 600;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    animation: slideInRight 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 350px;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'slideOutRight 0.4s ease forwards';
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
+}
+
+function submitToFormSubmit(formData, subject) {
+  const iframe = document.createElement('iframe');
+  iframe.name = 'formsubmit-frame-' + Date.now();
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  const form = document.createElement('form');
+  form.action = 'https://formsubmit.co/' + COMPANY_EMAIL;
+  form.method = 'POST';
+  form.target = iframe.name;
+
+  for (let [key, value] of Object.entries(formData)) {
+    if (key.startsWith('_')) continue;
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = value;
+    form.appendChild(input);
+  }
+
+  [
+    { name: '_subject', value: subject },
+    { name: '_template', value: 'table' },
+    { name: '_captcha', value: 'false' }
+  ].forEach(c => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = c.name;
+    input.value = c.value;
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    if (form.parentNode) document.body.removeChild(form);
+    if (iframe.parentNode) document.body.removeChild(iframe);
+  }, 8000);
+}
+
+async function handleFormSubmit(event, subject, closeCallback) {
+  event.preventDefault();
+  const form = event.target;
+  const data = formToObject(form);
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn ? btn.innerHTML : '';
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  }
+
+  let dbSuccess = false;
+
+  if (window.tsDB && window.tsDB.isDbConfigured()) {
+    let dbResult;
+    if (subject.includes('Enquiry')) {
+      dbResult = await window.tsDB.insertEnquiry(data);
+    } else if (subject.includes('Booking')) {
+      dbResult = await window.tsDB.insertBooking(data);
+    } else {
+      dbResult = await window.tsDB.insertContact(data);
+    }
+    dbSuccess = dbResult.success;
+    if (!dbSuccess) {
+      console.warn('[Form] DB insert failed:', dbResult.error);
+    }
+  }
+
+  submitToFormSubmit(data, subject);
+
+  if (dbSuccess) {
+    showDbToast('Submitted successfully! We will contact you soon.');
+  } else {
+    showDbToast('Form submitted via email. Database not connected yet.', 'warning');
+  }
+
+  form.reset();
+  if (typeof closeCallback === 'function') closeCallback();
+
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
   }
 }
 
-function handleNewsletterSubmit(event) {
-  if (window.location.protocol === 'file:') {
-    event.preventDefault();
-    const email = event.target.querySelector('input[type="email"]').value;
-    window.location.href = `mailto:${COMPANY_EMAIL}?subject=${encodeURIComponent('Newsletter Subscription')}&body=${encodeURIComponent('Email: ' + email)}`;
-    event.target.reset();
+async function handleNewsletterSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const email = form.querySelector('input[type="email"]').value;
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn ? btn.innerHTML : '';
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+  }
+
+  let dbSuccess = false;
+
+  if (window.tsDB && window.tsDB.isDbConfigured()) {
+    const dbResult = await window.tsDB.insertNewsletter(email);
+    dbSuccess = dbResult.success;
+  }
+
+  submitToFormSubmit({ email: email }, 'Newsletter Subscription');
+
+  if (dbSuccess) {
+    showDbToast('Subscribed successfully!');
+  } else {
+    showDbToast('Subscribed via email. Database not connected yet.', 'warning');
+  }
+
+  form.reset();
+
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
   }
 }
+
+const toastStyles = document.createElement('style');
+toastStyles.textContent = `
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100px); }
+  }
+`;
+document.head.appendChild(toastStyles);
 
 // ==================== UTILITY FUNCTIONS ====================
 function openWhatsApp() {
@@ -577,85 +721,4 @@ document.addEventListener('keydown', (e) => {
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
   console.log('TS Consultancy website initialized');
-});
-
-
-
-// ==================== SHARE & HASH ROUTING ====================
-function getBaseUrl() {
-  return window.location.href.split('#')[0].replace(/\/+$/, '');
-}
-
-function shareItem(platform, title, hash) {
-  const url = getBaseUrl() + '/' + hash;
-  const text = encodeURIComponent(title + ' - TS Consultancy');
-  if (platform === 'whatsapp') {
-    window.open('https://wa.me/?text=' + text + '%0A' + encodeURIComponent(url), '_blank');
-  } else if (platform === 'copy') {
-    navigator.clipboard.writeText(url).then(() => showToast('Link copied to clipboard!'));
-  } else if (platform === 'native' && navigator.share) {
-    navigator.share({ title: title, text: title + ' - TS Consultancy', url: url });
-  } else {
-    window.open(url, '_blank');
-  }
-}
-
-function showToast(message) {
-  const existing = document.querySelector('.share-toast');
-  if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.className = 'share-toast';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2500);
-}
-
-function openHashModal() {
-  const hash = window.location.hash;
-  if (!hash || hash.length < 2) return;
-  const parts = hash.substring(1).split('/');
-  if (parts.length >= 2) {
-    const type = parts[0];
-    const id = parts[1];
-    if (['property','resort','land'].includes(type)) {
-      setTimeout(() => openDetailModal(type, id), 300);
-    }
-  }
-}
-
-window.addEventListener('hashchange', openHashModal);
-document.addEventListener('DOMContentLoaded', openHashModal);
-
-// ==================== AUTO-ADD SHARE BARS ====================
-function addShareBars() {
-  const cards = document.querySelectorAll('.property-card, .resort-card, .land-card');
-  cards.forEach(card => {
-    if (card.querySelector('.share-bar')) return;
-    const info = card.querySelector('.property-info, .resort-info, .land-info');
-    if (!info) return;
-    const titleEl = info.querySelector('h3');
-    const title = titleEl ? titleEl.textContent.trim() : 'TS Consultancy Property';
-    const onclick = card.getAttribute('onclick') || '';
-    let type = 'property', id = '';
-    const match = onclick.match(/openDetailModal\('([^']+)',\s*'([^']+)'\)/);
-    if (match) { type = match[1]; id = match[2]; }
-    else {
-      const match2 = onclick.match(/open(Detail|Resort|Property)Modal\((\d+)\)/);
-      if (match2) { type = 'property'; id = 'legacy-' + match2[2]; }
-    }
-    if (!id) return;
-    const hash = '#' + type + '/' + id;
-    const safeTitle = title.replace(/'/g, "\\'");
-    const bar = document.createElement('div');
-    bar.className = 'share-bar';
-    bar.onclick = (e) => e.stopPropagation();
-    bar.innerHTML = '<button class="share-btn" onclick="shareItem(\'whatsapp\',\'' + safeTitle + '\',\'' + hash + '\')" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
-      '<button class="share-btn" onclick="shareItem(\'copy\',\'' + safeTitle + '\',\'' + hash + '\')" title="Copy Link"><i class="fas fa-link"></i></button>' +
-      '<button class="share-btn" onclick="shareItem(\'native\',\'' + safeTitle + '\',\'' + hash + '\')" title="Share"><i class="fas fa-share-alt"></i></button>';
-    info.appendChild(bar);
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  addShareBars();
 });

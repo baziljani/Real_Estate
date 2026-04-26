@@ -1,4 +1,4 @@
-[build]
+z[build]
   publish = "."
   command = ""
 
